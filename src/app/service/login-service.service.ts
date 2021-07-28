@@ -11,10 +11,10 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   checkLogin(data: any) : Observable<any>{
-    return this.http.post(`${environment.url}` , data)
+    return this.http.post(`${environment.apiUrl}/auth/login` , data)
   }
 
-  isLogin(){
+  isLogin(): any {
     return localStorage.getItem('token');
   }
 

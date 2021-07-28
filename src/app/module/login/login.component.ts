@@ -17,30 +17,41 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   message: string | undefined;
 
-  constructor(private fb: FormBuilder, private loginService: LoginService , private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private loginService: LoginService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [
+                    Validators.required,
+                    Validators.email
+                  ]],
       password: [
         '',
-        [Validators.required,
-        Validators.minLength(6),
-        Validators.maxLength(32)]
+        [
+          Validators.required,
+          Validators.minLength(6),
+          Validators.maxLength(32),
+        ],
       ],
     });
   }
 
-
-  submit():void {
-    let data = this.loginForm.value
-    this.loginService.checkLogin(data).subscribe(res=>{
-        localStorage.setItem('token',res.access_token);
+  submitForm(): void {
+    let data = this.loginForm.value;
+    this.loginService.checkLogin(data).subscribe(
+      (res) => {
+        localStorage.setItem('token', res.access_token);
         localStorage.setItem('user', JSON.stringify(res.user));
-        this.router.navigate(['/master/home'])
-    },error => {
-      this.message = error.message
-    })
+        this.router.navigate(['/master/home']);
+      },
+      (error) => {
+        this.message = error.message;
+      }
+    );
   }
 
   get password() {
@@ -61,9 +72,11 @@ export class LoginComponent implements OnInit {
   getErrorMessagePassword() {
     if (this.password?.hasError('required')) {
       return 'password khong duoc de trong ';
-    }else if (this.password?.hasError('minlength')){
+    } else if (this.password?.hasError('minlength')) {
       return 'Mat khau tren 6 ki tu';
     }
-    return this.password?.hasError('maxlength') ? 'Mat khau khong qua 32 ki tu' : '';
+    return this.password?.hasError('maxlength')
+      ? 'Mat khau khong qua 32 ki tu'
+      : '';
   }
 }
