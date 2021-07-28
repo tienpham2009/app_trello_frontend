@@ -54,29 +54,4 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  get password() {
-    return this.loginForm?.get('password');
-  }
-
-  get email() {
-    return this.loginForm?.get('email');
-  }
-
-  getErrorMessageEmail() {
-    if (this.email?.hasError('required')) {
-      return 'email khong duoc de trong ';
-    }
-    return this.email?.hasError('email') ? 'email khong hop le' : '';
-  }
-
-  getErrorMessagePassword() {
-    if (this.password?.hasError('required')) {
-      return 'password khong duoc de trong ';
-    } else if (this.password?.hasError('minlength')) {
-      return 'Mat khau tren 6 ki tu';
-    }
-    return this.password?.hasError('maxlength')
-      ? 'Mat khau khong qua 32 ki tu'
-      : '';
-  }
 }
