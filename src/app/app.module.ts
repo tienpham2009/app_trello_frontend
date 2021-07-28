@@ -15,8 +15,8 @@ import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
-    AppComponent, 
-    LoginComponent, 
+    AppComponent,
+    LoginComponent,
     RegisterComponent],
   imports: [
     BrowserModule,
