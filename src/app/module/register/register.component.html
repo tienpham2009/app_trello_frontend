@@ -9,17 +9,18 @@
 
                 <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
 
-                <form class="mx-1 mx-md-4" *ngIf="formRegister" [formGroup]="formRegister" (ngSubmit)="submit()" >
+                <form class="mx-1 mx-md-4" *ngIf="formRegister" [formGroup]="formRegister" (ngSubmit)="submit()">
 
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="text" id="form3Example1c" class="form-control" formControlName="name" [ngClass]="name && name.invalid && (name.dirty || name.touched) ? 'is-invalid' : ''" >
+                      <input type="text" id="form3Example1c" class="form-control" formControlName="name"
+                             [ngClass]="name && name.invalid && (name.dirty || name.touched) ? 'is-invalid' : ''">
                       <div *ngIf="name && name.invalid && (name.dirty || name.touched)"
                            class="text-danger">
-                      <div *ngIf="name.errors?.required">
-                        Name is required.
-                      </div>
+                        <div *ngIf="name.errors?.required">
+                          Name is required.
+                        </div>
                       </div>
                       <label class="form-label" for="form3Example1c">Your Name</label>
                     </div>
@@ -28,7 +29,8 @@
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="email" id="form3Example3c" class="form-control" formControlName="email" [ngClass]="email && email.invalid && (email.dirty || email.touched) ? 'is-invalid' : ''">
+                      <input type="email" id="form3Example3c" class="form-control" formControlName="email"
+                             [ngClass]="email && email.invalid && (email.dirty || email.touched) ? 'is-invalid' : ''">
                       <div *ngIf="email && email.invalid && (email.dirty || email.touched)"
                            class="text-danger">
                         <div *ngIf="email.errors?.required">
@@ -43,7 +45,8 @@
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="text"  class="form-control" formControlName="phone" [ngClass]="phone && phone.invalid && (phone.dirty || phone.touched) ? 'is-invalid' : ''">
+                      <input type="text" class="form-control" formControlName="phone"
+                             [ngClass]="phone && phone.invalid && (phone.dirty || phone.touched) ? 'is-invalid' : ''">
                       <div *ngIf="phone && phone.invalid && (phone.dirty || phone.touched)"
                            class="text-danger">
                         <div *ngIf="phone.errors?.required">
@@ -57,7 +60,8 @@
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="password" id="form3Example4c" class="form-control" formControlName="password" [ngClass]="password && password.invalid && (password.dirty || password.touched) ? 'is-invalid' : ''">
+                      <input type="password" id="form3Example4c" class="form-control" formControlName="password"
+                             [ngClass]="password && password.invalid && (password.dirty || password.touched) ? 'is-invalid' : ''">
                       <div *ngIf="password && password.invalid && (password.dirty || password.touched)"
                            class="text-danger">
                         <div *ngIf="password.errors?.required">
@@ -71,7 +75,8 @@
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="password" id="form3Example4cd" class="form-control"  formControlName="password_confirmation">
+                      <input type="password" id="form3Example4cd" class="form-control"
+                             formControlName="password_confirmation">
                       <label class="form-label" for="form3Example4cd">Repeat your password</label>
                     </div>
                   </div>
@@ -83,13 +88,13 @@
                       value=""
                       id="form2Example3c"
                     />
-                    <label class="form-check-label" >
+                    <label class="form-check-label">
                       I agree all statements in <a href="#!">Terms of service</a>
                     </label>
                   </div>
 
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                    <button    class="btn btn-primary btn-lg" [disabled]="formRegister.invalid">Register</button>
+                    <button class="btn btn-primary btn-lg" [disabled]="formRegister.invalid">Register</button>
                   </div>
 
                 </form>
@@ -97,7 +102,8 @@
               </div>
               <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
 
-                <img src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-registration/draw1.png" class="img-fluid" alt="Sample image">
+                <img src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-registration/draw1.png"
+                     class="img-fluid" alt="Sample image">
 
               </div>
             </div>
