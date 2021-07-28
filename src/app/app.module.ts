@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { MasterComponent } from './module/master/master.component';
 import { LoginComponent } from './module/login/login.component';
 import { RegisterComponent } from './module/register/register.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -14,10 +15,13 @@ import { RegisterComponent } from './module/register/register.component';
     LoginComponent,
     RegisterComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        FormsModule,
+
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
