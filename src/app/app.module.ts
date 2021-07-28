@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MasteComponent } from './module/maste/maste.component';
+import { MasterComponent } from './module/master/master.component';
 import { LoginComponent } from './module/login/login.component';
 import { RegisterComponent } from './module/register/register.component';
 
@@ -11,7 +11,7 @@ import { RegisterComponent } from './module/register/register.component';
 @NgModule({
   declarations: [
     AppComponent,
-    MasteComponent,
+    MasterComponent,
     LoginComponent,
     RegisterComponent,
   ],
