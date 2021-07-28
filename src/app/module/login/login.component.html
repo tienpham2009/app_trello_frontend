@@ -22,7 +22,6 @@
               formControlName="email"
             />
           </div>
-		  <p class="text-danger" *ngIf="email && email.invalid && (email.dirty || email.touched)">{{  getErrorMessageEmail() }}</p>
           <div class="input-group form-group">
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="fas fa-key"></i></span>
@@ -34,7 +33,6 @@
               formControlName="password"
             />
           </div>
-		  <p class="text-danger" *ngIf="password && password.invalid && (password.dirty || password.touched)">{{  getErrorMessagePassword() }}</p>
           <div class="row align-items-center remember">
             <input type="checkbox" />Remember Me
           </div>
