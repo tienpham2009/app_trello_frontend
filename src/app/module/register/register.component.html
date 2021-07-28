@@ -21,6 +21,12 @@
                         <div *ngIf="name.errors?.required">
                           Name is required.
                         </div>
+                        <div *ngIf="name.errors?.minlength">
+                          ten phai co tren 2 ki tu.
+                        </div>
+                        <div *ngIf="name.errors?.maxlength">
+                          ten khong qua 100 ki tu.
+                        </div>
                       </div>
                       <label class="form-label" for="form3Example1c">Your Name</label>
                     </div>
@@ -35,6 +41,9 @@
                            class="text-danger">
                         <div *ngIf="email.errors?.required">
                           Email is required.
+                        </div>
+                        <div *ngIf="email.errors?.email">
+                         khong dung dinh dang
                         </div>
                       </div>
                       <label class="form-label" for="form3Example3c">Your Email</label>
@@ -76,7 +85,10 @@
                     <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
                       <input type="password" id="form3Example4cd" class="form-control"
-                             formControlName="password_confirmation">
+                             formControlName="password_confirmation"(keyup)="checkPassword()">
+                      <div  class="text-danger" [hidden]="isConfirm">
+                        {{message}}
+                      </div>
                       <label class="form-label" for="form3Example4cd">Repeat your password</label>
                     </div>
                   </div>

@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {RegisterService} from "../../service/register.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -7,19 +9,24 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  formRegister!: FormGroup
+  formRegister!: FormGroup;
+  message:string = 'mat khau khong khop';
+  isConfirm:boolean=true
 
   constructor(private fb: FormBuilder,
+              private registerService:RegisterService,
+              private router:Router,
+
   ) {
   }
 
   ngOnInit(): void {
     this.formRegister = this.fb.group({
-        name: ['', Validators.required],
-        email: ['', Validators.required],
-        phone: ['', Validators.pattern('(84|0[3|5|7|8|9])+([0-9]{8})')],
-        password: ['', Validators.required],
-        password_confirmation: ['', Validators.required]
+        name: ['', [Validators.required,Validators.minLength(2),Validators.maxLength(100)]],
+        email: ['', [Validators.required,Validators.email]],
+        phone: ['', [Validators.pattern('(84|0[3|5|7|8|9])+([0-9]{8})')]],
+        password: ['', [Validators.required,Validators.minLength(6),Validators.maxLength(32)]],
+        password_confirmation: ['', [Validators.required]]
       },
       {validator: this.ConfirmedValidator('password', 'password_confirmation')})
   }
@@ -41,11 +48,10 @@ export class RegisterComponent implements OnInit {
 
   submit() {
     let userData = this.formRegister?.value
-    console.log(userData)
-    // this.authService.register(userData).subscribe(res => {
-    //   this.message = res.message
-    //
-    // })
+   this.registerService.register(userData).subscribe(res => {
+     console.log(res)
+     this.router.navigate(['/login'])
+   })
   }
 
   get name() {
@@ -68,4 +74,14 @@ export class RegisterComponent implements OnInit {
     return this.formRegister?.get('password_confirmation')
   }
 
+  checkPassword():void{
+    let formData= this.formRegister?.value
+    if (formData.password !== formData.password_confirmation){
+
+      this.isConfirm=false
+    }else {
+      this.isConfirm=true
+    }
+
+  }
 }
