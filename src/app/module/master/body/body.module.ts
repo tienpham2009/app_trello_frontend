@@ -5,6 +5,8 @@ import { BodyRoutingModule } from './body-routing.module';
 import { BoardComponent } from './board/board.component';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from '../navbar/navbar.component';
+import {DragDropModule} from "@angular/cdk/drag-drop";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { NavbarComponent } from '../navbar/navbar.component';
   ],
   imports: [
     CommonModule,
-    BodyRoutingModule
+    BodyRoutingModule,
+    DragDropModule,
+    ReactiveFormsModule
   ]
 })
 export class BodyModule { }
