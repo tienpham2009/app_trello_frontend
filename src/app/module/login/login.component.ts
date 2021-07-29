@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginService } from 'src/app/service/login-service.service';
+import {AuthService} from "../../service/auth.service";
 
 @Component({
   selector: 'app-login',
@@ -14,16 +14,19 @@ import { LoginService } from 'src/app/service/login-service.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  logMessage!:string;
   loginForm!: FormGroup;
   message: string | undefined;
 
   constructor(
     private fb: FormBuilder,
-    private loginService: LoginService,
+    private authService: AuthService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
+    this.authService.currentMessage.subscribe(message => this.logMessage = message);
+ console.log(this.logMessage)
     this.loginForm = this.fb.group({
       email: ['', [
                     Validators.required,
@@ -40,9 +43,11 @@ export class LoginComponent implements OnInit {
     });
   }
 
+
+
   submitForm(): void {
     let data = this.loginForm.value;
-    this.loginService.checkLogin(data).subscribe(
+    this.authService.checkLogin(data).subscribe(
       (res) => {
         localStorage.setItem('token', res.access_token);
         localStorage.setItem('user', JSON.stringify(res.user));
