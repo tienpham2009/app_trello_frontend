@@ -1,1 +1,6 @@
-<p>board works!</p>
+<div class="container">
+<form class="d-flex" *ngIf="formAddList" [formGroup]="formAddList" (ngSubmit)="addList()">
+  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" formControlName="title">
+  <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
+</div>
