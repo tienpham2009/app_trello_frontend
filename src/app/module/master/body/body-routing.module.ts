@@ -4,14 +4,14 @@ import { BoardComponent } from './board/board.component';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  {
-    path: 'home',
-    component: HomeComponent,
-  },
-  {
-    path: 'board',
-    component: BoardComponent,
-  }
+  // {
+  //   path: 'home',
+  //   component: HomeComponent,
+  // },
+  // {
+  //   path: 'board',
+  //   component: BoardComponent,
+  // }
 ];
 
 @NgModule({

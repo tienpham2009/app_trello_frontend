@@ -9,9 +9,18 @@ import { RegisterComponent } from './module/register/register.component';
 
 const routes: Routes = [
   {
-    path: 'master',
-    loadChildren: () => import('./module/master/master.module').then(module => module.MasterModule),
-    // canActivate:[AuthGuard]
+    path: 'admin',
+    component:MasterComponent,
+    children : [
+      {
+        path: 'home',
+        component: HomeComponent,
+      },
+      {
+        path: 'board',
+        component: BoardComponent,
+      },
+    ]
   },
   {
     path: 'login',
