@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { MasterRoutingModule } from './master-routing.module';
 import { MasterComponent } from './master.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 @NgModule({
   declarations: [
-    MasterComponent
+    MasterComponent,
+    NavbarComponent
   ],
   imports: [
     CommonModule,
