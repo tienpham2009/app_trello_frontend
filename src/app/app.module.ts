@@ -14,6 +14,17 @@ import { BoardComponent } from './module/master/body/board/board.component';
 import { HomeComponent } from './module/master/body/home/home.component';
 import { MasterComponent } from './module/master/master.component';
 import { NavbarComponent } from './module/master/navbar/navbar.component';
+import {DragDropModule} from "@angular/cdk/drag-drop";
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { en_US } from 'ng-zorro-antd/i18n';
+import { registerLocaleData } from '@angular/common';
+import en from '@angular/common/locales/en';
+import {NzButtonModule} from "ng-zorro-antd/button";
+import {NzIconModule} from "ng-zorro-antd/icon";
+import {NzFormModule} from "ng-zorro-antd/form";
+import {NzCardModule} from "ng-zorro-antd/card";
+
+registerLocaleData(en);
 
 
 
@@ -36,10 +47,14 @@ import { NavbarComponent } from './module/master/navbar/navbar.component';
     ReactiveFormsModule,
     HttpClientModule,
     MatInputModule,
-    HttpClientModule,
-    
+    DragDropModule,
+    NzButtonModule,
+    NzIconModule,
+    NzFormModule,
+    NzCardModule
+
   ],
-  providers: [],
+  providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
