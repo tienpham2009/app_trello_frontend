@@ -36,6 +36,7 @@ import { NavbarComponent } from './module/master/navbar/navbar.component';
     ReactiveFormsModule,
     HttpClientModule,
     MatInputModule,
+    HttpClientModule,
     
   ],
   providers: [],
