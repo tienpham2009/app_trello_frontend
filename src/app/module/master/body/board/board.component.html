@@ -1,6 +1,26 @@
-<div class="container">
-<form class="d-flex" *ngIf="formAddList" [formGroup]="formAddList" (ngSubmit)="addList()">
-  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" formControlName="title">
-  <button class="btn btn-outline-success" type="submit">Search</button>
-</form>
+<div cdkDropList cdkDropListOrientation="horizontal" class="example-list" (cdkDropListDropped)="drop($event)">
+  <div style="margin: 28px;" *ngFor="let timePeriod of lists" cdkDrag>
+    <nz-card style="width:300px;"  nzTitle="{{timePeriod.title}}" [nzExtra]="extraTemplate">
+      <p>Card content</p>
+      <p>Card content</p>
+      <p>Card content</p>
+    </nz-card>
+  </div>
+  <ng-template #extraTemplate>
+    <a>...</a>
+  </ng-template>
+  <div class="">
+  <button nz-button nzType="dashed" class="add-button" style=" margin: 28px" [hidden]="!isHiddenFormAddList" (click)="hidden()">
+    <i nz-icon nzType="plus"></i>
+    Add List
+  </button>
+  </div>
+  <div [hidden]="isHiddenFormAddList">
+    <form *ngIf="formAddList" [formGroup]="formAddList" (ngSubmit)="addList()">
+      <input type="text" formControlName="title">
+      <button>Add list</button>
+    </form>
+
+    <button (click)="hidden()">X</button>
+  </div>
 </div>
