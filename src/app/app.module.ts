@@ -10,6 +10,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {MatInputModule} from '@angular/material/input';
+import { BoardComponent } from './module/master/body/board/board.component';
+import { HomeComponent } from './module/master/body/home/home.component';
+import { MasterComponent } from './module/master/master.component';
+import { NavbarComponent } from './module/master/navbar/navbar.component';
 
 
 
@@ -17,7 +21,12 @@ import {MatInputModule} from '@angular/material/input';
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent],
+    RegisterComponent,
+    HomeComponent,
+    BoardComponent,
+    MasterComponent,
+    NavbarComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -27,6 +36,7 @@ import {MatInputModule} from '@angular/material/input';
     ReactiveFormsModule,
     HttpClientModule,
     MatInputModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent],
