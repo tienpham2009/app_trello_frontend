@@ -9,7 +9,7 @@ import { RegisterComponent } from './module/register/register.component';
 
 const routes: Routes = [
   {
-    path: 'admin',
+    path: '',
     component:MasterComponent,
     children : [
       {
@@ -20,7 +20,7 @@ const routes: Routes = [
         path: ':id/board',
         component: BoardComponent,
       },
-    ]
+    ] , canActivate : [AuthGuard]
   },
   {
     path: 'login',
