@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ListServiceService} from "../../../../service/list-service.service";
 import {ActivatedRoute} from "@angular/router";
 import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
@@ -27,7 +27,7 @@ export class BoardComponent implements OnInit {
     let board_id = +this.route.snapshot.paramMap.get('id')
     this.getListByBoardId();
     this.formAddList = this.fb.group({
-      title: [''],
+      title: ['' , [Validators.required]],
       board_id: [board_id],
     })
 
