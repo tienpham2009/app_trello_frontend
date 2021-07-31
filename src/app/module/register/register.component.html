@@ -19,13 +19,13 @@
                       <div *ngIf="name && name.invalid && (name.dirty || name.touched)"
                            class="text-danger">
                         <div *ngIf="name.errors?.required">
-                          Name is required.
+                          Name không đúng định dạng.
                         </div>
                         <div *ngIf="name.errors?.minlength">
-                          ten phai co tren 2 ki tu.
+                          tên phải có trên 2 kí tự.
                         </div>
                         <div *ngIf="name.errors?.maxlength">
-                          ten khong qua 100 ki tu.
+                         tên không quá 100 kí tự.
                         </div>
                       </div>
                       <label class="form-label" for="form3Example1c">Your Name</label>
@@ -40,10 +40,10 @@
                       <div *ngIf="email && email.invalid && (email.dirty || email.touched)"
                            class="text-danger">
                         <div *ngIf="email.errors?.required">
-                          Email is required.
+                          Email không đúng định dạng.
                         </div>
                         <div *ngIf="email.errors?.email">
-                         khong dung dinh dang
+                         không đúng định dạng
                         </div>
                       </div>
                       <label class="form-label" for="form3Example3c">Your Email</label>
@@ -59,7 +59,7 @@
                       <div *ngIf="phone && phone.invalid && (phone.dirty || phone.touched)"
                            class="text-danger">
                         <div *ngIf="phone.errors?.required">
-                          Phone is required.
+                          Phone không đúng định dạng
                         </div>
                       </div>
                       <label class="form-label" for="form3Example4c">Phone</label>
@@ -74,7 +74,7 @@
                       <div *ngIf="password && password.invalid && (password.dirty || password.touched)"
                            class="text-danger">
                         <div *ngIf="password.errors?.required">
-                          password is required.
+                          password không đúng định dạng.
                         </div>
                       </div>
                       <label class="form-label" for="form3Example4c">Password</label>
@@ -87,7 +87,7 @@
                       <input type="password" id="form3Example4cd" class="form-control"
                              formControlName="password_confirmation"(keyup)="checkPassword()">
                       <div  class="text-danger" [hidden]="isConfirm">
-                        {{message}}
+                        {{errormessage}}
                       </div>
                       <label class="form-label" for="form3Example4cd">Repeat your password</label>
                     </div>

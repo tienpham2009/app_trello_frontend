@@ -16,7 +16,21 @@ import { BoardBarComponent } from './module/master/body/board/board-bar/board-ba
 import { DialogMemberComponent } from './dialog/dialog-member/dialog-member.component';
 import{ MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
+import { BoardComponent } from './module/master/body/board/board.component';
+import { HomeComponent } from './module/master/body/home/home.component';
+import { MasterComponent } from './module/master/master.component';
+import { NavbarComponent } from './module/master/navbar/navbar.component';
+import {DragDropModule} from "@angular/cdk/drag-drop";
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { en_US } from 'ng-zorro-antd/i18n';
+import { registerLocaleData } from '@angular/common';
+import en from '@angular/common/locales/en';
+import {NzButtonModule} from "ng-zorro-antd/button";
+import {NzIconModule} from "ng-zorro-antd/icon";
+import {NzFormModule} from "ng-zorro-antd/form";
+import {NzCardModule} from "ng-zorro-antd/card";
 
+registerLocaleData(en);
 
 
 
@@ -26,10 +40,19 @@ import { MatSelectModule } from '@angular/material/select';
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    BoardBarComponent,DialogMemberComponent
+    HomeComponent,
+    BoardComponent,
+    MasterComponent,
+    NavbarComponent,
+    BoardBarComponent,
+    DialogMemberComponent
     ],
 
-  entryComponents:[DialogMemberComponent],
+  entryComponents:[DialogMemberComponent,
+
+
+  ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -42,11 +65,15 @@ import { MatSelectModule } from '@angular/material/select';
     MatToolbarModule,
     MatButtonModule,
     MatDialogModule,
-    MatSelectModule
-
+    MatSelectModule,
+    DragDropModule,
+    NzButtonModule,
+    NzIconModule,
+    NzFormModule,
+    NzCardModule
 
   ],
-  providers: [],
+  providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

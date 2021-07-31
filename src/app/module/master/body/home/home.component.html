@@ -1,2 +1,260 @@
-<p>hello world</p>
-<p>abc</p>
+<div class="container" style="max-width: 80%">
+  <!-- Sidebar -->
+  <div id="wrapper">
+    <div class="sidebar">
+      <ul class="navbar-nav sidebar accordion" >
+        <!-- Sidebar - Brand -->
+  
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0" />
+  
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            href="#"
+            data-toggle="collapse"
+            data-target="#collapseTwo"
+            aria-expanded="true"
+            aria-controls="collapseTwo"
+          >
+            <i class="fas fa-fw fa-table"></i>
+  
+            <span>Bang</span>
+          </a>
+          <div
+            id="collapseTwo"
+            class="collapse"
+            aria-labelledby="headingTwo"
+            data-parent="#accordionSidebar"
+          >
+            <div class="bg-white py-2 collapse-inner rounded">
+              <a class="collapse-item" href="buttons.html">Rieng tu</a>
+              <a class="collapse-item" href="cards.html">Nhom</a>
+              <a class="collapse-item" href="cards.html">Cong khai</a>
+            </div>
+          </div>
+        </li>
+  
+        <!-- Nav Item - Utilities Collapse Menu -->
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            href="#"
+            data-toggle="collapse"
+            data-target="#collapseUtilities"
+            aria-expanded="true"
+            aria-controls="collapseUtilities"
+          >
+            <span>Nhom</span>
+          </a>
+          <div
+            id="collapseUtilities"
+            class="collapse"
+            aria-labelledby="headingUtilities"
+            data-parent="#accordionSidebar"
+          >
+            <div class="bg-white py-2 collapse-inner rounded">
+              <a class="collapse-item" href="utilities-color.html">Nhom 1</a>
+              <a class="collapse-item" href="utilities-border.html">Nhom 2</a>
+            </div>
+          </div>
+        </li>
+  
+        <!-- Divider -->
+        <!-- <hr class="sidebar-divider" /> -->
+  
+        <!-- Heading -->
+        <!-- <div class="sidebar-heading">Addons</div> -->
+  
+        <!-- Nav Item - Pages Collapse Menu -->
+        <!-- <li class="nav-item">
+            <a
+              class="nav-link collapsed"
+              href="#"
+              data-toggle="collapse"
+              data-target="#collapsePages"
+              aria-expanded="true"
+              aria-controls="collapsePages"
+            >
+              <i class="fas fa-fw fa-folder"></i>
+              <span>Pages</span>
+            </a>
+            <div
+              id="collapsePages"
+              class="collapse"
+              aria-labelledby="headingPages"
+              data-parent="#accordionSidebar"
+            >
+              <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Login Screens:</h6>
+                <a class="collapse-item" href="login.html">Login</a>
+                <a class="collapse-item" href="register.html">Register</a>
+                <a class="collapse-item" href="forgot-password.html"
+                  >Forgot Password</a
+                >
+                <div class="collapse-divider"></div>
+                <h6 class="collapse-header">Other Pages:</h6>
+                <a class="collapse-item" href="404.html">404 Page</a>
+                <a class="collapse-item" href="blank.html">Blank Page</a>
+              </div>
+            </div>
+          </li> -->
+  
+        <!-- Nav Item - Charts -->
+        <!-- <li class="nav-item">
+            <a class="nav-link" href="charts.html">
+              <i class="fas fa-fw fa-chart-area"></i>
+              <span>Charts</span></a
+            >
+          </li> -->
+  
+        <!-- Nav Item - Tables -->
+        <!-- <li class="nav-item">
+            <a class="nav-link" href="tables.html">
+              <i class="fas fa-fw fa-table"></i>
+              <span>Tables</span></a
+            >
+          </li> -->
+  
+        <!-- Divider -->
+        <!-- <hr class="sidebar-divider d-none d-md-block" /> -->
+      </ul>
+      <!-- End of Sidebar -->
+    </div>
+    
+
+    <div class="container-fluid list-card" >
+      <!-- Content Row -->
+      <div class="row">
+        <!-- Earnings (Monthly) Card Example -->
+        <!-- <div class="list-card"> -->
+          <!-- show board -->
+          <div
+            class="col-xl-3 col-md-6 mb-4"
+            *ngFor="let board of dataBoards"
+            routerLink="/{{board.id}}/board" 
+          >
+            <div class="card border-left-success shadow h-100 py-2">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div
+                      class="
+                        text-xs
+                        font-weight-bold
+                        text-success text-uppercase
+                        mb-1
+                      "
+                    >
+                      {{ board.title }}
+                    </div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                      $215,000
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- add board -->
+          <div
+            class="col-xl-3 col-md-6 mb-4"
+            data-toggle="modal"
+            data-target="#exampleModal"
+          >
+            <div class="card border-left-warning shadow h-100 py-2">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div
+                      class="
+                        text-xs
+                        font-weight-bold
+                        text-warning text-uppercase
+                        mb-1
+                      "
+                    >
+                      Tao bang moi
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <span style="font-size: 50px">+</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <!-- </div> -->
+      </div>
+
+      <!-- Content Row -->
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <form *ngIf="formAddBoard" [formGroup]="formAddBoard">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="exampleModalLabel">Them Bang Moi</h3>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Them tieu de bang"
+            formControlName="title"
+          />
+          <label for="exampleFormControlSelect1">Example select</label>
+          <select
+            class="form-control"
+            id="exampleFormControlSelect1"
+            formControlName="modifier"
+          >
+            <option
+              *ngFor="let modifier of modifiers"
+              value="{{ modifier.value }}"
+            >
+              {{ modifier.name }}
+            </option>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary">Close</button>
+          <button
+            type="submit"
+            class="close"
+            data-dismiss="modal"
+            class="btn btn-primary"
+            (click)="submitForm()"
+          >
+            Luu
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
