@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -51,7 +52,8 @@ registerLocaleData(en);
     NzButtonModule,
     NzIconModule,
     NzFormModule,
-    NzCardModule
+    NzCardModule,
+    ToastrModule.forRoot()
 
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],

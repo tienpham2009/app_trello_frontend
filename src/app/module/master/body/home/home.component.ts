@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { BoardService } from 'src/app/service/board-service.service';
+import { NotificationService } from 'src/app/service/notification.service';
 
 @Component({
   selector: 'app-home',
@@ -26,7 +27,11 @@ export class HomeComponent implements OnInit {
   formAddBoard: FormGroup | undefined;
 
   dataBoards: any;
-  constructor(private boarService: BoardService, private fb: FormBuilder) {}
+  constructor(
+    private boarService: BoardService,
+    private fb: FormBuilder,
+    private notifyService: NotificationService
+  ) {}
 
   ngOnInit(): void {
     this.formAddBoard = this.fb.group({
@@ -44,10 +49,17 @@ export class HomeComponent implements OnInit {
 
   submitForm() {
     const data = this.formAddBoard?.value;
-    this.boarService.addBoard(data).subscribe( (res) => {
+    this.boarService.addBoard(data).subscribe((res) => {
       this.getBoardByUserId();
-        console.log(res);
-        
+      this.showToaster()
+      console.log(res);
     });
+  }
+
+  showToaster() {
+    this.notifyService.showSuccess(
+      'Data shown successfully !!',
+      'Notification'
+    );
   }
 }

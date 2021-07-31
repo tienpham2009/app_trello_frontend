@@ -38,7 +38,8 @@
               "src/theme.less",
               "src/custom-theme.scss",
               "src/styles.css",
-              "src/assets/css/sb-admin-2.min.css"
+              "src/assets/css/sb-admin-2.min.css",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
               "src/assets/js/sb-admin-2.min.js"
