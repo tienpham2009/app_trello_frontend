@@ -5,7 +5,7 @@
     class="example-list"
     (cdkDropListDropped)="drop($event)"
   >
-    <div style="margin: 28px" *ngFor="let timePeriod of lists" cdkDrag>
+    <div style="margin: 28px" *ngFor="let timePeriod of lists ; index as i" cdkDrag >
       <nz-card
         style="width: 300px"
         nzTitle="{{ timePeriod.title }}"
@@ -40,8 +40,8 @@
         style="margin: 5px;"
       >
         <input class="form-control border border-success " type="text" formControlName="title" />
-        <button class="btn btn-primary" [disabled]="formAddList.invalid">Add list</button>
-        <button style="float: right" class="btn btn-danger" (click)="hidden()">
+        <button type="submit" class="btn btn-primary" [disabled]="formAddList.invalid">Add list</button>
+        <button type="button" style="float: right" class="btn btn-danger" (click)="hidden()">
           X
         </button>
       </form>
