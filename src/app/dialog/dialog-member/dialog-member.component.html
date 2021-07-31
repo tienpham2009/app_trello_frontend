@@ -1,0 +1,26 @@
+
+  <h2>Thêm thành viên</h2>
+  <form *ngIf="formAddUser" [formGroup]="formAddUser" (ngSubmit)="submit()">
+    <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Thêm email thành viên...</mat-label>
+      <input matInput formControlName = 'user_id'>
+      <mat-error *ngIf="email && email.invalid">{{getErrorMessageEmail()}}</mat-error>
+    </mat-form-field>
+  </div>
+  <p>Lựa chọn quyền cho thành viên</p>
+  <div>
+    <mat-form-field appearance="fill">
+    <mat-label>Chọn quyền</mat-label>
+    <mat-select formControlName ='role_id'>
+      <mat-option value="2">Quyền chỉnh sửa</mat-option>
+      <mat-option value="3">Chỉ xem</mat-option>
+    </mat-select>
+  </mat-form-field>
+  </div>
+<div mat-dialog-actions>
+  <button mat-button  [disabled]="formAddUser.invalid">Thêm thành viên</button>
+
+
+</div>
+</form>

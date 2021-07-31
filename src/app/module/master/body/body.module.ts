@@ -6,10 +6,12 @@ import { BoardComponent } from './board/board.component';
 import { HomeComponent } from './home/home.component';
 
 
+
 @NgModule({
   declarations: [
     BoardComponent,
-    HomeComponent
+    HomeComponent,
+
   ],
   imports: [
     CommonModule,

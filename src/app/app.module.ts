@@ -10,6 +10,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {MatInputModule} from '@angular/material/input';
+import {  MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule} from '@angular/material/toolbar';
+import { BoardBarComponent } from './module/master/body/board/board-bar/board-bar.component';
+import { DialogMemberComponent } from './dialog/dialog-member/dialog-member.component';
+import{ MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
+
+
 
 
 
@@ -17,7 +25,11 @@ import {MatInputModule} from '@angular/material/input';
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent],
+    RegisterComponent,
+    BoardBarComponent,DialogMemberComponent
+    ],
+
+  entryComponents:[DialogMemberComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -27,6 +39,12 @@ import {MatInputModule} from '@angular/material/input';
     ReactiveFormsModule,
     HttpClientModule,
     MatInputModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatSelectModule
+
+
   ],
   providers: [],
   bootstrap: [AppComponent],
