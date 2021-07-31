@@ -51,7 +51,7 @@ registerLocaleData(en);
     NzButtonModule,
     NzIconModule,
     NzFormModule,
-    NzCardModule,
+    NzCardModule
 
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],

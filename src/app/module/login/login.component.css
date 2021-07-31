@@ -1,98 +1,169 @@
-/* Made with love by Mutiullah Samim*/
-
-@import url("https://fonts.googleapis.com/css?family=Numans");
-
-html,
-body {
-  background-image: url("http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
+.content {
+  color: #000;
+  overflow-x: hidden;
   height: 100%;
-  font-family: "Numans", sans-serif;
+  background-color: #B0BEC5;
+  background-repeat: no-repeat
 }
 
-.container {
-  height: 100%;
-  align-content: center;
+.card0 {
+  box-shadow: 0px 4px 8px 0px #757575;
+  border-radius: 0px
 }
 
-.card {
-  height: 370px;
-  margin-top: auto;
-  margin-bottom: auto;
-  width: 400px;
-  background-color: rgba(0, 0, 0, 0.5) !important;
+.card2 {
+  margin: 0px 40px
 }
 
-.social_icon span {
-  font-size: 60px;
-  margin-left: 10px;
-  color: #ffc312;
+.logo {
+  width: 200px;
+  height: 100px;
+  margin-top: 20px;
+  margin-left: 35px
 }
 
-.social_icon span:hover {
-  color: white;
-  cursor: pointer;
+.image {
+  width: 360px;
+  height: 280px
 }
 
-.card-header h3 {
-  color: white;
+.border-line {
+  border-right: 1px solid #EEEEEE
 }
 
-.social_icon {
-  position: absolute;
-  right: 20px;
-  top: -45px;
+.facebook {
+  background-color: #3b5998;
+  color: #fff;
+  font-size: 18px;
+  padding-top: 5px;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  cursor: pointer
 }
 
-.input-group-prepend span {
-  width: 50px;
-  background-color: #ffc312;
-  color: black;
-  border: 0 !important;
+.twitter {
+  background-color: #1DA1F2;
+  color: #fff;
+  font-size: 18px;
+  padding-top: 5px;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  cursor: pointer
 }
 
-input:focus {
-  outline: 0 0 0 0 !important;
-  box-shadow: 0 0 0 0 !important;
+.linkedin {
+  background-color: #2867B2;
+  color: #fff;
+  font-size: 18px;
+  padding-top: 5px;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  cursor: pointer
 }
 
-.remember {
-  color: white;
+.line {
+  height: 1px;
+  width: 45%;
+  background-color: #E0E0E0;
+  margin-top: 10px
 }
 
-.remember input {
-  width: 20px;
-  height: 20px;
-  margin-left: 15px;
-  margin-right: 5px;
+.or {
+  width: 10%;
+  font-weight: bold
 }
 
-.login_btn {
-  color: black;
-  background-color: #ffc312;
-  width: 100px;
+.text-sm {
+  font-size: 14px !important
 }
 
-.login_btn:hover {
-  color: black;
-  background-color: white;
+::placeholder {
+  color: #BDBDBD;
+  opacity: 1;
+  font-weight: 300
 }
 
-.links {
-  color: white;
+:-ms-input-placeholder {
+  color: #BDBDBD;
+  font-weight: 300
 }
 
-.links a {
-  margin-left: 4px;
+::-ms-input-placeholder {
+  color: #BDBDBD;
+  font-weight: 300
 }
 
-.example-form {
-  min-width: 150px;
-  max-width: 500px;
+input,
+textarea {
+  padding: 10px 12px 10px 12px;
+  border: 1px solid lightgrey;
+  border-radius: 2px;
+  margin-bottom: 5px;
+  margin-top: 2px;
   width: 100%;
+  box-sizing: border-box;
+  color: #2C3E50;
+  font-size: 14px;
+  letter-spacing: 1px
 }
 
-.example-full-width {
-  width: 100%;
+input:focus,
+textarea:focus {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  border: 1px solid #304FFE;
+  outline-width: 0
+}
+
+button:focus {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  outline-width: 0
+}
+
+a {
+  color: inherit;
+  cursor: pointer
+}
+
+.btn-blue {
+  background-color: #1A237E;
+  width: 150px;
+  color: #fff;
+  border-radius: 2px
+}
+
+.btn-blue:hover {
+  background-color: #000;
+  cursor: pointer
+}
+
+.bg-blue {
+  color: #fff;
+  background-color: #1A237E
+}
+
+@media screen and (max-width: 991px) {
+  .logo {
+    margin-left: 0px
+  }
+
+  .image {
+    width: 300px;
+    height: 220px
+  }
+
+  .border-line {
+    border-right: none
+  }
+
+  .card2 {
+    border-top: 1px solid #EEEEEE !important;
+    margin: 0px 15px
+  }
 }
