@@ -24,6 +24,10 @@ export class ListServiceService {
     return this.http.post<any>(`${environment.apiUrl}/list/move` , data , this.setHeader())
   }
 
+  changeTitle(data: any): Observable<any>{
+    return this.http.post<any>(`${environment.apiUrl}/list/changeTitle` , data , this.setHeader())
+  }
+
   setHeader() {
     let token = localStorage.getItem('token')
     let headers_object = new HttpHeaders().set('Authorization', 'Bearer' + token);
@@ -31,4 +35,6 @@ export class ListServiceService {
       headers: headers_object
     };
   }
+
+
 }

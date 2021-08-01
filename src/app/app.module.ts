@@ -24,6 +24,8 @@ import {NzButtonModule} from "ng-zorro-antd/button";
 import {NzIconModule} from "ng-zorro-antd/icon";
 import {NzFormModule} from "ng-zorro-antd/form";
 import {NzCardModule} from "ng-zorro-antd/card";
+import {MatCardModule} from '@angular/material/card';
+
 
 registerLocaleData(en);
 
@@ -53,6 +55,7 @@ registerLocaleData(en);
     NzIconModule,
     NzFormModule,
     NzCardModule,
+    MatCardModule,
     ToastrModule.forRoot()
 
   ],
