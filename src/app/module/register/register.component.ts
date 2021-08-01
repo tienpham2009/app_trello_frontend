@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {AuthService} from "../../service/auth.service";
+import {NotificationService} from "../../service/notification.service";
 
 @Component({
   selector: 'app-register',
@@ -13,10 +14,12 @@ export class RegisterComponent implements OnInit {
   message!: string;
   errormessage:string = 'mat khau khong khop';
   isConfirm:boolean=true
+  toastrMessage!:any;
 
   constructor(private fb: FormBuilder,
               private authService:AuthService,
               private router:Router,
+              private notifyService: NotificationService,
 
   ) {
   }
@@ -53,9 +56,23 @@ export class RegisterComponent implements OnInit {
     let userData = this.formRegister?.value
    this.authService.register(userData).subscribe(res => {
      console.log(res)
-     this.newMessage()
+     this.toastrMessage='dang ki thanh cong'
+     this.showToaster()
      this.router.navigate(['/login'])
+   },error => {
+     console.log(error.error)
+
+     if (error.error.email){
+       this.toastrMessage=error.error.email;
+       this.notifyService.showError(this.toastrMessage,'Thông báo')
+     }
+
+     if (error.error.phone){
+       this.toastrMessage=error.error.phone;
+       this.notifyService.showError(this.toastrMessage,'Thông báo')
+     }
    })
+
   }
 
   get name() {
@@ -89,7 +106,10 @@ export class RegisterComponent implements OnInit {
 
   }
 
-  newMessage() {
-    this.authService.changeMessage('Đăng kí thành công');
+  showToaster() {
+    this.notifyService.showSuccess(
+      this.toastrMessage,
+      'Notification'
+    );
   }
 }
