@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BoardService } from 'src/app/service/board-service.service';
 import { NotificationService } from 'src/app/service/notification.service';
 
@@ -35,8 +35,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.formAddBoard = this.fb.group({
-      title: [''],
-      modifier: [''],
+      title: ['' , [Validators.required]],
+      modifier: ['' , [Validators.required]],
     });
     this.getBoardByUserId();
   }
@@ -50,16 +50,23 @@ export class HomeComponent implements OnInit {
   submitForm() {
     const data = this.formAddBoard?.value;
     this.boarService.addBoard(data).subscribe((res) => {
+      this.notifyService.showSuccess(res.message , "congratulations")
       this.getBoardByUserId();
-      this.showToaster()
       console.log(res);
+      this.formAddBoard?.reset();
     });
   }
 
-  showToaster() {
-    this.notifyService.showSuccess(
-      'Data shown successfully !!',
-      'Notification'
-    );
+  resetForm() {
+    this.formAddBoard?.reset();
   }
+
+  get title () { 
+    return this.formAddBoard?.get('title');
+  }
+
+  get modifier () {
+    return this.formAddBoard?.get('modifier');
+  }
+
 }

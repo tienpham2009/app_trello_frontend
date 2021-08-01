@@ -25,3 +25,11 @@ a:hover {
   width: 80%;
   margin-left: 50px;
 }
+
+.font-sidebar {
+  font-size: 1.5rem !important; 
+}
+
+.label-add-card {
+  margin: .7rem;
+}

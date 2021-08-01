@@ -25,6 +25,8 @@ import {NzIconModule} from "ng-zorro-antd/icon";
 import {NzFormModule} from "ng-zorro-antd/form";
 import {NzCardModule} from "ng-zorro-antd/card";
 import {ChangePasswordComponent} from "./module/change-password/change-password.component";
+import {MatCardModule} from '@angular/material/card';
+
 
 registerLocaleData(en);
 
@@ -55,6 +57,7 @@ registerLocaleData(en);
     NzIconModule,
     NzFormModule,
     NzCardModule,
+    MatCardModule,
     ToastrModule.forRoot()
 
   ],

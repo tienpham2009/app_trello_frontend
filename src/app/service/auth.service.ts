@@ -22,6 +22,7 @@ export class AuthService {
 
   checkLogin(data: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/auth/login`, data)
+
   }
 
   getToken(): any {
