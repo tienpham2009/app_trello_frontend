@@ -12,4 +12,8 @@ export class NotificationService {
   showSuccess(message : any, title: any,){
     this.toastr.success(message, title)
 }
+
+  showError(message : any, title: any,){
+    this.toastr.error(message, title)
+  }
 }
