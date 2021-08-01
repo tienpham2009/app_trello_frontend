@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {AuthService} from "../../service/auth.service";
-import {ToastrService} from "ngx-toastr";
-
 
 @Component({
   selector: 'app-change-password',
@@ -15,8 +13,7 @@ export class ChangePasswordComponent implements OnInit {
   message !: string;
 
   constructor(private fb: FormBuilder,
-              private authService: AuthService,
-              private toastr: ToastrService) {
+              private authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -32,20 +29,13 @@ export class ChangePasswordComponent implements OnInit {
     this.authService.changePassword(formData).subscribe(res => {
       console.log(res)
       this.message = res.message
-      this.toastr.success(this.message,'Thông báo:')
     }, error => {
       console.log(error)
-   if (error.error['old_password']){
-     this.message = error.error['old_password'];
-     this.toastr.error(this.message,'Thông báo:')
-   }
-   if (error.error['new_password']){
-     this.message = error.error['new_password'];
-     this.toastr.error(this.message,'Thông báo:')
-   }
+     if(error.error['old_password'] && error.error['new_password']){
+        this.message = error.error['old_password'] + error.error['new_password']
+     }else {
+       this.message = error.error
+     }
     })
   }
-
-
-
 }

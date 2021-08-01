@@ -1,18 +1,18 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {AuthGuard} from './auth.guard';
-import {LoginComponent} from './module/login/login.component';
-import {BoardComponent} from './module/master/body/board/board.component';
-import {HomeComponent} from './module/master/body/home/home.component';
-import {MasterComponent} from './module/master/master.component';
-import {RegisterComponent} from './module/register/register.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './auth.guard';
+import { LoginComponent } from './module/login/login.component';
+import { BoardComponent } from './module/master/body/board/board.component';
+import { HomeComponent } from './module/master/body/home/home.component';
+import { MasterComponent } from './module/master/master.component';
+import { RegisterComponent } from './module/register/register.component';
 import {ChangePasswordComponent} from "./module/change-password/change-password.component";
 
 const routes: Routes = [
   {
     path: '',
-    component: MasterComponent,
-    children: [
+    component:MasterComponent,
+    children : [
       {
         path: '',
         component: HomeComponent,
@@ -22,10 +22,10 @@ const routes: Routes = [
         component: BoardComponent,
       },
       {
-        path: ':change-password',
-        component: ChangePasswordComponent,
+        path: 'change-password',
+        component: ChangePasswordComponent
       }
-    ], canActivate: [AuthGuard]
+    ] , canActivate : [AuthGuard]
   },
   {
     path: 'login',
@@ -41,5 +41,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}
