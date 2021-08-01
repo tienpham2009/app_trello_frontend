@@ -1,3 +1,4 @@
+
 import {Component,OnInit} from '@angular/core';
 import {AuthService} from "../../../service/auth.service";
 import {Router} from "@angular/router";
@@ -12,6 +13,7 @@ import { NotificationService } from 'src/app/service/notification.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+
   image!: File;
   userData:any;
 constructor(private authService: AuthService,

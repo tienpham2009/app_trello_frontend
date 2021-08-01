@@ -34,9 +34,10 @@ export class BoardComponent implements OnInit {
   }
 
   addList() {
+    let board_id = this.route.snapshot.paramMap.get('id');
     let list_data = this.formAddList?.value;
+        list_data.board_id = board_id;
     console.log(list_data);
-    
     this.listService.storeList(list_data).subscribe((res) => {
       this.getListByBoardId();
       this.formAddList.reset();
