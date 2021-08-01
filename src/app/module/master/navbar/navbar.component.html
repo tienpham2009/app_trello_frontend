@@ -19,7 +19,7 @@
     <i class="fa fa-bars"></i>
   </button>
 
-  <!-- Topbar Search -->  
+  <!-- Topbar Search -->
   <a class="icon btn btn-light"><i class="fas fa-align-justify fa-lg"></i></a>
   <a [routerLink]='["/"]' class="icon btn btn-light"><i class="fas fa-home fa-lg"></i></a>
   <!-- <a [routerLink]='["/admin/board"]' class="icon btn btn-light" ><i class="fas fa-fw fa-table fa-lg"></i><span style="font-size: 20px; text-align: center">Bang</span></a> -->
@@ -271,15 +271,15 @@
         aria-expanded="false"
       >
         <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-        <img class="img-profile rounded-circle" src="assets/img/undraw_profile.svg"/>
+        <img class="img-profile rounded-circle" src="http://127.0.0.1:8000/uploadedimages/{{userData.image}}"/>
       </a>
       <!-- Dropdown - User Information -->
       <div
         class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
         aria-labelledby="userDropdown"
       >
-        <a class="dropdown-item" href="#">
-          <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+            <a class="dropdown-item" href="#">
+            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
           Profile
         </a>
         <a class="dropdown-item" href="#">
@@ -302,6 +302,38 @@
         </a>
       </div>
     </li>
+    <!-- Change avatar -->
+    <li class="nav-item dropdown no-arrow">
+      <a
+        class="nav-link dropdown-toggle"
+        href="#"
+
+        id="userDropdown"
+        role="button"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        <span class="mr-2 d-none d-lg-inline text-gray-600 small">Thay đổi Avatar</span>
+
+      </a>
+      <!-- Dropdown - User Information -->
+      <div
+        class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+        aria-labelledby="userDropdown"
+      >
+      <a class="dropdown-item" >
+        Thay đổi avatar
+      <form (submit)="onSubmit()">
+        <input type="file" multiple (change) ="changeAvatar($event)" formControlName="image">
+
+        <button class="btn btn-info" (click) = "showToast()">Lưu</button>
+      </form>
+        </a>
+      </div>
+    </li>
   </ul>
 </nav>
+
 <!-- End of Topbar -->
+

@@ -30,4 +30,9 @@ export class BoardService {
       headers: headers_object,
     });
   }
+  addImage(data:any): Observable<any> {
+    let token =localStorage.getItem('token')
+    let headers_object = new HttpHeaders().set('Authorization', 'Bearer' + token);
+    return this.http.post(environment.apiUrl + '/add_image', data, {headers: headers_object});
+  }
 }
