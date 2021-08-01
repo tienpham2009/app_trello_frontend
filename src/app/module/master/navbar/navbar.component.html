@@ -1,12 +1,14 @@
 <!-- Topbar -->
 <nav
   class="
-    navbar navbar-expand navbar-light
+    navbar  navbar-light
     bg-white
     topbar
     mb-4
-    static-top
+
     shadow
+    fixed-top
+    navbar-expand-md
   "
 >
   <!-- Sidebar Toggle (Topbar) -->
@@ -19,7 +21,7 @@
 
   <!-- Topbar Search -->
   <a class="icon btn btn-light"><i class="fas fa-align-justify fa-lg"></i></a>
-  <a [routerLink]='["/admin/home"]' class="icon btn btn-light"><i class="fas fa-home fa-lg"></i></a>
+  <a [routerLink]='["/home"]' class="icon btn btn-light"><i class="fas fa-home fa-lg"></i></a>
   <!-- <a [routerLink]='["/admin/board"]' class="icon btn btn-light" ><i class="fas fa-fw fa-table fa-lg"></i><span style="font-size: 20px; text-align: center">Bang</span></a> -->
 
   <form
@@ -268,7 +270,7 @@
         aria-haspopup="true"
         aria-expanded="false"
       >
-        <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+        <span class="mr-2 d-none d-lg-inline text-gray-600 small">Xin chào: {{userData.name}}</span>
         <img class="img-profile rounded-circle" src="assets/img/undraw_profile.svg"/>
       </a>
       <!-- Dropdown - User Information -->

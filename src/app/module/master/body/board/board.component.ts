@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {ListServiceService} from "../../../../service/list-service.service";
 import {ActivatedRoute} from "@angular/router";
 import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
-import { NzButtonModule } from 'ng-zorro-antd/button';
+// import { NzButtonModule } from 'ng-zorro-antd/button';
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
@@ -55,5 +55,6 @@ export class BoardComponent implements OnInit {
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.lists, event.previousIndex, event.currentIndex);
+    console.log(this.lists)
   }
 }

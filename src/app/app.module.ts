@@ -23,6 +23,7 @@ import {NzButtonModule} from "ng-zorro-antd/button";
 import {NzIconModule} from "ng-zorro-antd/icon";
 import {NzFormModule} from "ng-zorro-antd/form";
 import {NzCardModule} from "ng-zorro-antd/card";
+import {ChangePasswordComponent} from "./module/change-password/change-password.component";
 
 registerLocaleData(en);
 
@@ -36,7 +37,8 @@ registerLocaleData(en);
     HomeComponent,
     BoardComponent,
     MasterComponent,
-    NavbarComponent
+    NavbarComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
