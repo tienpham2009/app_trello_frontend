@@ -90,6 +90,6 @@ export class RegisterComponent implements OnInit {
   }
 
   newMessage() {
-    this.authService.changeMessage('oke');
+    this.authService.changeMessage('Đăng kí thành công');
   }
 }
