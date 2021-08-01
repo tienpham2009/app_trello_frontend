@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../../service/auth.service";
 import {Router} from "@angular/router";
 import { BoardService } from 'src/app/service/board-service.service';
+import { Toast } from 'ngx-toastr';
+import { NotificationService } from 'src/app/service/notification.service';
 
 
 @Component({
@@ -15,7 +17,8 @@ export class NavbarComponent implements OnInit {
 
   constructor(private authService: AuthService,
               private router: Router,
-              private boardService: BoardService) {
+              private boardService: BoardService,
+              private toast: NotificationService) {
   }
 
   ngOnInit(): void {
@@ -45,6 +48,8 @@ export class NavbarComponent implements OnInit {
   {});
 
   }
-
+  showToast(){
+      this.toast.showSuccess('Thành công','Lưu ảnh');
+  }
 
 }

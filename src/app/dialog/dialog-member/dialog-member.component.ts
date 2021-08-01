@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AddUserService } from 'src/app/service/add-user.service';
+import { NotificationService } from 'src/app/service/notification.service';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 
 
@@ -14,38 +16,37 @@ import { AddUserService } from 'src/app/service/add-user.service';
 export class DialogMemberComponent implements OnInit {
   formAddUser: FormGroup | undefined;
 
-  constructor (private fb: FormBuilder,
+  constructor (@Inject(MAT_DIALOG_DATA) public data: any,
+    private fb: FormBuilder,
     private addMember: AddUserService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private toast: NotificationService) { }
 
   ngOnInit(): void {
+    console.log(this.data)
 
     this.formAddUser = this.fb.group({
-      user_id: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email]],
       role_id:['',[Validators.required]]
 
     })
   }
 submit(){
-  const board_id = this.route.snapshot.params.id;
+
+  const board_id = this.data.dataKey;
   this.formAddUser?.addControl('board_id',new FormControl(board_id));
   const userBoard = this.formAddUser?.value;
-
-    this.addMember.add(userBoard).subscribe({
+  console.log(userBoard);
+  this.addMember.add(userBoard).subscribe({
       next: (res:any) => {
+        this.toast.showSuccess('Thành công','Thêm thành viên');
 
       }
         });
 
 }
-getErrorMessageEmail() {
-  if (this.email?.hasError('required')) {
-    return 'You must enter a value';
-  }
-  return this.email?.hasError('email') ? 'Not a valid email' : '';
-}
-get email() {
-  return this.formAddUser?.get('email')
-}
+
+
+
 
 }

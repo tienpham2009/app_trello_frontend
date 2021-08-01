@@ -13,11 +13,13 @@ export class BoardBarComponent implements OnInit {
   constructor(public dialog: MatDialog,
     public route:ActivatedRoute) { }
 
-  ngOnInit(): void {const board_id = this.route.snapshot.params.id;
-    console.log(board_id);
+  ngOnInit(): void {
   }
 openDialog(){
-  this.dialog.open(DialogMemberComponent);
+  this.dialog.open(DialogMemberComponent ,{data : {
+    dataKey: this.route.snapshot.params.id
+  }
+});
 }
 
 

@@ -15,8 +15,13 @@ export class ListServiceService {
   storeList(listData: any): Observable<any> {
     return this.http.post<any>(environment.apiUrl + '/list/store', listData, this.setHeader())
   }
+
   getListByBoardId(board_id:number):Observable<any>{
     return this.http.get<any>(`${environment.apiUrl}/list/${board_id}/show`,this.setHeader())
+  }
+
+  moveList(data: any): Observable<any>{
+    return this.http.post<any>(`${environment.apiUrl}/list/move` , data , this.setHeader())
   }
 
   setHeader() {

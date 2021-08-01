@@ -4,8 +4,8 @@
     <div>
     <mat-form-field appearance="fill">
       <mat-label>Thêm email thành viên...</mat-label>
-      <input matInput formControlName = 'user_id'>
-      <mat-error *ngIf="email && email.invalid">{{getErrorMessageEmail()}}</mat-error>
+      <input matInput formControlName = 'email'>
+
     </mat-form-field>
   </div>
   <p>Lựa chọn quyền cho thành viên</p>
@@ -19,8 +19,7 @@
   </mat-form-field>
   </div>
 <div mat-dialog-actions>
-  <button mat-button  [disabled]="formAddUser.invalid">Thêm thành viên</button>
-
+  <button mat-button mat-dialog-close [disabled]="formAddUser.invalid" type="submit">Thêm thành viên</button>
 
 </div>
 </form>

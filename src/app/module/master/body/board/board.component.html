@@ -1,27 +1,53 @@
-<div cdkDropList cdkDropListOrientation="horizontal" class="example-list" (cdkDropListDropped)="drop($event)">
-  <div style="margin: 28px;" *ngFor="let timePeriod of lists" cdkDrag>
-    <nz-card style="width:300px;"  nzTitle="{{timePeriod.title}}" [nzExtra]="extraTemplate">
-      <p>Card content</p>
-      <p>Card content</p>
-      <p>Card content</p>
-    </nz-card>
-  </div>
-  <ng-template #extraTemplate>
-    <a>...</a>
-  </ng-template>
-  <div class="">
-  <button nz-button nzType="dashed" class="add-button" style=" margin: 28px" [hidden]="!isHiddenFormAddList" (click)="hidden()">
-    <i nz-icon nzType="plus"></i>
-    Add List
-  </button>
-  </div>
-  <div [hidden]="isHiddenFormAddList">
-    <form *ngIf="formAddList" [formGroup]="formAddList" (ngSubmit)="addList()">
-      <input type="text" formControlName="title">
-      <button>Add list</button>
-    </form>
 
-    <button (click)="hidden()">X</button>
+<div class="show-list">
+  <app-board-bar></app-board-bar>
+  <div
+    cdkDropList
+    cdkDropListOrientation="horizontal"
+    class="example-list"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <div style="margin: 28px" *ngFor="let timePeriod of lists ; index as i" cdkDrag >
+      <nz-card
+        style="width: 300px"
+        nzTitle="{{ timePeriod.title }}"
+        [nzExtra]="extraTemplate"
+      >
+        <p>Card content</p>
+        <p>Card content</p>
+        <p>Card content</p>
+      </nz-card>
+    </div>
+    <ng-template #extraTemplate>
+      <a>...</a>
+    </ng-template>
+    <div class="">
+      <button
+        nz-button
+        nzType="dashed"
+        class="add-button"
+        style="margin: 28px"
+        [hidden]="!isHiddenFormAddList"
+        (click)="hidden()"
+      >
+        <i nz-icon nzType="plus"></i>
+        Add List
+      </button>
+    </div>
+    <div [hidden]="isHiddenFormAddList" class="border border-primary" style="margin: 20px">
+      <form
+        *ngIf="formAddList"
+        [formGroup]="formAddList"
+        (ngSubmit)="addList()"
+        style="margin: 5px;"
+      >
+        <input class="form-control border border-success " type="text" formControlName="title" />
+        <button type="submit" class="btn btn-primary" [disabled]="formAddList.invalid">Add list</button>
+        <button type="button" style="float: right" class="btn btn-danger" (click)="hidden()">
+          X
+        </button>
+      </form>
+    </div>
   </div>
 </div>
-<app-board-bar></app-board-bar>
+
