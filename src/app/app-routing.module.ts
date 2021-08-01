@@ -12,6 +12,7 @@ const routes: Routes = [
   {
     path: '',
     component: MasterComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -22,10 +23,10 @@ const routes: Routes = [
         component: BoardComponent,
       },
       {
-        path: ':change-password',
+        path: 'change-password',
         component: ChangePasswordComponent,
       }
-    ], canActivate: [AuthGuard]
+    ]
   },
   {
     path: 'login',
