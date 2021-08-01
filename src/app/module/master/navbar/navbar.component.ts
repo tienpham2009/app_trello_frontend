@@ -45,7 +45,12 @@ export class NavbarComponent implements OnInit {
     data.append('image',this.image);
     this.boardService.addImage(data).subscribe((res:any) =>
 
-  {});
+  {
+    localStorage.setItem('user',JSON.stringify(res.user));
+    // @ts-ignore
+    this.userData = JSON.parse(localStorage.getItem('user'));
+    console.log(res.user);
+  });
 
   }
   showToast(){
