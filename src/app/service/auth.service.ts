@@ -14,10 +14,6 @@ export class AuthService {
 
   constructor(private http:HttpClient) { }
 
-  changeMessage(message: string) {
-    this.messageSource.next(message);
-  }
-
   checkLogin(data: any) : Observable<any>{
     return this.http.post(`${environment.apiUrl}/auth/login` , data)
   }
