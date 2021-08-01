@@ -7,21 +7,15 @@ import {Router} from "@angular/router";
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit,DoCheck {
+export class NavbarComponent implements OnInit {
   userData !: any;
 
   constructor(private authService: AuthService,
               private router: Router) {
   }
-
-  ngDoCheck() {
-    this.checkLogin()
-  }
-
   ngOnInit(): void {
     // @ts-ignore
     this.userData = JSON.parse(localStorage.getItem('user'));
-    this.checkLogin()
   }
 
   logout() {
@@ -34,13 +28,7 @@ export class NavbarComponent implements OnInit,DoCheck {
         console.log(error)
       })
   }
-  checkLogin() {
-    if (!this.authService.isLogin()){
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      this.router.navigate(['/login']);
-    }
-  }
+
 
 
 }
