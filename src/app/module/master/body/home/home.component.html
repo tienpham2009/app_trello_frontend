@@ -2,12 +2,12 @@
   <!-- Sidebar -->
   <div id="wrapper">
     <div class="sidebar">
-      <ul class="navbar-nav sidebar accordion" >
+      <ul class="navbar-nav sidebar accordion">
         <!-- Sidebar - Brand -->
-  
+
         <!-- Divider -->
         <hr class="sidebar-divider my-0" />
-  
+
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
           <a
@@ -18,9 +18,9 @@
             aria-expanded="true"
             aria-controls="collapseTwo"
           >
-            <i class="fas fa-fw fa-table"></i>
-  
-            <span>Bang</span>
+            <i class="fas fa-fw fa-table font-sidebar"></i>
+
+            <span class="font-sidebar">Bang</span>
           </a>
           <div
             id="collapseTwo"
@@ -35,7 +35,7 @@
             </div>
           </div>
         </li>
-  
+
         <!-- Nav Item - Utilities Collapse Menu -->
         <li class="nav-item">
           <a
@@ -46,7 +46,7 @@
             aria-expanded="true"
             aria-controls="collapseUtilities"
           >
-            <span>Nhom</span>
+            <span class="font-sidebar">Nhom</span>
           </a>
           <div
             id="collapseUtilities"
@@ -60,13 +60,13 @@
             </div>
           </div>
         </li>
-  
+
         <!-- Divider -->
         <!-- <hr class="sidebar-divider" /> -->
-  
+
         <!-- Heading -->
         <!-- <div class="sidebar-heading">Addons</div> -->
-  
+
         <!-- Nav Item - Pages Collapse Menu -->
         <!-- <li class="nav-item">
             <a
@@ -100,7 +100,7 @@
               </div>
             </div>
           </li> -->
-  
+
         <!-- Nav Item - Charts -->
         <!-- <li class="nav-item">
             <a class="nav-link" href="charts.html">
@@ -108,7 +108,7 @@
               <span>Charts</span></a
             >
           </li> -->
-  
+
         <!-- Nav Item - Tables -->
         <!-- <li class="nav-item">
             <a class="nav-link" href="tables.html">
@@ -116,79 +116,81 @@
               <span>Tables</span></a
             >
           </li> -->
-  
+
         <!-- Divider -->
         <!-- <hr class="sidebar-divider d-none d-md-block" /> -->
       </ul>
       <!-- End of Sidebar -->
     </div>
-    
 
-    <div class="container-fluid list-card" >
+    <div class="container-fluid list-card">
       <!-- Content Row -->
+      <div>
+        <h2>Danh sach bang cua ban</h2>
+      </div>
       <div class="row">
         <!-- Earnings (Monthly) Card Example -->
         <!-- <div class="list-card"> -->
-          <!-- show board -->
-          <div
-            class="col-xl-3 col-md-6 mb-4"
-            *ngFor="let board of dataBoards"
-            routerLink="/{{board.id}}/board" 
-          >
-            <div class="card border-left-success shadow h-100 py-2">
-              <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                  <div class="col mr-2">
-                    <div
-                      class="
-                        text-xs
-                        font-weight-bold
-                        text-success text-uppercase
-                        mb-1
-                      "
-                    >
-                      {{ board.title }}
-                    </div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+        <!-- show board -->
+        <div
+          class="col-xl-3 col-md-6 mb-4"
+          *ngFor="let board of dataBoards"
+          routerLink="/{{ board.id }}/board"
+        >
+          <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+              <div class="row no-gutters align-items-center">
+                <!-- <div class="col mr-2"> -->
+                <div
+                  class="
+                    text-xs
+                    font-weight-bold
+                    text-success text-uppercase
+                    mb-1
+                  "
+                >
+                  {{ board.title }}
+                </div>
+                <!-- <div class="h5 mb-0 font-weight-bold text-gray-800">
                       $215,000
-                    </div>
-                  </div>
-                  <div class="col-auto">
+                    </div> -->
+                <!-- </div> -->
+                <!-- <div class="col-auto">
                     <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                  </div>
-                </div>
+                  </div> -->
               </div>
             </div>
           </div>
+        </div>
 
-          <!-- add board -->
-          <div
-            class="col-xl-3 col-md-6 mb-4"
-            data-toggle="modal"
-            data-target="#exampleModal"
-          >
-            <div class="card border-left-warning shadow h-100 py-2">
-              <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                  <div class="col mr-2">
-                    <div
-                      class="
-                        text-xs
-                        font-weight-bold
-                        text-warning text-uppercase
-                        mb-1
-                      "
-                    >
-                      Tao bang moi
-                    </div>
+        <!-- add board -->
+        <div
+          class="col-xl-3 col-md-6 mb-4"
+          data-toggle="modal"
+          data-target="#exampleModal"
+        >
+          <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+              <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                  <div
+                    class="
+                      text-xs
+                      font-weight-bold
+                      text-warning text-uppercase
+                      mb-1
+                    "
+                  >
+                    Tao bang moi
                   </div>
-                  <div class="col-auto">
-                    <span style="font-size: 50px">+</span>
-                  </div>
+                </div>
+                <div class="col-auto">
+                  <span style="font-size: 50px">+</span>
                 </div>
               </div>
             </div>
           </div>
+        </div>
         <!-- </div> -->
       </div>
 
@@ -216,6 +218,7 @@
             class="close"
             data-dismiss="modal"
             aria-label="Close"
+            (click)="resetForm()"
           >
             <span aria-hidden="true">&times;</span>
           </button>
@@ -227,24 +230,75 @@
             class="form-control"
             placeholder="Them tieu de bang"
             formControlName="title"
+            [ngClass]="
+              title && title.invalid && (title.dirty || title.touched)
+                ? 'is-invalid'
+                : ''
+            "
           />
-          <label for="exampleFormControlSelect1">Example select</label>
-          <select
-            class="form-control"
-            id="exampleFormControlSelect1"
-            formControlName="modifier"
+          <div
+            *ngIf="title && title.invalid && (title.dirty || title.touched)"
+            class="text-danger"
           >
-            <option
-              *ngFor="let modifier of modifiers"
-              value="{{ modifier.value }}"
-            >
-              {{ modifier.name }}
-            </option>
-          </select>
+            <div *ngIf="title.errors?.required">Khong duoc de trong</div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <label class="label-add-card" for="exampleFormControlSelect1"
+                >Nhom</label
+              >
+              <select
+                class="form-control"
+                id="exampleFormControlSelect1"
+                formControlName="group"
+              >
+                <option></option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label class="label-add-card" for="exampleFormControlSelect1"
+                >Che do hien thi</label
+              >
+              <select
+                class="form-control"
+                id="exampleFormControlSelect1"
+                formControlName="modifier"
+                [ngClass]="
+                  modifier &&
+                  modifier.invalid &&
+                  (modifier.dirty || modifier.touched)
+                    ? 'is-invalid'
+                    : ''
+                "
+              >
+                <option
+                  *ngFor="let modifier of modifiers"
+                  value="{{ modifier.value }}"
+                >
+                  {{ modifier.name }}
+                </option>
+              </select>
+              <div
+                *ngIf="
+                  modifier &&
+                  modifier.invalid &&
+                  (modifier.dirty || modifier.touched)
+                "
+                class="text-danger"
+              >
+                <div *ngIf="modifier.errors?.required">
+                  Vui long chon che do hien thi
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary">Close</button>
+          <!-- <button type="button" data-dismiss="modal" class="btn btn-secondary">
+            Dong
+          </button> -->
           <button
+            [disabled]="formAddBoard.invalid"
             type="submit"
             class="close"
             data-dismiss="modal"
