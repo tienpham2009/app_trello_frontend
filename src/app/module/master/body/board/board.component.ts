@@ -58,6 +58,19 @@ export class BoardComponent implements OnInit {
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.lists, event.previousIndex, event.currentIndex);
+// <<<<<<< check_token_expired
+//     for (let i = 0; i < this.lists.length; i++)
+//     {
+//         let data = {
+//           "location": i,
+//           "listId" : this.lists[i].id,
+//         };
+//         this.listService.moveList(data).subscribe(() => {
+//           this.getListByBoardId()
+//         })
+//     }
+
+// =======
     for (let i = 0; i < this.lists.length; i++) {
       let data = {
         location: i,
@@ -90,5 +103,6 @@ export class BoardComponent implements OnInit {
 
   showInput(listId: any) {
     this.hiddenInput = listId;
+// >>>>>>> dev
   }
 }

@@ -6,6 +6,7 @@ import { BoardComponent } from './module/master/body/board/board.component';
 import { HomeComponent } from './module/master/body/home/home.component';
 import { MasterComponent } from './module/master/master.component';
 import { RegisterComponent } from './module/register/register.component';
+import {ChangePasswordComponent} from "./module/change-password/change-password.component";
 
 const routes: Routes = [
   {
@@ -20,6 +21,10 @@ const routes: Routes = [
         path: ':id/board',
         component: BoardComponent,
       },
+      {
+        path: 'change-password',
+        component: ChangePasswordComponent
+      }
     ] , canActivate : [AuthGuard]
   },
   {
