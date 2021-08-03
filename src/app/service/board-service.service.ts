@@ -20,6 +20,16 @@ export class BoardService {
     });
   }
 
+  getBoardByGroupId(data :any): Observable<any>
+  {
+    let token = localStorage.getItem('token');
+    let headers_object = new HttpHeaders().set(
+      'Authorization',
+      'Bearer' + token
+    );
+    return this.http.post(`${environment.apiUrl}/board/getWithGroup` , data  , {headers: headers_object})
+  }
+
   addBoard(data: any): Observable<any> {
     let token = localStorage.getItem('token');
     let headers_object = new HttpHeaders().set(
@@ -30,6 +40,7 @@ export class BoardService {
       headers: headers_object,
     });
   }
+ 
   addImage(data:any): Observable<any> {
     let token =localStorage.getItem('token')
     let headers_object = new HttpHeaders().set('Authorization', 'Bearer' + token);
