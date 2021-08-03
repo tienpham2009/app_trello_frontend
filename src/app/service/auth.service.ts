@@ -4,8 +4,7 @@ import {environment} from "../../environments/environment";
 import {map} from "rxjs/operators";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {JwtHelperService} from "@auth0/angular-jwt";
-
-const helper = new JwtHelperService();
+const helper =  new JwtHelperService();
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +29,6 @@ export class AuthService {
   }
 
   isLogin() {
-    console.log( !this.isTokenExpired(this.getToken()))
     return !this.isTokenExpired(this.getToken());
   }
 
@@ -39,7 +37,6 @@ export class AuthService {
       return true;
     }
     const date = helper.getTokenExpirationDate(token);
-    console.log(date);
     if (date === undefined) return false;
     // @ts-ignore
     return !(date.valueOf() > new Date().valueOf());

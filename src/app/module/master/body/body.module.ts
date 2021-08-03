@@ -9,11 +9,13 @@ import {DragDropModule} from "@angular/cdk/drag-drop";
 import {ReactiveFormsModule} from "@angular/forms";
 
 
+
 @NgModule({
   declarations: [
     BoardComponent,
     HomeComponent,
     NavbarComponent
+
   ],
   imports: [
     CommonModule,

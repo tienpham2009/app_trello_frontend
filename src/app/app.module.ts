@@ -11,6 +11,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {MatInputModule} from '@angular/material/input';
+import {  MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule} from '@angular/material/toolbar';
+import { BoardBarComponent } from './module/master/body/board/board-bar/board-bar.component';
+import { DialogMemberComponent } from './dialog/dialog-member/dialog-member.component';
+import{ MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
 import { BoardComponent } from './module/master/body/board/board.component';
 import { HomeComponent } from './module/master/body/home/home.component';
 import { MasterComponent } from './module/master/master.component';
@@ -24,11 +30,13 @@ import {NzButtonModule} from "ng-zorro-antd/button";
 import {NzIconModule} from "ng-zorro-antd/icon";
 import {NzFormModule} from "ng-zorro-antd/form";
 import {NzCardModule} from "ng-zorro-antd/card";
-import {ChangePasswordComponent} from "./module/change-password/change-password.component";
 import {MatCardModule} from '@angular/material/card';
+import {ChangePasswordComponent} from "./dialog/change-password/change-password.component";
+import { UploadAvatarComponent } from './dialog/upload-avatar/upload-avatar.component';
 
 
 registerLocaleData(en);
+
 
 
 
@@ -41,8 +49,18 @@ registerLocaleData(en);
     BoardComponent,
     MasterComponent,
     NavbarComponent,
-    ChangePasswordComponent
+    BoardBarComponent,
+    DialogMemberComponent,
+    ChangePasswordComponent,
+    UploadAvatarComponent
+    ],
+
+  entryComponents:[
+    DialogMemberComponent,
+    ChangePasswordComponent,
+    UploadAvatarComponent
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -52,6 +70,10 @@ registerLocaleData(en);
     ReactiveFormsModule,
     HttpClientModule,
     MatInputModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatSelectModule,
     DragDropModule,
     NzButtonModule,
     NzIconModule,

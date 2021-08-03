@@ -19,7 +19,7 @@
     <i class="fa fa-bars"></i>
   </button>
 
-  <!-- Topbar Search -->  
+  <!-- Topbar Search -->
   <a class="icon btn btn-light"><i class="fas fa-align-justify fa-lg"></i></a>
   <a [routerLink]='["/"]' class="icon btn btn-light"><i class="fas fa-home fa-lg"></i></a>
   <!-- <a [routerLink]='["/admin/board"]' class="icon btn btn-light" ><i class="fas fa-fw fa-table fa-lg"></i><span style="font-size: 20px; text-align: center">Bang</span></a> -->
@@ -186,7 +186,7 @@
           <div class="dropdown-list-image mr-3">
             <img
               class="rounded-circle"
-              src="img/undraw_profile_1.svg"
+              src="assets/img/undraw_profile_1.svg"
               alt="..."
             />
             <div class="status-indicator bg-success"></div>
@@ -203,7 +203,7 @@
           <div class="dropdown-list-image mr-3">
             <img
               class="rounded-circle"
-              src="img/undraw_profile_2.svg"
+              src="assets/img/undraw_profile_2.svg"
               alt="..."
             />
             <div class="status-indicator"></div>
@@ -220,7 +220,7 @@
           <div class="dropdown-list-image mr-3">
             <img
               class="rounded-circle"
-              src="img/undraw_profile_3.svg"
+              src="assets/img/undraw_profile_3.svg"
               alt="..."
             />
             <div class="status-indicator bg-warning"></div>
@@ -264,31 +264,36 @@
         class="nav-link dropdown-toggle"
         href="#"
 
-        id="userDropdown"
+        id="userD
+        ropdown"
         role="button"
         data-toggle="dropdown"
         aria-haspopup="true"
         aria-expanded="false"
       >
-        <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-        <img class="img-profile rounded-circle" src="assets/img/undraw_profile.svg"/>
+        <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{userData.name}}</span>
+        <img class="img-profile rounded-circle" src="http://127.0.0.1:8000/uploadedimages/{{userData.image}}"/>
       </a>
       <!-- Dropdown - User Information -->
       <div
         class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
         aria-labelledby="userDropdown"
       >
-        <a class="dropdown-item" href="#">
-          <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+            <a class="dropdown-item" href="#">
+            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
           Profile
         </a>
         <a class="dropdown-item" href="#">
           <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
           Settings
         </a>
-        <a class="dropdown-item" href="#">
+        <a class="dropdown-item" (click)="openDialogUploadAvatar()">
           <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-          Activity Log
+          Thay đổi ảnh đại diện
+        </a>
+        <a style="color: black" class="dropdown-item" (click)="openDialogChangePassword()">
+          <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+          Đổi mật khẩu
         </a>
         <div class="dropdown-divider"></div>
         <a
@@ -304,4 +309,6 @@
     </li>
   </ul>
 </nav>
+
 <!-- End of Topbar -->
+

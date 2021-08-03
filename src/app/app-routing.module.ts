@@ -1,3 +1,4 @@
+
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from './auth.guard';
@@ -6,12 +7,11 @@ import {BoardComponent} from './module/master/body/board/board.component';
 import {HomeComponent} from './module/master/body/home/home.component';
 import {MasterComponent} from './module/master/master.component';
 import {RegisterComponent} from './module/register/register.component';
-import {ChangePasswordComponent} from "./module/change-password/change-password.component";
-
 const routes: Routes = [
   {
     path: '',
     component: MasterComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -21,11 +21,7 @@ const routes: Routes = [
         path: ':id/board',
         component: BoardComponent,
       },
-      {
-        path: ':change-password',
-        component: ChangePasswordComponent,
-      }
-    ], canActivate: [AuthGuard]
+    ]
   },
   {
     path: 'login',
@@ -34,7 +30,8 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
-  }
+  },
+
 ];
 
 @NgModule({

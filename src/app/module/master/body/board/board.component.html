@@ -1,4 +1,6 @@
+
 <div class="show-list">
+  <app-board-bar></app-board-bar>
   <div
     cdkDropList
     cdkDropListOrientation="horizontal"
@@ -7,7 +9,7 @@
   >
     <div
       style="margin: 28px"
-      *ngFor="let timePeriod of lists; index as i"
+      *ngFor="let timePeriod of lists; let i = index"
       cdkDrag
     >
       <!-- start card -->
@@ -67,11 +69,37 @@
         </div>
         <!-- Card Body -->
         <div class="card-body">
-          <p>this is card</p>
-          <p>this is card</p>
-          <p>this is card</p>
-          <p>this is card</p>
-          <p>this is card</p>
+          <mat-card-actions (click)="hiddenFormAddCard(i)" [hidden]="!isHiddenFormAddCard[i]"><i nz-icon nzType="plus"></i>
+            Thêm thẻ</mat-card-actions>
+          <div [hidden]="isHiddenFormAddCard[i]">
+            <form
+              *ngIf="formAddCard"
+              [formGroup]="formAddCard"
+              (ngSubmit)="addCard(i)"
+              style="margin: 5px"
+            >
+              <input
+                class="form-control border border-success"
+                type="text"
+                formControlName="title"
+              />
+              <button
+                type="submit"
+                class="btn btn-primary add-list"
+                [disabled]="formAddCard.invalid"
+              >
+                Thêm thẻ
+              </button>
+              <button
+                type="button"
+                class="btn btn-danger add-list"
+                (click)="hiddenFormAddCard(i)"
+              >
+                X
+              </button>
+            </form>
+
+          </div>
         </div>
       </div>
       <!-- end card -->
@@ -126,3 +154,4 @@
     </div>
   </div>
 </div>
+
