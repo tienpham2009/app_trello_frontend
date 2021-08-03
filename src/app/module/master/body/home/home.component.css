@@ -24,12 +24,21 @@ a:hover {
   left: 200px;
   width: 80%;
   margin-left: 50px;
+  width: 75rem;
 }
 
 .font-sidebar {
-  font-size: 1.5rem !important; 
+  font-size: 1.2rem !important
 }
 
 .label-add-card {
   margin: .7rem;
+}
+
+.space-work{
+  padding-left: 0;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding-right: 0 !important
 }
