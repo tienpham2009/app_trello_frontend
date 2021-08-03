@@ -30,8 +30,9 @@ import {NzButtonModule} from "ng-zorro-antd/button";
 import {NzIconModule} from "ng-zorro-antd/icon";
 import {NzFormModule} from "ng-zorro-antd/form";
 import {NzCardModule} from "ng-zorro-antd/card";
-import {ChangePasswordComponent} from "./module/change-password/change-password.component";
 import {MatCardModule} from '@angular/material/card';
+import {ChangePasswordComponent} from "./dialog/change-password/change-password.component";
+import { UploadAvatarComponent } from './dialog/upload-avatar/upload-avatar.component';
 
 
 registerLocaleData(en);
@@ -48,12 +49,17 @@ registerLocaleData(en);
     BoardComponent,
     MasterComponent,
     NavbarComponent,
-    ChangePasswordComponent,
     BoardBarComponent,
-    DialogMemberComponent
+    DialogMemberComponent,
+    ChangePasswordComponent,
+    UploadAvatarComponent
     ],
 
-  entryComponents:[DialogMemberComponent],
+  entryComponents:[
+    DialogMemberComponent,
+    ChangePasswordComponent,
+    UploadAvatarComponent
+  ],
 
   imports: [
     BrowserModule,

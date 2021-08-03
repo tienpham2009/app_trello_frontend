@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from "../../service/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-master',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MasterComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthService,
+              private router: Router) { }
 
   ngOnInit(): void {
+    this.checkIsLogin()
   }
-
+  checkIsLogin() {
+    if (!this.authService.isLogin()){
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+    }
+  }
 }
