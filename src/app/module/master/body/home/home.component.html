@@ -291,6 +291,36 @@
                 </div>
               </div>
             </div>
+
+
+            <div class = "col-12">
+            <mat-form-field class="example-chip-list" appearance="fill">
+              <label class="label-add-card" for="exampleFormControlSelect1"
+                >Thêm thành viên</label>
+              <mat-chip-list #chipList aria-label="Fruit selection">
+                <mat-chip *ngFor="let userEmail of userEmails" [selectable]="selectable"
+                         [removable]="removable" (removed)="remove(userEmail)">
+                  {{userEmail.email}}
+                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+
+                <input placeholder="Nhập email muốn thêm..."
+                       [matChipInputFor]="chipList"
+                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                       [matChipInputAddOnBlur]="addOnBlur"
+                       (matChipInputTokenEnd)="add($event)"type="text"
+                       class="form-control">
+              </mat-chip-list>
+            </mat-form-field>
+            </div>
+
+
+
+
+
+
+
+
           </div>
         </div>
         <div class="modal-footer">

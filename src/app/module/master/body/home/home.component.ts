@@ -2,12 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BoardService } from 'src/app/service/board-service.service';
 import { NotificationService } from 'src/app/service/notification.service';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {MatChipInputEvent} from '@angular/material/chips';
+export interface Email {
+  email: string;
+}
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
+
 export class HomeComponent implements OnInit {
   modifiers: any[] = [
     {
@@ -61,12 +67,38 @@ export class HomeComponent implements OnInit {
     this.formAddBoard?.reset();
   }
 
-  get title () { 
+  get title () {
     return this.formAddBoard?.get('title');
   }
 
   get modifier () {
     return this.formAddBoard?.get('modifier');
+  }
+  // tu
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  readonly separatorKeysCodes = [ENTER, COMMA] as const;
+  userEmails: Email[] = [];
+  add(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+
+    // Add our fruit
+    if (value) {
+      this.userEmails.push({email: value});
+    }
+
+    // Clear the input value
+    event.chipInput!.clear();
+  }
+
+  remove(userEmail: Email): void {
+    const index = this.userEmails.indexOf(userEmail);
+
+    if (index >= 0) {
+      this.userEmails.splice(index, 1);
+    }
   }
 
 }

@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {MatInputModule} from '@angular/material/input';
 import {  MatButtonModule } from '@angular/material/button';
+import {  MatChipsModule } from '@angular/material/chips';
 import { MatToolbarModule} from '@angular/material/toolbar';
 import { BoardBarComponent } from './module/master/body/board/board-bar/board-bar.component';
 import { DialogMemberComponent } from './dialog/dialog-member/dialog-member.component';
@@ -74,7 +75,8 @@ registerLocaleData(en);
     NzFormModule,
     NzCardModule,
     MatCardModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    MatChipsModule
 
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
