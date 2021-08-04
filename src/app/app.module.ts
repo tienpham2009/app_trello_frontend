@@ -10,9 +10,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatInputModule} from '@angular/material/input';
+import {  MatButtonModule } from '@angular/material/button';
+import {  MatChipsModule } from '@angular/material/chips';
+import { MatToolbarModule} from '@angular/material/toolbar';
 import { BoardBarComponent } from './module/master/body/board/board-bar/board-bar.component';
 import { DialogMemberComponent } from './dialog/dialog-member/dialog-member.component';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -35,6 +36,8 @@ import { ChangePasswordComponent } from './dialog/change-password/change-passwor
 import { UploadAvatarComponent } from './dialog/upload-avatar/upload-avatar.component';
 import { CardInfoComponent } from './dialog/card-info/card-info.component';
 
+
+
 registerLocaleData(en);
 
 @NgModule({
@@ -52,6 +55,8 @@ registerLocaleData(en);
     UploadAvatarComponent,
     CardInfoComponent,
   ],
+
+
 
   entryComponents: [
     DialogMemberComponent,
@@ -80,6 +85,7 @@ registerLocaleData(en);
     NzCardModule,
     MatCardModule,
     ToastrModule.forRoot(),
+    MatChipsModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent],

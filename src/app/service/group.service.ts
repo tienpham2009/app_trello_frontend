@@ -17,7 +17,7 @@ export class GroupService {
       headers: headers_object
     };
   }
-  
+
   addGroup(data: any): Observable<any> {
     return this.http.post<any>(`${environment.apiUrl}/group/add` , data , this.setHeader());
   }
@@ -25,7 +25,10 @@ export class GroupService {
   getGroupByUserId(): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}/group/get` , this.setHeader());
   }
-  
-  
+  addUserGroup(data:any):Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/add_user_group` ,data, this.setHeader());
+  }
+
+
 
 }

@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from '../navbar/navbar.component';
 import {DragDropModule} from "@angular/cdk/drag-drop";
 import {ReactiveFormsModule} from "@angular/forms";
+import { AddUserGroupComponent } from './home/add-user-group/add-user-group.component';
 
 
 
@@ -14,7 +15,8 @@ import {ReactiveFormsModule} from "@angular/forms";
   declarations: [
     BoardComponent,
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    AddUserGroupComponent
 
   ],
   imports: [

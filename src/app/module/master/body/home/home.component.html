@@ -150,6 +150,56 @@
         <!-- Content Row -->
         <div>
           <h2>{{ group.name }}</h2>
+          <!-- <app-add-user-group></app-add-user-group> -->
+          <button type="button" class="btn btn-primary" data-target="#addUserGroupModal" data-toggle="modal">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+            <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path>
+            <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"></path>
+            </svg>
+            </button>
+
+          <!-- Modal -->
+          <div class="modal fade" id="addUserGroupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+          <form *ngIf = "formAddUserGroup" [formGroup]="formAddUserGroup" (ngSubmit)="addUserGroup(group.id)">
+          <div class="modal-content">
+          <div class="modal-header">
+          <h2 class="modal-title" id="exampleModalLabel">Thêm thành viên vào nhóm</h2>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+          </div>
+          <div class="modal-body">
+          <!-- <label class="label-add-card" for="exampleFormControlSelect1"
+          >Nhập email thành viên</label> -->
+              <mat-form-field class="example-chip-list" appearance="fill">
+
+                <mat-chip-list #chipList aria-label="Fruit selection">
+                  <mat-chip *ngFor="let userEmail of userEmails" [selectable]="selectable"
+                           [removable]="removable" (removed)="remove(userEmail)">
+                    {{userEmail.email}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+
+                  <input placeholder="Nhập email muốn thêm..."
+                         [matChipInputFor]="chipList"
+                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                         [matChipInputAddOnBlur]="addOnBlur"
+                         (matChipInputTokenEnd)="add($event)"type="text"
+                         class="form-control"
+                         formControlName="email">
+                </mat-chip-list>
+              </mat-form-field>
+          </div>
+          <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+          </div>
+          </form>
+          </div>
+          </div>
+<!--  -->
         </div>
         <div class="row">
           <!-- hien thi bang-->
@@ -173,6 +223,30 @@
                   >
                     {{ board.title }}
                   </div>
+
+                  <!-- <div class = "col-12">
+              <mat-form-field class="example-chip-list" appearance="fill">
+                <label class="label-add-card" for="exampleFormControlSelect1"
+                  >Thêm thành viên</label>
+                <mat-chip-list #chipList aria-label="Fruit selection">
+                  <mat-chip *ngFor="let userEmail of userEmails" [selectable]="selectable"
+                           [removable]="removable" (removed)="remove(userEmail)">
+                    {{userEmail.email}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+
+                  <input placeholder="Nhập email muốn thêm..."
+                         [matChipInputFor]="chipList"
+                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                         [matChipInputAddOnBlur]="addOnBlur"
+                         (matChipInputTokenEnd)="add($event)"type="text"
+                         class="form-control">
+                </mat-chip-list>
+              </mat-form-field>
+              </div> -->
+
+
+
                   <!-- <div class="h5 mb-0 font-weight-bold text-gray-800">
                         $215,000
                       </div> -->
@@ -361,6 +435,7 @@
               </div>
               
             </div>
+
           </div>
         </div>
         <div class="modal-footer">

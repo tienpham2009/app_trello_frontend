@@ -43,6 +43,7 @@ a:hover {
   padding-right: 0 !important
 }
 
+
 .bg-image {
   background-size: 100% 100%;
 }
@@ -66,3 +67,8 @@ a:hover {
   width: 3rem;
   height: 3rem;
 }
+
+.example-chip-list {
+  width: 100%;
+}
+
