@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import {AuthService} from "../../service/auth.service";
+import {NotificationService} from "../../service/notification.service";
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private notifyService: NotificationService,
   ) {}
 
   ngOnInit(): void {
@@ -54,7 +56,8 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/']);
       },
       (error) => {
-        this.message = error.message;
+        console.log(error.error.error)
+       this.notifyService.showError(error.error.error,'Lỗi')
       }
     );
   }

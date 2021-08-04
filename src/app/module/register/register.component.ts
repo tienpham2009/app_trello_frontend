@@ -12,7 +12,7 @@ import {NotificationService} from "../../service/notification.service";
 export class RegisterComponent implements OnInit {
   formRegister!: FormGroup;
   message!: string;
-  errormessage:string = 'mat khau khong khop';
+  errormessage:string = 'Mật khẩu không khớp';
   isConfirm:boolean=true
   toastrMessage!:any;
 
@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
     this.formRegister = this.fb.group({
         name: ['', [Validators.required,Validators.minLength(2),Validators.maxLength(100)]],
         email: ['', [Validators.required,Validators.email]],
-        phone: ['', [Validators.pattern('(84|0[3|5|7|8|9])+([0-9]{8})')]],
+        phone: ['', [Validators.pattern('(84|0[3|5|7|8|9])+([0-9]{8})'),Validators.required]],
         password: ['', [Validators.required,Validators.minLength(6),Validators.maxLength(32)]],
         password_confirmation: ['', [Validators.required]]
       },
@@ -52,11 +52,11 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  submit() {
+  register() {
     let userData = this.formRegister?.value
    this.authService.register(userData).subscribe(res => {
      console.log(res)
-     this.toastrMessage='dang ki thanh cong'
+     this.toastrMessage='Đăng kí thành công'
      this.showToaster()
      this.router.navigate(['/login'])
    },error => {

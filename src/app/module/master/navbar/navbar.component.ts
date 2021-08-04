@@ -1,10 +1,10 @@
 
-import {Component,OnInit} from '@angular/core';
+import {Component, DoCheck, OnInit} from '@angular/core';
 import {AuthService} from "../../../service/auth.service";
 import {Router} from "@angular/router";
-import { BoardService } from 'src/app/service/board-service.service';
-import { Toast } from 'ngx-toastr';
-import { NotificationService } from 'src/app/service/notification.service';
+import {MatDialog} from "@angular/material/dialog";
+import {ChangePasswordComponent} from "../../../dialog/change-password/change-password.component";
+import {UploadAvatarComponent} from "../../../dialog/upload-avatar/upload-avatar.component";
 
 
 @Component({
@@ -12,16 +12,21 @@ import { NotificationService } from 'src/app/service/notification.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
-
-  image!: File;
+export class NavbarComponent implements OnInit,DoCheck {
   userData:any;
 constructor(private authService: AuthService,
               private router: Router,
-              private boardService: BoardService,
-              private toast: NotificationService) {
+            private dialog: MatDialog) {
   }
   ngOnInit(): void {
+    // @ts-ignore
+    this.userData = JSON.parse(localStorage.getItem('user'));
+    if (this.userData.image === null){
+      this.userData.image = "https://img.hoidap247.com/picture/answer/20210524/large_1621873431875.jpg"
+    }
+    this.checkLogin();
+  }
+  ngDoCheck() {
     // @ts-ignore
     this.userData = JSON.parse(localStorage.getItem('user'));
     this.checkLogin();
@@ -38,22 +43,6 @@ constructor(private authService: AuthService,
       })
   }
 
-  changeAvatar($event: any) {
-    this.image = $event.target.files[0];
-  }
-  onSubmit(){
-    const data = new FormData();
-    data.append('image',this.image);
-    this.boardService.addImage(data).subscribe((res:any) =>
-  {
-    localStorage.setItem('user',JSON.stringify(res.user));
-    // @ts-ignore
-    this.userData = JSON.parse(localStorage.getItem('user'));
-    console.log(res.user);
-
-  })
-};
-
   checkLogin() {
     if (!this.authService.isLogin()){
       localStorage.removeItem('token');
@@ -62,8 +51,13 @@ constructor(private authService: AuthService,
     }
   }
 
-  showToast(){
-      this.toast.showSuccess('Thành công','Lưu ảnh');
+
+  openDialogChangePassword(){
+    this.dialog.open(ChangePasswordComponent)
   }
+  openDialogUploadAvatar(){
+    this.dialog.open(UploadAvatarComponent)
+  }
+
 
 }

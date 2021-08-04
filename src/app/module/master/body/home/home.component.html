@@ -8,7 +8,7 @@
         <!-- Divider -->
         <hr class="sidebar-divider my-0" />
 
-        <!-- Nav Item - Pages Collapse Menu -->
+        <!-- bang-->
         <li class="nav-item">
           <a
             class="nav-link collapsed"
@@ -17,6 +17,7 @@
             data-target="#collapseTwo"
             aria-expanded="true"
             aria-controls="collapseTwo"
+            style="padding-left: 0"
           >
             <i class="fas fa-fw fa-table font-sidebar"></i>
 
@@ -35,9 +36,23 @@
             </div>
           </div>
         </li>
+        <!-- them khong gian lam viec-->
 
-        <!-- Nav Item - Utilities Collapse Menu -->
-        <li class="nav-item">
+        <li class="nav-item row">
+          <a class="nav-link space-work" style="width: 75% ;color : #4e73df">
+            khong gian lam viec
+          </a>
+          <a
+            style="font-size: 2rem; padding: 1rem ; color: green"
+            data-toggle="modal"
+            data-target="#createGroup"
+          >
+            +
+          </a>
+        </li>
+
+        <!-- danh sach group-->
+        <li class="nav-item" *ngFor="let group of dataGroups">
           <a
             class="nav-link collapsed"
             href="#"
@@ -46,7 +61,7 @@
             aria-expanded="true"
             aria-controls="collapseUtilities"
           >
-            <span class="font-sidebar">Nhom</span>
+            <span class="font-sidebar">{{ group.name }}</span>
           </a>
           <div
             id="collapseUtilities"
@@ -55,8 +70,12 @@
             data-parent="#accordionSidebar"
           >
             <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="utilities-color.html">Nhom 1</a>
-              <a class="collapse-item" href="utilities-border.html">Nhom 2</a>
+              <a class="collapse-item" href="utilities-color.html"
+                >chuc nang 1</a
+              >
+              <a class="collapse-item" href="utilities-border.html"
+                >chuc nang 2</a
+              >
             </div>
           </div>
         </li>
@@ -122,84 +141,163 @@
       </ul>
       <!-- End of Sidebar -->
     </div>
+    <!-- danh sach group -->
+    <div>
+      <div
+        class="container-fluid list-card"
+        *ngFor="let group of dataGroups; let i = index"
+      >
+        <!-- Content Row -->
+        <div>
+          <h2>{{ group.name }}</h2>
+          <!-- <app-add-user-group></app-add-user-group> -->
+          <button type="button" class="btn btn-primary" data-target="#addUserGroupModal" data-toggle="modal">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+            <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path>
+            <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"></path>
+            </svg>
+            </button>
 
-    <div class="container-fluid list-card">
-      <!-- Content Row -->
-      <div>
-        <h2>Danh sach bang cua ban</h2>
-      </div>
-      <div class="row">
-        <!-- Earnings (Monthly) Card Example -->
-        <!-- <div class="list-card"> -->
-        <!-- show board -->
-        <div
-          class="col-xl-3 col-md-6 mb-4"
-          *ngFor="let board of dataBoards"
-          routerLink="/{{ board.id }}/board"
-        >
-          <div class="card border-left-success shadow h-100 py-2">
-            <div class="card-body">
-              <div class="row no-gutters align-items-center">
-                <!-- <div class="col mr-2"> -->
-                <div
-                  class="
-                    text-xs
-                    font-weight-bold
-                    text-success text-uppercase
-                    mb-1
-                  "
-                >
-                  {{ board.title }}
-                </div>
-                <!-- <div class="h5 mb-0 font-weight-bold text-gray-800">
-                      $215,000
-                    </div> -->
-                <!-- </div> -->
-                <!-- <div class="col-auto">
-                    <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                  </div> -->
-              </div>
-            </div>
+          <!-- Modal -->
+          <div class="modal fade" id="addUserGroupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+          <form *ngIf = "formAddUserGroup" [formGroup]="formAddUserGroup" (ngSubmit)="addUserGroup(group.id)">
+          <div class="modal-content">
+          <div class="modal-header">
+          <h2 class="modal-title" id="exampleModalLabel">Thêm thành viên vào nhóm</h2>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
           </div>
-        </div>
+          <div class="modal-body">
+          <!-- <label class="label-add-card" for="exampleFormControlSelect1"
+          >Nhập email thành viên</label> -->
+              <mat-form-field class="example-chip-list" appearance="fill">
 
-        <!-- add board -->
-        <div
-          class="col-xl-3 col-md-6 mb-4"
-          data-toggle="modal"
-          data-target="#exampleModal"
-        >
-          <div class="card border-left-warning shadow h-100 py-2">
-            <div class="card-body">
-              <div class="row no-gutters align-items-center">
-                <div class="col mr-2">
+                <mat-chip-list #chipList aria-label="Fruit selection">
+                  <mat-chip *ngFor="let userEmail of userEmails" [selectable]="selectable"
+                           [removable]="removable" (removed)="remove(userEmail)">
+                    {{userEmail.email}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+
+                  <input placeholder="Nhập email muốn thêm..."
+                         [matChipInputFor]="chipList"
+                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                         [matChipInputAddOnBlur]="addOnBlur"
+                         (matChipInputTokenEnd)="add($event)"type="text"
+                         class="form-control"
+                         formControlName="email">
+                </mat-chip-list>
+              </mat-form-field>
+          </div>
+          <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+          </div>
+          </form>
+          </div>
+          </div>
+<!--  -->
+        </div>
+        <div class="row">
+          <!-- hien thi bang-->
+          <div
+            class="col-xl-3 col-md-6 mb-4"
+            *ngFor="let board of dataBoards[i]"
+            routerLink="/{{ board.id }}/board"
+          >
+            <div class="card border-left-primary shadow h-100 py-2">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <!-- <div class="col mr-2"> -->
                   <div
                     class="
                       text-xs
                       font-weight-bold
-                      text-warning text-uppercase
+                      text-primary text-uppercase
                       mb-1
                     "
                   >
-                    Tao bang moi
+                    {{ board.title }}
                   </div>
-                </div>
-                <div class="col-auto">
-                  <span style="font-size: 50px">+</span>
+
+                  <!-- <div class = "col-12">
+              <mat-form-field class="example-chip-list" appearance="fill">
+                <label class="label-add-card" for="exampleFormControlSelect1"
+                  >Thêm thành viên</label>
+                <mat-chip-list #chipList aria-label="Fruit selection">
+                  <mat-chip *ngFor="let userEmail of userEmails" [selectable]="selectable"
+                           [removable]="removable" (removed)="remove(userEmail)">
+                    {{userEmail.email}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+
+                  <input placeholder="Nhập email muốn thêm..."
+                         [matChipInputFor]="chipList"
+                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                         [matChipInputAddOnBlur]="addOnBlur"
+                         (matChipInputTokenEnd)="add($event)"type="text"
+                         class="form-control">
+                </mat-chip-list>
+              </mat-form-field>
+              </div> -->
+
+
+
+                  <!-- <div class="h5 mb-0 font-weight-bold text-gray-800">
+                        $215,000
+                      </div> -->
+                  <!-- </div> -->
+                  <!-- <div class="col-auto">
+                      <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                    </div> -->
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <!-- </div> -->
-      </div>
 
-      <!-- Content Row -->
+          <!-- add board -->
+          <div
+            class="col-xl-3 col-md-6 mb-4"
+            data-toggle="modal"
+            data-target="#exampleModal"
+          >
+            <div class="card border-left-success shadow h-100 py-2">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div
+                      class="
+                        text-xs
+                        font-weight-bold
+                        text-success text-uppercase
+                        mb-1
+                      "
+                    >
+                      Tao bang moi
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <span style="font-size: 50px; color: green">+</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- </div> -->
+        </div>
+
+        <!-- Content Row -->
+      </div>
     </div>
+
+    <!-- danh sach bang trong cac group -->
   </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal tao bang -->
 <div
   class="modal fade"
   id="exampleModal"
@@ -245,15 +343,30 @@
           <div class="row">
             <div class="col-6">
               <label class="label-add-card" for="exampleFormControlSelect1"
-                >Nhom</label
+                >Khong gian lam viec</label
               >
               <select
                 class="form-control"
                 id="exampleFormControlSelect1"
                 formControlName="group"
+                [ngClass]="
+                  group && group.invalid && (group.dirty || group.touched)
+                    ? 'is-invalid'
+                    : ''
+                "
               >
-                <option></option>
+                <option *ngFor="let group of dataGroups" value="{{ group.id }}">
+                  {{ group.name }}
+                </option>
               </select>
+              <div
+                *ngIf="group && group.invalid && (group.dirty || group.touched)"
+                class="text-danger"
+              >
+                <div *ngIf="group.errors?.required">
+                  Vui long chon khong gian lam viec
+                </div>
+              </div>
             </div>
             <div class="col-6">
               <label class="label-add-card" for="exampleFormControlSelect1"
@@ -292,35 +405,6 @@
               </div>
             </div>
 
-
-            <div class = "col-12">
-            <mat-form-field class="example-chip-list" appearance="fill">
-              <label class="label-add-card" for="exampleFormControlSelect1"
-                >Thêm thành viên</label>
-              <mat-chip-list #chipList aria-label="Fruit selection">
-                <mat-chip *ngFor="let userEmail of userEmails" [selectable]="selectable"
-                         [removable]="removable" (removed)="remove(userEmail)">
-                  {{userEmail.email}}
-                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-                </mat-chip>
-
-                <input placeholder="Nhập email muốn thêm..."
-                       [matChipInputFor]="chipList"
-                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                       [matChipInputAddOnBlur]="addOnBlur"
-                       (matChipInputTokenEnd)="add($event)"type="text"
-                       class="form-control">
-              </mat-chip-list>
-            </mat-form-field>
-            </div>
-
-
-
-
-
-
-
-
           </div>
         </div>
         <div class="modal-footer">
@@ -333,7 +417,114 @@
             class="close"
             data-dismiss="modal"
             class="btn btn-primary"
-            (click)="submitForm()"
+            (click)="submitFormAddBoard()"
+          >
+            Luu
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- modal tao nhom -->
+<div
+  class="modal fade"
+  id="createGroup"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <form *ngIf="formAddGroup" [formGroup]="formAddGroup">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="exampleModalLabel">Them nhom moi</h3>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+            (click)="resetForm()"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-6">
+              <label class="label-add-card" for="exampleFormControlSelect1"
+                >Ten nhom</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Them ten nhom"
+                formControlName="name"
+                [ngClass]="
+                  name && name.invalid && (name.dirty || name.touched)
+                    ? 'is-invalid'
+                    : ''
+                "
+              />
+              <div
+                *ngIf="name && name.invalid && (name.dirty || name.touched)"
+                class="text-danger"
+              >
+                <div *ngIf="name.errors?.required">Khong duoc de trong</div>
+              </div>
+            </div>
+            <div class="col-6">
+              <label class="label-add-card" for="exampleFormControlSelect1"
+                >Che do hien thi</label
+              >
+              <select
+                class="form-control"
+                id="exampleFormControlSelect1"
+                formControlName="modifierGroup"
+                [ngClass]="
+                  modifierGroup &&
+                  modifierGroup.invalid &&
+                  (modifierGroup.dirty || modifierGroup.touched)
+                    ? 'is-invalid'
+                    : ''
+                "
+              >
+                <option
+                  *ngFor="let modifierGroup of modifierGroups"
+                  value="{{ modifierGroup.value }}"
+                >
+                  {{ modifierGroup.name }}
+                </option>
+              </select>
+              <div
+                *ngIf="
+                  modifierGroup &&
+                  modifierGroup.invalid &&
+                  (modifierGroup.dirty || modifierGroup.touched)
+                "
+                class="text-danger"
+              >
+                <div *ngIf="modifierGroup.errors?.required">
+                  Vui long chon che do hien thi
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <!-- <button type="button" data-dismiss="modal" class="btn btn-secondary">
+            Dong
+          </button> -->
+          <button
+            [disabled]="formAddGroup.invalid"
+            type="submit"
+            class="close"
+            data-dismiss="modal"
+            class="btn btn-primary"
+            (click)="submitFormAddGroup()"
           >
             Luu
           </button>

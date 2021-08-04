@@ -22,32 +22,25 @@ export class AuthService {
 
   checkLogin(data: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/auth/login`, data)
-
   }
 
-  isLogin(): any {
+  getToken(): any {
     return localStorage.getItem('token');
   }
 
-  // isLogin() {
-  //   let token = this.getToken();
-  //   if(!this.isTokenExpired(token)){
-  //     return false
-  //   }else {
-  //     return true
-  //   }
-  // }
+  isLogin() {
+    return !this.isTokenExpired(this.getToken());
+  }
 
-  // isTokenExpired(token?: string|null): boolean {
-  //   if(!token) token = this.getToken();
-  //   if(!token) return true;
-
-  //   const date = helper.getTokenExpirationDate(token);
-  //   console.log(date);
-  //   if(date === undefined) return false;
-  //   // @ts-ignore
-  //   return !(date.valueOf() > new Date().valueOf());
-  // }
+  isTokenExpired(token: string | null): boolean {
+    if (!token){
+      return true;
+    }
+    const date = helper.getTokenExpirationDate(token);
+    if (date === undefined) return false;
+    // @ts-ignore
+    return !(date.valueOf() > new Date().valueOf());
+  }
 
   logout(): Observable<any> {
     return this.http.post<any>(`${environment.apiUrl}/auth/logout`, null, this.setHeader())
