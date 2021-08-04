@@ -42,3 +42,6 @@ a:hover {
   font-weight: 500;
   padding-right: 0 !important
 }
+.example-chip-list {
+  width: 100%;
+}
