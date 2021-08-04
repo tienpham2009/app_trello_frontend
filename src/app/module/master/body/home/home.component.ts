@@ -41,6 +41,7 @@ export class HomeComponent implements OnInit {
 
   dataBoards: any[] = [];
   dataGroups: any;
+  dataImages: any;
   constructor(
     private boarService: BoardService,
     private fb: FormBuilder,
@@ -53,6 +54,7 @@ export class HomeComponent implements OnInit {
       title: ['', [Validators.required]],
       modifier: ['', [Validators.required]],
       group: ['', [Validators.required]],
+      image: [''],
     });
 
     this.formAddGroup = this.fb.group({
@@ -67,12 +69,14 @@ export class HomeComponent implements OnInit {
     this.groupService.getGroupByUserId().subscribe((res) => {
       this.dataGroups = res.groups;
       this.dataBoards = res.dataBoards;
+      this.dataImages = res.images;
+      console.log(this.dataBoards);
     });
   }
 
   submitFormAddBoard() {
     const data = this.formAddBoard?.value;
-    this.boarService.addBoard(data).subscribe((res) => {
+    this.boarService.addBoard(data).subscribe((res) => {      
       this.notifyService.showSuccess(res.message, 'congratulations');
       this.getGroupByUserId();
       this.formAddBoard?.reset();

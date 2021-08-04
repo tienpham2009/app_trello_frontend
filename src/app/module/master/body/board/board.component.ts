@@ -3,6 +3,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ListServiceService} from '../../../../service/list-service.service';
 import {ActivatedRoute} from '@angular/router';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import { MatDialog } from '@angular/material/dialog';
+import { CardInfoComponent } from 'src/app/dialog/card-info/card-info.component';
 
 // import { NzButtonModule } from 'ng-zorro-antd/button';
 @Component({
@@ -19,11 +21,13 @@ export class BoardComponent implements OnInit {
   location: any;
   listId: any;
   hiddenInput: number | undefined;
+  board: any;
 
   constructor(
     private fb: FormBuilder,
     private listService: ListServiceService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dialog : MatDialog
   ) {
   }
 
@@ -71,6 +75,7 @@ export class BoardComponent implements OnInit {
     // @ts-ignore
     let board_id = +this.route.snapshot.paramMap.get('id');
     this.listService.getListByBoardId(board_id).subscribe((res) => {
+      this.board = res.board;
       this.lists = res.list;
       this.setHiddenForCard(this.lists)
     });
@@ -103,10 +108,6 @@ export class BoardComponent implements OnInit {
     }
   }
 
-  changeTitleList(element: any) {
-    console.log(element);
-  }
-
   isHiddenInput(title: any, listId: any) {
     this.hiddenInput = -1;
     console.log(listId);
@@ -122,5 +123,16 @@ export class BoardComponent implements OnInit {
 
   showInput(listId: any) {
     this.hiddenInput = listId;
+  }
+
+  showCard(number: number): void {
+    this.dialog.open(CardInfoComponent , {
+      width: '40rem',
+      height: '45rem',
+      data: 
+      {
+        number: number,
+      }
+    })
   }
 }

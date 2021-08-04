@@ -1,6 +1,11 @@
-
-<div class="show-list">
+<div
+  class="show-list"
+  style="background-image: url('http://127.0.0.1:8000/uploadedimages/{{ board.name }}'); background-size: 100% 100%; "
+>
   <app-board-bar></app-board-bar>
+  <button (click)="showCard(1)">
+     open dialog
+  </button>
   <div
     cdkDropList
     cdkDropListOrientation="horizontal"
@@ -8,12 +13,13 @@
     (cdkDropListDropped)="drop($event)"
   >
     <div
+      class="container-list"
       style="margin: 28px"
       *ngFor="let timePeriod of lists; let i = index"
       cdkDrag
     >
       <!-- start card -->
-      <div class="card shadow mb-4">
+      <div class="card shadow mb-4 section-list">
         <!-- Card Header - Dropdown -->
         <div
           class="
@@ -26,7 +32,7 @@
           "
         >
           <input
-            style="width: 80%;"
+            style="width: 80%"
             type="text"
             #element
             class="form-control"
@@ -68,9 +74,42 @@
           </div>
         </div>
         <!-- Card Body -->
-        <div class="card-body">
-          <mat-card-actions (click)="hiddenFormAddCard(i)" [hidden]="!isHiddenFormAddCard[i]"><i nz-icon nzType="plus"></i>
-            Thêm thẻ</mat-card-actions>
+        <div class="card-body crollable-list">
+          <!-- card -->
+          <div
+            class="col-xl-3 col-md-6 mb-4"
+            style="padding-left: 0;"
+          >
+            <div
+              class="card border-left-success shadow h-100 py-2"
+              style="max-height: 6rem ;max-width: 15.5rem;"
+            >
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div
+                      class="
+                        text-xs
+                        font-weight-bold
+                        text-success text-uppercase
+                        mb-1
+                      "
+                    >
+                      Tao bang moi
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <span style="font-size: 50px; color: green">+</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <mat-card-actions
+            (click)="hiddenFormAddCard(i)"
+            [hidden]="!isHiddenFormAddCard[i]"
+            ><i nz-icon nzType="plus"></i> Thêm thẻ</mat-card-actions
+          >
           <div [hidden]="isHiddenFormAddCard[i]">
             <form
               *ngIf="formAddCard"
@@ -98,7 +137,6 @@
                 X
               </button>
             </form>
-
           </div>
         </div>
       </div>
@@ -112,7 +150,7 @@
         nz-button
         nzType="dashed"
         class="add-button"
-        style="margin: 28px;"
+        style="margin: 28px"
         [hidden]="!isHiddenFormAddList"
         (click)="hidden()"
       >
@@ -123,7 +161,7 @@
     <div
       [hidden]="isHiddenFormAddList"
       class="border border-primary"
-      style="margin: 20px; height: 20%"
+      style="margin: 20px; max-height: 11%"
     >
       <form
         *ngIf="formAddList"
@@ -154,4 +192,3 @@
     </div>
   </div>
 </div>
-
