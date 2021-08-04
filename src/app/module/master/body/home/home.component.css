@@ -42,6 +42,33 @@ a:hover {
   font-weight: 500;
   padding-right: 0 !important
 }
+
+
+.bg-image {
+  background-size: 100% 100%;
+}
+
+.labl {
+  display : block;
+  width: 3rem;
+}
+.labl > input{ /* HIDE RADIO */
+  visibility: hidden; /* Makes input not-clickable */
+  position: absolute; /* Remove input from document flow */
+}
+.labl > input + div{ /* DIV STYLES */
+  cursor:pointer;
+  border:2px solid transparent;
+}
+.labl > input:checked + div{ /* (RADIO CHECKED) DIV STYLES */
+  border: 2px solid #ff0000;
+}
+.radio-image {
+  width: 3rem;
+  height: 3rem;
+}
+
 .example-chip-list {
   width: 100%;
 }
+
