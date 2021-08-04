@@ -33,6 +33,8 @@ import {NzCardModule} from "ng-zorro-antd/card";
 import {MatCardModule} from '@angular/material/card';
 import {ChangePasswordComponent} from "./dialog/change-password/change-password.component";
 import { UploadAvatarComponent } from './dialog/upload-avatar/upload-avatar.component';
+import {MatListModule} from "@angular/material/list";
+import {MatLineModule} from "@angular/material/core";
 
 
 registerLocaleData(en);
@@ -80,7 +82,9 @@ registerLocaleData(en);
     NzFormModule,
     NzCardModule,
     MatCardModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    MatListModule,
+    MatLineModule
 
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],

@@ -1,22 +1,21 @@
-
 <div class="show-list">
   <app-board-bar></app-board-bar>
-  <div
-    cdkDropList
-    cdkDropListOrientation="horizontal"
-    class="example-list"
-    (cdkDropListDropped)="drop($event)"
-  >
     <div
-      style="margin: 28px"
-      *ngFor="let timePeriod of lists; let i = index"
-      cdkDrag
+      cdkDropList
+      cdkDropListOrientation="horizontal"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)"
     >
-      <!-- start card -->
-      <div class="card shadow mb-4">
-        <!-- Card Header - Dropdown -->
-        <div
-          class="
+      <div
+        style="margin: 28px"
+        *ngFor="let timePeriod of lists; let i = index"
+        cdkDrag
+      >
+        <!-- start card -->
+        <div class="card shadow mb-4">
+          <!-- Card Header - Dropdown -->
+          <div
+            class="
             card-header
             py-3
             d-flex
@@ -24,134 +23,146 @@
             align-items-center
             justify-content-between
           "
-        >
-          <input
-            style="width: 80%;"
-            type="text"
-            #element
-            class="form-control"
-            *ngIf="hiddenInput === timePeriod.id"
-            (focusout)="isHiddenInput(element.value, timePeriod.id)"
-            value="{{ timePeriod.title }}"
-          />
-          <div
-            *ngIf="hiddenInput != timePeriod.id"
-            (click)="showInput(timePeriod.id)"
           >
-            <h1 class="m-0 font-weight-bold text-primary">
-              {{ timePeriod.title }}
-            </h1>
-          </div>
-
-          <div class="dropdown no-arrow">
-            <a
-              class="dropdown-toggle"
-              href="#"
-              role="button"
-              id="dropdownMenuLink"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-            </a>
+            <input
+              style="width: 80%;"
+              type="text"
+              #element
+              class="form-control"
+              *ngIf="hiddenInput === timePeriod.id"
+              (focusout)="isHiddenInput(element.value, timePeriod.id)"
+              value="{{ timePeriod.title }}"
+            />
             <div
-              class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-              aria-labelledby="dropdownMenuLink"
+              *ngIf="hiddenInput != timePeriod.id"
+              (click)="showInput(timePeriod.id)"
             >
-              <div class="dropdown-header">Dropdown Header:</div>
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
+              <h1 class="m-0 font-weight-bold text-primary">
+                {{ timePeriod.title }}
+              </h1>
+            </div>
+
+            <div class="dropdown no-arrow">
+              <a
+                class="dropdown-toggle"
+                href="#"
+                role="button"
+                id="dropdownMenuLink"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+              </a>
+              <div
+                class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                aria-labelledby="dropdownMenuLink"
+              >
+                <div class="dropdown-header">Dropdown Header:</div>
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </div>
+          </div>
+          <!-- Card Body -->
+          <div class="card-body">
+              <div
+                cdkDropList
+                [cdkDropListData]="cards[timePeriod.id]"
+                class="example-card"
+                (cdkDropListDropped)="dropCard($event)">
+                <div class="example-box-card" *ngFor="let item of cards[timePeriod.id]" cdkDrag>
+                  {{item.title}}
+                </div>
+              </div>
+
+            <mat-card-actions (click)="hiddenFormAddCard(i)" [hidden]="!isHiddenFormAddCard[i]"><i nz-icon
+                                                                                                   nzType="plus"></i>
+              Thêm thẻ
+            </mat-card-actions>
+            <div [hidden]="isHiddenFormAddCard[i]">
+              <form
+                *ngIf="formAddCard"
+                [formGroup]="formAddCard"
+                (ngSubmit)="addCard(i)"
+                style="margin: 5px"
+              >
+                <input
+                  class="form-control border border-success"
+                  type="text"
+                  formControlName="title"
+                />
+                <button
+                  type="submit"
+                  class="btn btn-primary add-list"
+                  [disabled]="formAddCard.invalid"
+                >
+                  Thêm thẻ
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-danger add-list"
+                  (click)="hiddenFormAddCard(i)"
+                >
+                  X
+                </button>
+              </form>
+
             </div>
           </div>
         </div>
-        <!-- Card Body -->
-        <div class="card-body">
-          <mat-card-actions (click)="hiddenFormAddCard(i)" [hidden]="!isHiddenFormAddCard[i]"><i nz-icon nzType="plus"></i>
-            Thêm thẻ</mat-card-actions>
-          <div [hidden]="isHiddenFormAddCard[i]">
-            <form
-              *ngIf="formAddCard"
-              [formGroup]="formAddCard"
-              (ngSubmit)="addCard(i)"
-              style="margin: 5px"
-            >
-              <input
-                class="form-control border border-success"
-                type="text"
-                formControlName="title"
-              />
-              <button
-                type="submit"
-                class="btn btn-primary add-list"
-                [disabled]="formAddCard.invalid"
-              >
-                Thêm thẻ
-              </button>
-              <button
-                type="button"
-                class="btn btn-danger add-list"
-                (click)="hiddenFormAddCard(i)"
-              >
-                X
-              </button>
-            </form>
-
-          </div>
-        </div>
+        <!-- end card -->
       </div>
-      <!-- end card -->
-    </div>
-    <ng-template #extraTemplate>
-      <a>---</a>
-    </ng-template>
-    <div>
-      <button
-        nz-button
-        nzType="dashed"
-        class="add-button"
-        style="margin: 28px;"
-        [hidden]="!isHiddenFormAddList"
-        (click)="hidden()"
-      >
-        <i nz-icon nzType="plus"></i>
-        Add List
-      </button>
-    </div>
-    <div
-      [hidden]="isHiddenFormAddList"
-      class="border border-primary"
-      style="margin: 20px; height: 20%"
-    >
-      <form
-        *ngIf="formAddList"
-        [formGroup]="formAddList"
-        (ngSubmit)="addList()"
-        style="margin: 5px"
-      >
-        <input
-          class="form-control border border-success"
-          type="text"
-          formControlName="title"
-        />
+      <ng-template #extraTemplate>
+        <a>---</a>
+      </ng-template>
+      <div>
         <button
-          type="submit"
-          class="btn btn-primary add-list"
-          [disabled]="formAddList.invalid"
-        >
-          Add list
-        </button>
-        <button
-          type="button"
-          class="btn btn-danger add-list"
+          nz-button
+          nzType="dashed"
+          class="add-button"
+          style="margin: 28px;"
+          [hidden]="!isHiddenFormAddList"
           (click)="hidden()"
         >
-          X
+          <i nz-icon nzType="plus"></i>
+          Add List
         </button>
-      </form>
+      </div>
+      <div
+        [hidden]="isHiddenFormAddList"
+        class="border border-primary"
+        style="margin: 20px; height: 20%"
+      >
+        <form
+          *ngIf="formAddList"
+          [formGroup]="formAddList"
+          (ngSubmit)="addList()"
+          style="margin: 5px"
+        >
+          <input
+            class="form-control border border-success"
+            type="text"
+            formControlName="title"
+          />
+          <button
+            type="submit"
+            class="btn btn-primary add-list"
+            [disabled]="formAddList.invalid"
+          >
+            Add list
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger add-list"
+            (click)="hidden()"
+          >
+            X
+          </button>
+        </form>
+      </div>
     </div>
-  </div>
 </div>
 

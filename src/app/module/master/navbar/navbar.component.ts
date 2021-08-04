@@ -45,8 +45,6 @@ constructor(private authService: AuthService,
 
   checkLogin() {
     if (!this.authService.isLogin()){
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
       this.router.navigate(['/login']);
     }
   }

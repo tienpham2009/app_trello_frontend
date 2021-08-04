@@ -12,7 +12,11 @@ export class CardService {
   }
 
   storeCard(dataCard:any):Observable<any>{
-    return this.http.post<any>(`${environment.apiUrl}/list/changeTitle` , dataCard , this.setHeader())
+    return this.http.post<any>(`${environment.apiUrl}/card/store` , dataCard , this.setHeader())
+  }
+  getCardOfListByBoardId(board_id:number):Observable<any>{
+    return this.http.get<any>(`${environment.apiUrl}/card/${board_id}/get-card`, this.setHeader())
+
   }
   setHeader() {
     let token = localStorage.getItem('token')

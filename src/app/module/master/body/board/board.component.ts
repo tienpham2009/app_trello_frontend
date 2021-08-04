@@ -2,7 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ListServiceService} from '../../../../service/list-service.service';
 import {ActivatedRoute} from '@angular/router';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {CardService} from "../../../../service/card.service";
+import {NotificationService} from "../../../../service/notification.service";
 
 // import { NzButtonModule } from 'ng-zorro-antd/button';
 @Component({
@@ -14,6 +16,7 @@ export class BoardComponent implements OnInit {
   formAddList!: FormGroup;
   formAddCard!: FormGroup;
   lists: any;
+  cards: any = [];
   isHiddenFormAddList: boolean = true;
   isHiddenFormAddCard: Array<any> = [];
   location: any;
@@ -23,7 +26,9 @@ export class BoardComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private listService: ListServiceService,
-    private route: ActivatedRoute
+    private cardService: CardService,
+    private route: ActivatedRoute,
+    private notifyService: NotificationService,
   ) {
   }
 
@@ -31,6 +36,7 @@ export class BoardComponent implements OnInit {
     // @ts-ignore
     let board_id = +this.route.snapshot.paramMap.get('id');
     this.getListByBoardId();
+    this.getCardOfListByBoardId()
     this.formAddList = this.fb.group({
       title: ['', [Validators.required]],
       board_id: [board_id],
@@ -64,7 +70,11 @@ export class BoardComponent implements OnInit {
     let ListId = this.lists[i].id;
     let formAddData = this.formAddCard.value;
     formAddData.list_id = ListId
-    console.log(formAddData);
+    this.cardService.storeCard(formAddData).subscribe(res => {
+      this.notifyService.showSuccess(res.message, 'Thông báo');
+      this.hiddenFormAddCard(i);
+      this.getCardOfListByBoardId()
+    })
   }
 
   getListByBoardId() {
@@ -76,15 +86,26 @@ export class BoardComponent implements OnInit {
     });
   }
 
+  getCardOfListByBoardId() {
+    // @ts-ignore
+    let board_id = +this.route.snapshot.paramMap.get('id');
+    this.cardService.getCardOfListByBoardId(board_id).subscribe(res => {
+      let lists = res.lists;
+      let cards = res.cards;
+      for (let i = 0; i < lists.length; i++) {
+        this.cards[lists[i].id] = cards[lists[i].id];
+      }
+    })
+  }
+
   hidden() {
     this.isHiddenFormAddList = !this.isHiddenFormAddList;
   }
 
-  hiddenFormAddCard(listId: any) {
-    this.isHiddenFormAddCard[listId] = !this.isHiddenFormAddCard[listId]
-
+  hiddenFormAddCard(index: any) {
+    this.isHiddenFormAddCard[index] = !this.isHiddenFormAddCard[index]
     for (let i = 0; i < this.lists.length; i++) {
-      if (this.isHiddenFormAddCard[i] === this.isHiddenFormAddCard[listId] && i !== listId) {
+      if (this.isHiddenFormAddCard[i] === this.isHiddenFormAddCard[index] && i !== index) {
         this.isHiddenFormAddCard[i] = true
       }
     }
@@ -122,5 +143,15 @@ export class BoardComponent implements OnInit {
 
   showInput(listId: any) {
     this.hiddenInput = listId;
+  }
+  dropCard(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex);
+    }
   }
 }
