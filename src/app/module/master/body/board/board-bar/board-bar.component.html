@@ -5,9 +5,40 @@
 
     <span class="example-spacer"></span>
 
-    <button mat-raised-button color="primary" (click)="openDialog()">Thêm thành viên</button>
+    <button mat-raised-button color="primary" (click)="openDialog()" style="margin:5px;">Thêm thành viên</button>
+
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal96" (click) = getAllUser()>
+      Launch demo modal
+    </button>
 
 
   </mat-toolbar>
 </div>
+</div>
+<div class="modal fade" id="exampleModal96" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">Danh sách thành viên trong nhóm</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table>
+          <tr>
+            <th>Thành viên</th>
+            <th>Vị trí</th>
+          </tr>
+          <tr  *ngFor = "let userBoard of userBoards ; index as i">
+            <td>Magazzini Alimentari Riuniti</td>
+            <td>Giovanni Rovelli</td>
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
