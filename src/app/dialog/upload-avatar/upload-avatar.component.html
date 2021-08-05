@@ -1,5 +1,5 @@
  <form>
         <input type="file" multiple  accept="image/*" (change) ="changeAvatar($event)">
-        <button class="btn btn-info" (click)="uploadAvatar()" mat-dialog-close>Lưu</button>
+        <button type="button" class="btn btn-info" (click)="uploadAvatar();dialogRef.close()" mat-dialog-close>Lưu</button>
  </form>
 

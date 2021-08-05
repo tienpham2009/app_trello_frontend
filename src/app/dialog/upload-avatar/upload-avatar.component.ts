@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {NotificationService} from "../../service/notification.service";
 import {BoardService} from "../../service/board-service.service";
+import {MatDialogRef} from "@angular/material/dialog";
+import {CardInfoComponent} from "../card-info/card-info.component";
 
 @Component({
   selector: 'app-upload-avatar',
@@ -12,6 +14,8 @@ export class UploadAvatarComponent implements OnInit {
 
   constructor(private toast: NotificationService,
               private boardService: BoardService,
+              public dialogRef: MatDialogRef<CardInfoComponent>,
+
   ) { }
 
   ngOnInit(): void {
