@@ -85,8 +85,9 @@ export class BoardComponent implements OnInit,OnChanges {
     // @ts-ignore
     let board_id = +this.route.snapshot.paramMap.get('id');
     this.listService.getListByBoardId(board_id).subscribe((res) => {
+      this.board = res.board;
       this.lists = res.lists;
-      console.log(this.lists);
+      console.log(res);
       this.setHiddenForCard(this.lists)
     });
   }

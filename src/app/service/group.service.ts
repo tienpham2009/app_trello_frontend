@@ -29,6 +29,8 @@ export class GroupService {
     return this.http.post<any>(`${environment.apiUrl}/add_user_group` ,data, this.setHeader());
   }
 
-
+  getUserGroup(data:any): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/group/${data}/getMember` , this.setHeader());
+  }
 
 }
