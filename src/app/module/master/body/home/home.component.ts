@@ -50,6 +50,8 @@ export class HomeComponent implements OnInit {
   dataGroups: any;
   formAddUserGroup: FormGroup | undefined;
   data: any;
+  id_group!:number;
+
   constructor(
     private boarService: BoardService,
     private fb: FormBuilder,
@@ -163,15 +165,20 @@ console.log(res)
       this.userEmails.splice(index, 1);
     }
   }
+  getId(id:number){
+    this.id_group = id;
+  }
 
-  addUserGroup(id:number){
+  addUserGroup(){
     const userGroup = this.formAddUserGroup?.value;
     userGroup.email_array = this.userEmails;
-    userGroup.group_id = id;
+    userGroup.group_id = this.id_group;
+
+    console.log(userGroup.group_id);
     this.groupService.addUserGroup(userGroup).subscribe({
       next: (res:any) => {
         this.notifyService.showSuccess('Thành công','Thêm thành viên');
-        this.formAddUserGroup?.reset();
+
 
       }
         });
