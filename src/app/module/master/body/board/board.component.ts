@@ -156,13 +156,20 @@ export class BoardComponent implements OnInit,OnChanges {
   }
 
   showCard(number: number): void {
-    this.dialog.open(CardInfoComponent , {
+   const dialogRef = this.dialog.open(CardInfoComponent , {
       width: '40rem',
       height: '45rem',
       data:
       {
         number: number,
       }
-    })
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.getListByBoardId()
+    });
   }
+
+  
+
 }

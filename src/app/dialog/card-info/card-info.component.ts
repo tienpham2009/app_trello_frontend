@@ -85,4 +85,8 @@ export class CardInfoComponent implements OnInit {
       this.notifyService.showSuccess(res.status,'Thông báo:')
     })
   }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 }
