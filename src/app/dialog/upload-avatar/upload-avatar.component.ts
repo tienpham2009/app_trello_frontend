@@ -14,21 +14,20 @@ export class UploadAvatarComponent implements OnInit {
               private boardService: BoardService,
   ) { }
 
-  ngOnInit(
-  ): void {
+  ngOnInit(): void {
   }
-  showToast(){
-    this.toast.showSuccess('Thành công','Lưu ảnh');
-  }
+
   changeAvatar($event: any) {
     this.image = $event.target.files[0];
   }
   uploadAvatar(){
     const data = new FormData();
     data.append('image',this.image);
+    console.log(data)
     this.boardService.addImage(data).subscribe((res:any) =>
     {
-     this.showToast()
+      console.log(res)
+      this.toast.showSuccess('Thành công','Lưu ảnh');
       localStorage.setItem('user',JSON.stringify(res.user));
     })
   };
