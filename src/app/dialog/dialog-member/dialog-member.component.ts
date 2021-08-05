@@ -19,7 +19,6 @@ export class DialogMemberComponent implements OnInit {
   constructor (@Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
     private addMember: AddUserService,
-    private route: ActivatedRoute,
     private toast: NotificationService) { }
 
   ngOnInit(): void {

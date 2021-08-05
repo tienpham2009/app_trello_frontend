@@ -46,4 +46,10 @@ export class BoardService {
     let headers_object = new HttpHeaders().set('Authorization', 'Bearer' + token);
     return this.http.post(environment.apiUrl + '/auth/add_image', data, {headers: headers_object});
   }
+
+  showAllUser(board_id:any): Observable<any> {
+    let token =localStorage.getItem('token')
+    let headers_object = new HttpHeaders().set('Authorization', 'Bearer' + token);
+    return this.http.get(environment.apiUrl + `/${board_id}/show_user_board` ,{headers: headers_object});
+  }
 }
