@@ -7,8 +7,9 @@
       <input type="text"
              [hidden]="!isHiddenInputTitle"
              formControlName="title"
+             (focusout)="setHiddenInputTitle();changeTitleCard()"
              value="{{ card.title }}"
-             (focusout)="setHiddenInputTitle();changeTitleCard()">
+      >
     </form>
     <div class="row">
       <div class="col-8">
