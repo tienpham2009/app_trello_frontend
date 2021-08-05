@@ -39,11 +39,11 @@
         <!-- them khong gian lam viec-->
 
         <li class="nav-item row">
-          <a class="nav-link space-work" style="width: 75% ;color : #4e73df">
+          <a class="nav-link space-work" style="width: 75%; color: #4e73df">
             khong gian lam viec
           </a>
           <a
-            style="font-size: 2rem; padding: 1rem ; color: green"
+            style="font-size: 2rem; padding: 1rem; color: green"
             data-toggle="modal"
             data-target="#createGroup"
           >
@@ -150,15 +150,66 @@
         <!-- Content Row -->
         <div>
           <h2>{{ group.name }}</h2>
+          <!-- <app-add-user-group></app-add-user-group> -->
+          <button type="button" class="btn btn-primary" data-target="#addUserGroupModal" data-toggle="modal" (click)= "getId(group.id)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+            <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path>
+            <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"></path>
+            </svg>
+            </button>
+
+          <!-- Modal them thanh vien vao nhom -->
+          <div class="modal fade" id="addUserGroupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+          <form *ngIf = "formAddUserGroup" [formGroup]="formAddUserGroup" (ngSubmit) = addUserGroup()>
+          <div class="modal-content">
+          <div class="modal-header">
+          <h2 class="modal-title" id="exampleModalLabel">Thêm thành viên vào nhóm</h2>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+          </div>
+          <div class="modal-body">
+          <!-- <label class="label-add-card" for="exampleFormControlSelect1"
+          >Nhập email thành viên</label> -->
+              <mat-form-field class="example-chip-list" appearance="fill">
+
+                <mat-chip-list #chipList aria-label="Fruit selection">
+                  <mat-chip *ngFor="let userEmail of userEmails" [selectable]="selectable"
+                           [removable]="removable" (removed)="remove(userEmail)">
+                    {{userEmail.email}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+
+                  <input placeholder="Nhập email muốn thêm..."
+                         [matChipInputFor]="chipList"
+                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                         [matChipInputAddOnBlur]="addOnBlur"
+                         (matChipInputTokenEnd)="add($event)"type="text"
+                         class="form-control"
+                         formControlName="email">
+                </mat-chip-list>
+              </mat-form-field>
+          </div>
+          <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+          </div>
+          </form>
+          </div>
+          </div>
+<!--  -->
         </div>
         <div class="row">
           <!-- hien thi bang-->
           <div
             class="col-xl-3 col-md-6 mb-4"
+            style="height: 10rem"
             *ngFor="let board of dataBoards[i]"
             routerLink="/{{ board.id }}/board"
           >
-            <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card border-left-primary shadow h-100 py-2 bg-image" style="background-image: url('http://127.0.0.1:8000/uploadedimages/{{ board.name }}')" >
               <div class="card-body">
                 <div class="row no-gutters align-items-center">
                   <!-- <div class="col mr-2"> -->
@@ -166,12 +217,36 @@
                     class="
                       text-xs
                       font-weight-bold
-                      text-primary text-uppercase
+                      text-white text-uppercase
                       mb-1
                     "
                   >
                     {{ board.title }}
                   </div>
+
+                  <!-- <div class = "col-12">
+              <mat-form-field class="example-chip-list" appearance="fill">
+                <label class="label-add-card" for="exampleFormControlSelect1"
+                  >Thêm thành viên</label>
+                <mat-chip-list #chipList aria-label="Fruit selection">
+                  <mat-chip *ngFor="let userEmail of userEmails" [selectable]="selectable"
+                           [removable]="removable" (removed)="remove(userEmail)">
+                    {{userEmail.email}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+
+                  <input placeholder="Nhập email muốn thêm..."
+                         [matChipInputFor]="chipList"
+                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                         [matChipInputAddOnBlur]="addOnBlur"
+                         (matChipInputTokenEnd)="add($event)"type="text"
+                         class="form-control">
+                </mat-chip-list>
+              </mat-form-field>
+              </div> -->
+
+
+
                   <!-- <div class="h5 mb-0 font-weight-bold text-gray-800">
                         $215,000
                       </div> -->
@@ -190,7 +265,10 @@
             data-toggle="modal"
             data-target="#exampleModal"
           >
-            <div class="card border-left-success shadow h-100 py-2">
+            <div
+              class="card border-left-success shadow h-100 py-2"
+              style="max-height: 6rem"
+            >
               <div class="card-body">
                 <div class="row no-gutters align-items-center">
                   <div class="col mr-2">
@@ -249,87 +327,115 @@
         </div>
 
         <div class="modal-body">
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Them tieu de bang"
-            formControlName="title"
-            [ngClass]="
-              title && title.invalid && (title.dirty || title.touched)
-                ? 'is-invalid'
-                : ''
-            "
-          />
-          <div
-            *ngIf="title && title.invalid && (title.dirty || title.touched)"
-            class="text-danger"
-          >
-            <div *ngIf="title.errors?.required">Khong duoc de trong</div>
-          </div>
           <div class="row">
             <div class="col-6">
-              <label class="label-add-card" for="exampleFormControlSelect1"
-                >Khong gian lam viec</label
-              >
-              <select
+              <input
+                type="text"
                 class="form-control"
-                id="exampleFormControlSelect1"
-                formControlName="group"
+                placeholder="Them tieu de bang"
+                formControlName="title"
                 [ngClass]="
-                  group && group.invalid && (group.dirty || group.touched)
+                  title && title.invalid && (title.dirty || title.touched)
                     ? 'is-invalid'
                     : ''
                 "
-              >
-                <option *ngFor="let group of dataGroups" value="{{ group.id }}">
-                  {{ group.name }}
-                </option>
-              </select>
+              />
               <div
-                *ngIf="group && group.invalid && (group.dirty || group.touched)"
+                *ngIf="title && title.invalid && (title.dirty || title.touched)"
                 class="text-danger"
               >
-                <div *ngIf="group.errors?.required">
-                  Vui long chon khong gian lam viec
+                <div *ngIf="title.errors?.required">Khong duoc de trong</div>
+              </div>
+              <div>
+                <div>
+                  <label class="label-add-card" for="exampleFormControlSelect1"
+                    >Khong gian lam viec</label
+                  >
+                  <select
+                    class="form-control"
+                    id="exampleFormControlSelect1"
+                    formControlName="group"
+                    [ngClass]="
+                      group && group.invalid && (group.dirty || group.touched)
+                        ? 'is-invalid'
+                        : ''
+                    "
+                  >
+                    <option
+                      *ngFor="let group of dataGroups"
+                      value="{{ group.id }}"
+                    >
+                      {{ group.name }}
+                    </option>
+                  </select>
+                  <div
+                    *ngIf="
+                      group && group.invalid && (group.dirty || group.touched)
+                    "
+                    class="text-danger"
+                  >
+                    <div *ngIf="group.errors?.required">
+                      Vui long chon khong gian lam viec
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <label class="label-add-card" for="exampleFormControlSelect1"
+                    >Che do hien thi</label
+                  >
+                  <select
+                    class="form-control"
+                    id="exampleFormControlSelect1"
+                    formControlName="modifier"
+                    [ngClass]="
+                      modifier &&
+                      modifier.invalid &&
+                      (modifier.dirty || modifier.touched)
+                        ? 'is-invalid'
+                        : ''
+                    "
+                  >
+                    <option
+                      *ngFor="let modifier of modifiers"
+                      value="{{ modifier.value }}"
+                    >
+                      {{ modifier.name }}
+                    </option>
+                  </select>
+                  <div
+                    *ngIf="
+                      modifier &&
+                      modifier.invalid &&
+                      (modifier.dirty || modifier.touched)
+                    "
+                    class="text-danger"
+                  >
+                    <div *ngIf="modifier.errors?.required">
+                      Vui long chon che do hien thi
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="col-6">
-              <label class="label-add-card" for="exampleFormControlSelect1"
-                >Che do hien thi</label
-              >
-              <select
-                class="form-control"
-                id="exampleFormControlSelect1"
-                formControlName="modifier"
-                [ngClass]="
-                  modifier &&
-                  modifier.invalid &&
-                  (modifier.dirty || modifier.touched)
-                    ? 'is-invalid'
-                    : ''
-                "
-              >
-                <option
-                  *ngFor="let modifier of modifiers"
-                  value="{{ modifier.value }}"
-                >
-                  {{ modifier.name }}
-                </option>
-              </select>
-              <div
-                *ngIf="
-                  modifier &&
-                  modifier.invalid &&
-                  (modifier.dirty || modifier.touched)
-                "
-                class="text-danger"
-              >
-                <div *ngIf="modifier.errors?.required">
-                  Vui long chon che do hien thi
-                </div>
+              <div class="row">
+                <label class="labl radio-image col-4" *ngFor="let image of dataImages">
+                  <input
+                    type="radio"
+                    formControlName="image"
+                    value="{{ image.id }}"
+                  />
+                  <div style="width: 3.22rem">
+                    <img
+                      src="http://127.0.0.1:8000/uploadedimages/{{ image.name }}"
+                      class="radio-image"
+                    />
+                  </div>
+                </label>
               </div>
+              
             </div>
+
           </div>
         </div>
         <div class="modal-footer">

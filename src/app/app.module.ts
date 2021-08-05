@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {MatInputModule} from '@angular/material/input';
 import {  MatButtonModule } from '@angular/material/button';
+import {  MatChipsModule } from '@angular/material/chips';
 import { MatToolbarModule} from '@angular/material/toolbar';
 import { BoardBarComponent } from './module/master/body/board/board-bar/board-bar.component';
 import { DialogMemberComponent } from './dialog/dialog-member/dialog-member.component';
@@ -35,6 +36,8 @@ import {ChangePasswordComponent} from "./dialog/change-password/change-password.
 import { UploadAvatarComponent } from './dialog/upload-avatar/upload-avatar.component';
 import {MatListModule} from "@angular/material/list";
 import {MatLineModule} from "@angular/material/core";
+import { CardInfoComponent } from './dialog/card-info/card-info.component';
+
 
 
 registerLocaleData(en);
@@ -84,8 +87,8 @@ registerLocaleData(en);
     MatCardModule,
     ToastrModule.forRoot(),
     MatListModule,
-    MatLineModule
-
+    MatLineModule,
+    MatChipsModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent],

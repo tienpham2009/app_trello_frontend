@@ -11,7 +11,11 @@
     <div class="example-container" *ngFor="let list of lists;let i = index">
       <ul class="list-group" style="width: 18rem">
       <div cdkDropList [cdkDropListData]="list.cards" class="example-container" (cdkDropListDropped)="dropCard($event)">
-        <div class="list-group-item example-box-card" *ngFor="let item of list.cards" cdkDrag>{{item.title}}</div>
+        <div class="list-group-item example-box-card"  *ngFor="let item of list.cards" cdkDrag>
+        <div (click)="showCard(item.id)">
+          {{item.title}}
+        </div>
+        </div>
       </div>
       </ul>
 
@@ -26,10 +30,7 @@
           <button type="button" class="btn btn-danger add-list" (click)="hiddenFormAddCard(i)"> X</button>
         </form>
       </div>
-
     </div>
-
-
   </div>
     <!--    nút thêm list-->
     <div>
@@ -77,4 +78,5 @@
         </button>
       </form>
     </div>
-</div>
+  </div>
+

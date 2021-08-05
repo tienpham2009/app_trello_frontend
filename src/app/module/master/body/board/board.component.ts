@@ -5,6 +5,8 @@ import {ActivatedRoute} from '@angular/router';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {CardService} from "../../../../service/card.service";
 import {NotificationService} from "../../../../service/notification.service";
+import { MatDialog } from '@angular/material/dialog';
+import { CardInfoComponent } from 'src/app/dialog/card-info/card-info.component';
 
 // import { NzButtonModule } from 'ng-zorro-antd/button';
 @Component({
@@ -19,6 +21,7 @@ export class BoardComponent implements OnInit {
   isHiddenFormAddList: boolean = true;
   isHiddenFormAddCard: Array<any> = [];
   hiddenInput: number | undefined;
+  board: any;
 
   constructor(
     private fb: FormBuilder,
@@ -26,6 +29,7 @@ export class BoardComponent implements OnInit {
     private cardService: CardService,
     private route: ActivatedRoute,
     private notifyService: NotificationService,
+    private dialog : MatDialog
   ) {
   }
 
@@ -102,7 +106,7 @@ export class BoardComponent implements OnInit {
       this.listService.moveList(this.lists).subscribe((res) => {
         console.log(res)
       });
-  }
+    }
 
   changeTitleList(element: any) {
     console.log(element);
@@ -144,6 +148,17 @@ export class BoardComponent implements OnInit {
     })
     this.cardService.moveCard(event.container.data).subscribe(res=>{
       console.log(res)
+    })
+  }
+
+  showCard(number: number): void {
+    this.dialog.open(CardInfoComponent , {
+      width: '40rem',
+      height: '45rem',
+      data:
+      {
+        number: number,
+      }
     })
   }
 }
