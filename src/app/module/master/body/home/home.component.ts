@@ -50,6 +50,8 @@ export class HomeComponent implements OnInit {
   dataImages: any;
   formAddUserGroup: FormGroup | undefined;
   data: any;
+  id_group!:number;
+
   constructor(
     private boarService: BoardService,
     private fb: FormBuilder,
@@ -89,8 +91,8 @@ export class HomeComponent implements OnInit {
 
   submitFormAddBoard() {
     const data = this.formAddBoard?.value;
-    this.boarService.addBoard(data).subscribe((res) => {      
-      this.notifyService.showSuccess(res.message, 'congratulations');
+    this.boarService.addBoard(data).subscribe((res) => {
+      this.notifyService.showSuccess(res.message, 'Thông báo');
       this.getGroupByUserId();
       this.formAddBoard?.reset();
     });
@@ -166,15 +168,20 @@ console.log(res)
       this.userEmails.splice(index, 1);
     }
   }
+  getId(id:number){
+    this.id_group = id;
+  }
 
-  addUserGroup(id:number){
+  addUserGroup(){
     const userGroup = this.formAddUserGroup?.value;
     userGroup.email_array = this.userEmails;
-    userGroup.group_id = id;
+    userGroup.group_id = this.id_group;
+
+    console.log(userGroup.group_id);
     this.groupService.addUserGroup(userGroup).subscribe({
       next: (res:any) => {
         this.notifyService.showSuccess('Thành công','Thêm thành viên');
-        this.formAddUserGroup?.reset();
+
 
       }
         });

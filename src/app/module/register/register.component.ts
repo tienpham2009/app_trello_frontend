@@ -109,7 +109,7 @@ export class RegisterComponent implements OnInit {
   showToaster() {
     this.notifyService.showSuccess(
       this.toastrMessage,
-      'Notification'
+      'Thông báo'
     );
   }
 }

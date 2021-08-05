@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CardService } from 'src/app/service/card.service';
-import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-card-info',
@@ -9,44 +9,52 @@ import {FormBuilder, FormGroup} from "@angular/forms";
   styleUrls: ['./card-info.component.css'],
 })
 export class CardInfoComponent implements OnInit {
-  formEdit!: FormGroup;
-  card: any;
 
-  hidden:boolean =true;
+  card: any;
+  comments: any;
+  formComment!: FormGroup;
+
   constructor(
-    private fb:FormBuilder,
     public dialogRef: MatDialogRef<CardInfoComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private cardService: CardService
+    private cardService: CardService,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
-    this.formEdit=this.fb.group({
-      content:[]
-    })
     let card_id = this.data.number;
-    this.getCardById(card_id)
+    this.getAll(card_id);
+
+    this.formComment = this.fb.group({
+      comment: [''],
+    });
+  }
+
+  getAll(card_id: any) {
+    this.cardService.getCard(card_id).subscribe((res) => {
+      this.card = res.card;
+
+      this.comments = res.comments;
+      console.log(res);
+
+      console.log(this.card);
+    });
   }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  submit(){
-  let data = this.formEdit?.value;
-    console.log(data)
-  }
-
-  setHidden(){
-    this.hidden=!this.hidden;
-    console.log(this.hidden)
-  }
-
-  getCardById(id:number ){
-    console.log(id)
-    this.cardService.getCardById(id).subscribe((res) => {
-      this.card = res.card;
-      console.log(this.card);
-    });
+  addComment(): void {
+    let data = this.formComment?.value;
+    let card_id = this.data.number;
+    data.card_id = this.data.number;
+    console.log(data);
+    if (data.comment != '') {
+      this.cardService.addComment(data).subscribe((res) => {
+        this.getAll(card_id);
+      });
+    }
+    this.formComment.reset();
   }
 }

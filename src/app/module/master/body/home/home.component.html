@@ -21,7 +21,7 @@
           >
             <i class="fas fa-fw fa-table font-sidebar"></i>
 
-            <span class="font-sidebar">Bang</span>
+            <span class="font-sidebar">Bảng</span>
           </a>
           <div
             id="collapseTwo"
@@ -30,9 +30,9 @@
             data-parent="#accordionSidebar"
           >
             <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="buttons.html">Rieng tu</a>
-              <a class="collapse-item" href="cards.html">Nhom</a>
-              <a class="collapse-item" href="cards.html">Cong khai</a>
+              <a class="collapse-item" href="buttons.html">Riêng tư</a>
+              <a class="collapse-item" href="cards.html">Nhóm</a>
+              <a class="collapse-item" href="cards.html">Công khai</a>
             </div>
           </div>
         </li>
@@ -40,7 +40,7 @@
 
         <li class="nav-item row">
           <a class="nav-link space-work" style="width: 75%; color: #4e73df">
-            khong gian lam viec
+            không gian làm việc
           </a>
           <a
             style="font-size: 2rem; padding: 1rem; color: green"
@@ -71,10 +71,10 @@
           >
             <div class="bg-white py-2 collapse-inner rounded">
               <a class="collapse-item" href="utilities-color.html"
-                >chuc nang 1</a
+                >chức năng 1</a
               >
               <a class="collapse-item" href="utilities-border.html"
-                >chuc nang 2</a
+                >chức năng 2</a
               >
             </div>
           </div>
@@ -151,17 +151,17 @@
         <div>
           <h2>{{ group.name }}</h2>
           <!-- <app-add-user-group></app-add-user-group> -->
-          <button type="button" class="btn btn-primary" data-target="#addUserGroupModal" data-toggle="modal">
+          <button type="button" class="btn btn-primary" data-target="#addUserGroupModal" data-toggle="modal" (click)= "getId(group.id)">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
             <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path>
             <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"></path>
             </svg>
             </button>
 
-          <!-- Modal -->
+          <!-- Modal them thanh vien vao nhom -->
           <div class="modal fade" id="addUserGroupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
-          <form *ngIf = "formAddUserGroup" [formGroup]="formAddUserGroup" (ngSubmit)="addUserGroup(group.id)">
+          <form *ngIf = "formAddUserGroup" [formGroup]="formAddUserGroup" (ngSubmit) = addUserGroup()>
           <div class="modal-content">
           <div class="modal-header">
           <h2 class="modal-title" id="exampleModalLabel">Thêm thành viên vào nhóm</h2>
@@ -178,7 +178,7 @@
                   <mat-chip *ngFor="let userEmail of userEmails" [selectable]="selectable"
                            [removable]="removable" (removed)="remove(userEmail)">
                     {{userEmail.email}}
-                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                    <mat-icon matChipRemove *ngIf="removable">Hủy</mat-icon>
                   </mat-chip>
 
                   <input placeholder="Nhập email muốn thêm..."
@@ -192,8 +192,8 @@
               </mat-form-field>
           </div>
           <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+          <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
           </div>
           </div>
           </form>
@@ -280,7 +280,7 @@
                         mb-1
                       "
                     >
-                      Tao bang moi
+                      Tạo bảng mới
                     </div>
                   </div>
                   <div class="col-auto">
@@ -314,7 +314,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h3 class="modal-title" id="exampleModalLabel">Them Bang Moi</h3>
+          <h3 class="modal-title" id="exampleModalLabel">Thêm bảng mới</h3>
           <button
             type="button"
             class="close"
@@ -332,7 +332,7 @@
               <input
                 type="text"
                 class="form-control"
-                placeholder="Them tieu de bang"
+                placeholder="Thêm tiêu đề bảng"
                 formControlName="title"
                 [ngClass]="
                   title && title.invalid && (title.dirty || title.touched)
@@ -344,12 +344,12 @@
                 *ngIf="title && title.invalid && (title.dirty || title.touched)"
                 class="text-danger"
               >
-                <div *ngIf="title.errors?.required">Khong duoc de trong</div>
+                <div *ngIf="title.errors?.required">Không được để trống</div>
               </div>
               <div>
                 <div>
                   <label class="label-add-card" for="exampleFormControlSelect1"
-                    >Khong gian lam viec</label
+                    >Không gian làm việc</label
                   >
                   <select
                     class="form-control"
@@ -375,13 +375,13 @@
                     class="text-danger"
                   >
                     <div *ngIf="group.errors?.required">
-                      Vui long chon khong gian lam viec
+                      Vui lòng chọn không gian làm việc
                     </div>
                   </div>
                 </div>
                 <div>
                   <label class="label-add-card" for="exampleFormControlSelect1"
-                    >Che do hien thi</label
+                    >Chế độ hiển thị</label
                   >
                   <select
                     class="form-control"
@@ -411,7 +411,7 @@
                     class="text-danger"
                   >
                     <div *ngIf="modifier.errors?.required">
-                      Vui long chon che do hien thi
+                      Vui lòng chọn chế độ hiển thị
                     </div>
                   </div>
                 </div>
@@ -433,7 +433,7 @@
                   </div>
                 </label>
               </div>
-              
+
             </div>
 
           </div>
@@ -450,7 +450,7 @@
             class="btn btn-primary"
             (click)="submitFormAddBoard()"
           >
-            Luu
+            Lưu
           </button>
         </div>
       </div>
@@ -471,7 +471,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h3 class="modal-title" id="exampleModalLabel">Them nhom moi</h3>
+          <h3 class="modal-title" id="exampleModalLabel">Thêm nhóm mới</h3>
           <button
             type="button"
             class="close"
@@ -487,7 +487,7 @@
           <div class="row">
             <div class="col-6">
               <label class="label-add-card" for="exampleFormControlSelect1"
-                >Ten nhom</label
+                >Tên nhóm</label
               >
               <input
                 type="text"
@@ -504,12 +504,12 @@
                 *ngIf="name && name.invalid && (name.dirty || name.touched)"
                 class="text-danger"
               >
-                <div *ngIf="name.errors?.required">Khong duoc de trong</div>
+                <div *ngIf="name.errors?.required">Không được để trống</div>
               </div>
             </div>
             <div class="col-6">
               <label class="label-add-card" for="exampleFormControlSelect1"
-                >Che do hien thi</label
+                >Chế độ hiển thị</label
               >
               <select
                 class="form-control"
@@ -539,7 +539,7 @@
                 class="text-danger"
               >
                 <div *ngIf="modifierGroup.errors?.required">
-                  Vui long chon che do hien thi
+                  Vui lòng chọn chế độ hiển thị
                 </div>
               </div>
             </div>
@@ -557,7 +557,7 @@
             class="btn btn-primary"
             (click)="submitFormAddGroup()"
           >
-            Luu
+            Lưu
           </button>
         </div>
       </div>

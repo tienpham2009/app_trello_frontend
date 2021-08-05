@@ -1,41 +1,63 @@
 <div class="card">
-    <div class="card-body" style="height:40rem ; background-color:#00288000">
-      <h2 class="card-title font-weight-bold"> <button (click)="onNoClick()" class="btn btn-light rounded-circle" style="margin-left: 26rem;">X</button></h2>
-    <div class="row">
-        <div class="col-8">
-            <div class="mg">Thanh vien <button class="btn btn-sm btn-light rounded-circle">+</button></div>
-            <div class="mg">Nhan
-                <small class="badge badge-primary mr-1">Primary</small>
-                <small class="badge badge-secondary mr-1">Secondary</small>
-                <small class="badge badge-success mr-1">Success</small>
-                <small class="badge badge-danger mr-1">Danger</small>
-            </div>
+  <div class="card-body" style="height: 40rem; background-color: #00288000">
+    <h2 class="card-title font-weight-bold">
+      {{ card.title }}
+      <button
+        (click)="onNoClick()"
+        class="btn btn-light rounded-circle"
+        style="margin-left: 26rem"
+      >
+        X
+      </button>
+    </h2>
 
-            <h2 class="mg">Mo ta <button type="button" class="btn btn-sm btn-light" (click)="setHidden()" >Chinh sua</button></h2>
-            <div [hidden]="hidden">
-              <form *ngIf="formEdit" [formGroup]="formEdit" (ngSubmit)="submit()">
-                <textarea  cols="30" rows="10" formControlName="content"></textarea>
-                <button type="submit">sub</button>
-              </form>
-            </div>
-            <div class="mg">
-<!--                <p>{{ card.content }}</p>-->
-            </div>
-            <div class="row">
-                <div class="col-12 mg">
-                    <form action="">
-                        <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Binh luan</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
-                        </div>
-                    </form>
+    <div class="row">
+      <div class="col-8">
+        <div class="mg">
+          Thành viên
+          <button class="btn btn-sm btn-light rounded-circle">+</button>
+        </div>
+        <div class="mg">
+          Nhãn
+          <small class="badge badge-primary mr-1">Primary</small>
+          <small class="badge badge-secondary mr-1">Secondary</small>
+          <small class="badge badge-success mr-1">Success</small>
+          <small class="badge badge-danger mr-1">Danger</small>
+        </div>
+        <h2 class="mg">
+          Mô tả
+          <button type="button" class="btn btn-sm btn-light">Chỉnh sửa</button>
+        </h2>
+        <div class="mg">
+          <p>{{ card.content }}</p>
+        </div>
+        <div class="row">
+          <div class="col-12 mg">
+            <form *ngIf="formComment" [formGroup]="formComment">
+              <div class="form-group">
+                <label for="exampleFormControlTextarea1">Bình luận</label>
+                <div *ngFor="let comment of comments">
+                  <p>{{ comment.name }}: <span>{{ comment.content }}</span></p>
                 </div>
-            </div>
+
+                <input
+                  class="form-control"
+                  id="exampleFormControlTextarea1"
+                  rows="1"
+                  formControlName="comment"
+                  (keyup.enter)="addComment()"
+                />
+              </div>
+            </form>
+          </div>
         </div>
-        <div class="col-4">
-                <div class="bg-light mb-1 p-2"><i class="fas fa-user"></i> Thanh vien</div>
-                <div class="bg-light mb-1 p-2"><i class="fas fa-tag"></i> Nhan</div>
+      </div>
+      <div class="col-4">
+        <div class="bg-light mb-1 p-2">
+          <i class="fas fa-user"></i> Thành viên
         </div>
+        <div class="bg-light mb-1 p-2"><i class="fas fa-tag"></i>Nhãn</div>
+      </div>
     </div>
-    </div>
+  </div>
 </div>
