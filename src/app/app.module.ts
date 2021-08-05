@@ -57,13 +57,14 @@ registerLocaleData(en);
     BoardBarComponent,
     DialogMemberComponent,
     ChangePasswordComponent,
-    UploadAvatarComponent
+    CardInfoComponent
     ],
 
   entryComponents:[
     DialogMemberComponent,
     ChangePasswordComponent,
-    UploadAvatarComponent
+    UploadAvatarComponent,
+    CardInfoComponent,
   ],
 
   imports: [
