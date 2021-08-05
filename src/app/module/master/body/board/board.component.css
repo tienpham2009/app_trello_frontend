@@ -48,12 +48,12 @@
 }
 
 .show-list {
-  margin-top: 80px;
+  margin-top: 4rem;
+  height: 50rem;
 }
 
 .add-button {
-  width: 150%;
-  height: 20%;
+  width: 150% !important;
   margin: 28px;
   padding-bottom: 45px;
   padding-top: 20px;
@@ -63,7 +63,7 @@ button.add-list {
   padding: 0.2rem;
   width: 40%;
   margin-top: 0.4rem;
-  margin-right: .5rem;
+  margin-right: 0.5rem;
 }
 
 .list {
@@ -71,5 +71,30 @@ button.add-list {
 }
 
 div.card {
-  width: 18rem
+  width: 18rem;
+}
+
+.container-list {
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+}
+.section-list {
+  margin: 10px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+
+  /* for Firefox */
+  min-height: 0;
+}
+
+.scrollable-list {
+  background: white;
+  flex-grow: 1;
+
+  overflow: auto;
+
+  /* for Firefox */
+  min-height: 0;
 }
