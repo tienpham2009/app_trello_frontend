@@ -89,7 +89,7 @@ registerLocaleData(en);
     ToastrModule.forRoot(),
     MatListModule,
     MatLineModule,
-    MatChipsModule
+    MatChipsModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent],
