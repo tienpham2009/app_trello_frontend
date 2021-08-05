@@ -1,15 +1,17 @@
 <div class="card">
   <div class="card-body" style="height: 40rem; background-color: #00288000">
-    <h2 class="card-title font-weight-bold">
-      {{ card.title }}
+    <div class="row">
+      <h2 class="card-title font-weight-bold">
+        {{ card.title }}
+      </h2>
       <button
         (click)="onNoClick()"
         class="btn btn-light rounded-circle"
-        style="margin-left: 26rem"
+        style="margin-left: 29rem"
       >
         X
       </button>
-    </h2>
+    </div>
 
     <div class="row">
       <div class="col-8">
@@ -35,18 +37,22 @@
           <div class="col-12 mg">
             <form *ngIf="formComment" [formGroup]="formComment">
               <div class="form-group">
-                <label for="exampleFormControlTextarea1">Binh luan</label>
-                <div *ngFor="let comment of comments">
-                  <p>{{ comment.name }}: <span>{{ comment.content }}</span></p>
+                <div class="card">
+                  <div class="card-header">Bình luận</div>
+                  <div class="card-body">
+                    <div *ngFor="let comment of comments">
+                      <h5 class="card-title">{{ comment.name }}</h5>
+                      <p class="card-text">{{ comment.content }}</p>
+                    </div>
+                  </div>
+                  <input
+                    class="form-control"
+                    id="exampleFormControlTextarea1"
+                    rows="1"
+                    formControlName="comment"
+                    (keyup.enter)="addComment()"
+                  />
                 </div>
-
-                <input
-                  class="form-control"
-                  id="exampleFormControlTextarea1"
-                  rows="1"
-                  formControlName="comment"
-                  (keyup.enter)="addComment()"
-                />
               </div>
             </form>
           </div>

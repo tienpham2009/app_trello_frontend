@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BoardService } from 'src/app/service/board-service.service';
 import { GroupService } from 'src/app/service/group.service';
 import { NotificationService } from 'src/app/service/notification.service';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {MatChipInputEvent} from '@angular/material/chips';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { MatChipInputEvent } from '@angular/material/chips';
 
 export interface Email {
   email: string;
@@ -15,7 +15,6 @@ export interface Email {
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-
 export class HomeComponent implements OnInit {
   modifiers: any[] = [
     {
@@ -50,7 +49,7 @@ export class HomeComponent implements OnInit {
   dataImages: any;
   formAddUserGroup: FormGroup | undefined;
   data: any;
-  id_group!:number;
+  id_group!: number;
 
   constructor(
     private boarService: BoardService,
@@ -60,10 +59,9 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.formAddUserGroup= this.fb.group({
+    this.formAddUserGroup = this.fb.group({
       email_array: ['', [Validators.required, Validators.email]],
-      group_id:['']
-
+      group_id: [''],
     });
     this.formAddBoard = this.fb.group({
       title: ['', [Validators.required]],
@@ -91,7 +89,7 @@ export class HomeComponent implements OnInit {
 
   submitFormAddBoard() {
     const data = this.formAddBoard?.value;
-    this.boarService.addBoard(data).subscribe((res) => {      
+    this.boarService.addBoard(data).subscribe((res) => {
       this.notifyService.showSuccess(res.message, 'congratulations');
       this.getGroupByUserId();
       this.formAddBoard?.reset();
@@ -110,9 +108,8 @@ export class HomeComponent implements OnInit {
     this.formAddBoard?.reset();
   }
 
-
   get title() {
-  return this.formAddBoard?.get('title');
+    return this.formAddBoard?.get('title');
   }
 
   get modifier() {
@@ -131,8 +128,8 @@ export class HomeComponent implements OnInit {
   get group() {
     return this.formAddGroup?.get('groups');
   }
-//
-visible = true;
+  //
+  visible = true;
   selectable = true;
   removable = true;
   addOnBlur = true;
@@ -143,17 +140,17 @@ visible = true;
 
     // Add our fruit
     if (value) {
-      this.userEmails.push({email: value});
-  //     const group_id = this.data.dataKey;
-  // this.formAddUserGroup?.addControl('group_id',new FormControl(group_id));
-  const userGroup = this.userEmails.values;
-  // console.log(userGroup);
-  this.groupService.addUserGroup(userGroup).subscribe({
-      next: (res:any) => {
-      // this.toast.showSuccess('Thành công','Thêm thành viên');
-console.log(res)
-      }
-        });
+      this.userEmails.push({ email: value });
+      //     const group_id = this.data.dataKey;
+      // this.formAddUserGroup?.addControl('group_id',new FormControl(group_id));
+      const userGroup = this.userEmails.values;
+      // console.log(userGroup);
+      this.groupService.addUserGroup(userGroup).subscribe({
+        next: (res: any) => {
+          // this.toast.showSuccess('Thành công','Thêm thành viên');
+          console.log(res);
+        },
+      });
       // console.log(this.userEmails)
     }
 
@@ -168,23 +165,18 @@ console.log(res)
       this.userEmails.splice(index, 1);
     }
   }
-  getId(id:number){
+  getId(id: number) {
     this.id_group = id;
   }
 
-  addUserGroup(){
+  addUserGroup() {
     const userGroup = this.formAddUserGroup?.value;
     userGroup.email_array = this.userEmails;
     userGroup.group_id = this.id_group;
-
-    console.log(userGroup.group_id);
     this.groupService.addUserGroup(userGroup).subscribe({
-      next: (res:any) => {
-        this.notifyService.showSuccess('Thành công','Thêm thành viên');
-
-
-      }
-        });
-
-}
+      next: (res: any) => {
+        this.notifyService.showSuccess('Thành công', 'Thêm thành viên');
+      },
+    });
+  }
 }

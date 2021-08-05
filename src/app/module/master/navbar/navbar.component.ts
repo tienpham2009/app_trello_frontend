@@ -21,7 +21,7 @@ constructor(private authService: AuthService,
   ngOnInit(): void {
     // @ts-ignore
     this.userData = JSON.parse(localStorage.getItem('user'));
-    if (this.userData.image === null){
+    if (this.userData.image == null){
       this.userData.image = "1627974437.jpeg"
     }
     this.checkLogin();
