@@ -63,7 +63,7 @@
           >
             <span class="font-sidebar">{{ group.name }}</span>
           </a>
-          <div
+          <!-- <div
             id="collapseUtilities"
             class="collapse"
             aria-labelledby="headingUtilities"
@@ -77,7 +77,7 @@
                 >chuc nang 2</a
               >
             </div>
-          </div>
+          </div> -->
         </li>
 
         <!-- Divider -->
@@ -148,10 +148,10 @@
         *ngFor="let group of dataGroups; let i = index"
       >
         <!-- Content Row -->
-        <div>
+        <div class="row">
           <h2>{{ group.name }}</h2>
           <!-- <app-add-user-group></app-add-user-group> -->
-          <button type="button" class="btn btn-primary" data-target="#addUserGroupModal" data-toggle="modal" (click)= "getId(group.id)">
+          <button type="button" class="btn btn-primary" style="margin-left: 1rem;height: 2rem" data-target="#addUserGroupModal" data-toggle="modal" (click)= "getId(group.id)">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
             <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path>
             <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"></path>
@@ -161,7 +161,7 @@
           <!-- Modal them thanh vien vao nhom -->
           <div class="modal fade" id="addUserGroupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
-          <form *ngIf = "formAddUserGroup" [formGroup]="formAddUserGroup" (ngSubmit) = addUserGroup()>
+          <form *ngIf = "formAddUserGroup" [formGroup]="formAddUserGroup">
           <div class="modal-content">
           <div class="modal-header">
           <h2 class="modal-title" id="exampleModalLabel">Thêm thành viên vào nhóm</h2>
@@ -192,11 +192,10 @@
               </mat-form-field>
           </div>
           <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Save changes</button>
+          <button type="submit" data-dismiss="modal" class="btn btn-primary" (click)="addUserGroup()">Save changes</button>
           </div>
           </div>
-          </form>
+          </form> 
           </div>
           </div>
 <!--  -->

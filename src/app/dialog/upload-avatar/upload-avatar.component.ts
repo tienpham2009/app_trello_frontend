@@ -15,7 +15,6 @@ export class UploadAvatarComponent implements OnInit {
   constructor(private toast: NotificationService,
               private boardService: BoardService,
               public dialogRef: MatDialogRef<CardInfoComponent>,
-
   ) { }
 
   ngOnInit(): void {

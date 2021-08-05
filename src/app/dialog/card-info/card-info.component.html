@@ -1,16 +1,20 @@
 <div class="card">
-  <div class="card-body" style="height:40rem ; background-color:#00288000">
-    <i class="fa fa-times" style="float: right" aria-hidden="true" (click)="dialogRef.close()"></i>
-    <h2 class="card-title font-weight-bold" [hidden]="isHiddenInputTitle"
-        >{{ card.title }}   <i  class="fa fa-pencil-square-o" aria-hidden="true" (click)="setHiddenInputTitle()"></i></h2>
-    <form *ngIf="formUpdateCard" [formGroup]="formUpdateCard">
-      <input type="text"
-             [hidden]="!isHiddenInputTitle"
-             formControlName="title"
-             (focusout)="setHiddenInputTitle();changeTitleCard()"
-             value="{{ card.title }}"
-      >
-    </form>
+  <div class="card-body" style="height: 40rem; background-color: #00288000">
+    <i
+      class="fa fa-times"
+      style="float: right"
+      aria-hidden="true"
+      (click)="dialogRef.close()"
+    ></i>
+    <h2 class="card-title font-weight-bold" [hidden]="isHiddenInputTitle">
+      {{ card.title }}
+      <i
+        class="fa fa-pencil-square-o"
+        aria-hidden="true"
+        (click)="setHiddenInputTitle()"
+      ></i>
+    </h2>
+      <input type="text" [(ngModel)]="card.title" name="title" (focusout)="setHiddenInputTitle();updateCard()" [hidden]="!isHiddenInputTitle">
     <div class="row">
       <div class="col-8">
         <div class="mg">
@@ -24,32 +28,40 @@
           <small class="badge badge-success mr-1">Success</small>
           <small class="badge badge-danger mr-1">Danger</small>
         </div>
-        <h2 class="mg">
-          Mô tả
-        </h2>
+        <h2 class="mg">Mô tả</h2>
         <div class="mg" [hidden]="isHiddenInputContent">
-          <i class="fas fa-edit" style="float: right" (click)="setHiddenInputContent()"></i>
-          <p style="background-color: #cccccc">{{ card.content ?? "Chưa có mô tả" }}</p>
+          <i
+            class="fas fa-edit"
+            style="float: right"
+            (click)="setHiddenInputContent()"
+          ></i>
+          <p style="background-color: #cccccc">
+            {{ card.content ?? "Chưa có mô tả" }}
+          </p>
         </div>
-        <form *ngIf="formUpdateCard" [formGroup]="formUpdateCard" [hidden]="!isHiddenInputContent">
-          <textarea cols="30" rows="10" formControlName="content" (focusout)="setHiddenInputContent();changeContentCard()">{{card.content}}</textarea>
-        </form>
+          <textarea cols="30" rows="10" [(ngModel)]="card.content" name="content" [hidden]="!isHiddenInputContent" (focusout)="setHiddenInputContent(); updateCard()">
+
+          </textarea>
         <div class="row">
           <div class="col-12 mg">
             <form *ngIf="formComment" [formGroup]="formComment">
               <div class="form-group">
-                <label for="exampleFormControlTextarea1">Binh luan</label>
-                <div *ngFor="let comment of comments">
-                  <p>{{ comment.name }}: <span>{{ comment.content }}</span></p>
+                <div class="card">
+                  <div class="card-header">Bình luận</div>
+                  <div class="card-body">
+                    <div *ngFor="let comment of comments">
+                      <h5 class="card-title">{{ comment.name }}</h5>
+                      <p class="card-text">{{ comment.content }}</p>
+                    </div>
+                  </div>
+                  <input
+                    class="form-control"
+                    id="exampleFormControlTextarea1"
+                    rows="1"
+                    formControlName="comment"
+                    (keyup.enter)="addComment()"
+                  />
                 </div>
-
-                <input
-                  class="form-control"
-                  id="exampleFormControlTextarea1"
-                  rows="1"
-                  formControlName="comment"
-                  (keyup.enter)="addComment()"
-                />
               </div>
             </form>
           </div>

@@ -14,7 +14,6 @@ export class CardInfoComponent implements OnInit {
   card: any;
   comments: any;
   formComment!: FormGroup;
-  formUpdateCard!: FormGroup;
   isHiddenInputTitle: boolean = false;
   isHiddenInputContent: boolean = false;
 
@@ -34,10 +33,6 @@ export class CardInfoComponent implements OnInit {
     this.getAll(card_id);
     this.formComment = this.fb.group({
       comment: [''],
-    });
-    this.formUpdateCard = this.fb.group({
-      title: [''],
-      content: [''],
     });
   }
 
@@ -71,18 +66,14 @@ export class CardInfoComponent implements OnInit {
     this.formComment.reset();
   }
 
-  changeTitleCard(): void {
-    // @ts-ignore
-    let board_id = +this.router.snapshot.paramMap.get('id');
-    this.card.title = this.formUpdateCard.value.title;
+  updateCard(): void {
     this.cardService.updateCard(this.card).subscribe(res => {
       this.notifyService.showSuccess(res.status,'Thông báo:')
     })
   }
-  changeContentCard(): void {
-    this.card.content = this.formUpdateCard.value.content;
-    this.cardService.updateCard(this.card).subscribe(res => {
-      this.notifyService.showSuccess(res.status,'Thông báo:')
-    })
+
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }
