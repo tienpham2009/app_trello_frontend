@@ -16,11 +16,8 @@ export class BoardComponent implements OnInit {
   formAddList!: FormGroup;
   formAddCard!: FormGroup;
   lists: any;
-  cards: any = [];
   isHiddenFormAddList: boolean = true;
   isHiddenFormAddCard: Array<any> = [];
-  location: any;
-  listId: any;
   hiddenInput: number | undefined;
 
   constructor(
@@ -36,7 +33,6 @@ export class BoardComponent implements OnInit {
     // @ts-ignore
     let board_id = +this.route.snapshot.paramMap.get('id');
     this.getListByBoardId();
-    this.getCardOfListByBoardId()
     this.formAddList = this.fb.group({
       title: ['', [Validators.required]],
       board_id: [board_id],
@@ -73,7 +69,7 @@ export class BoardComponent implements OnInit {
     this.cardService.storeCard(formAddData).subscribe(res => {
       this.notifyService.showSuccess(res.message, 'Thông báo');
       this.hiddenFormAddCard(i);
-      this.getCardOfListByBoardId()
+      this.getListByBoardId();
     })
   }
 
@@ -81,22 +77,12 @@ export class BoardComponent implements OnInit {
     // @ts-ignore
     let board_id = +this.route.snapshot.paramMap.get('id');
     this.listService.getListByBoardId(board_id).subscribe((res) => {
-      this.lists = res.list;
+      this.lists = res.lists;
+      console.log(this.lists);
       this.setHiddenForCard(this.lists)
     });
   }
 
-  getCardOfListByBoardId() {
-    // @ts-ignore
-    let board_id = +this.route.snapshot.paramMap.get('id');
-    this.cardService.getCardOfListByBoardId(board_id).subscribe(res => {
-      let lists = res.lists;
-      let cards = res.cards;
-      for (let i = 0; i < lists.length; i++) {
-        this.cards[lists[i].id] = cards[lists[i].id];
-      }
-    })
-  }
 
   hidden() {
     this.isHiddenFormAddList = !this.isHiddenFormAddList;
@@ -111,17 +97,11 @@ export class BoardComponent implements OnInit {
     }
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  dropList(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.lists, event.previousIndex, event.currentIndex);
-    for (let i = 0; i < this.lists.length; i++) {
-      let data = {
-        location: i,
-        listId: this.lists[i].id,
-      };
-      this.listService.moveList(data).subscribe(() => {
-        this.getListByBoardId();
+      this.listService.moveList(this.lists).subscribe((res) => {
+        console.log(res)
       });
-    }
   }
 
   changeTitleList(element: any) {
@@ -144,6 +124,7 @@ export class BoardComponent implements OnInit {
   showInput(listId: any) {
     this.hiddenInput = listId;
   }
+
   dropCard(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -153,5 +134,16 @@ export class BoardComponent implements OnInit {
         event.previousIndex,
         event.currentIndex);
     }
+    for (let i = 0; i < this.lists.length; i++) {
+        this.lists[i].cards['list_id'] = this.lists[i]['id']
+    }
+    // @ts-ignore
+    event.container.data[event.currentIndex].list_id = event.container.data.list_id
+    this.cardService.moveCard(event.previousContainer.data).subscribe(res=>{
+      console.log(res)
+    })
+    this.cardService.moveCard(event.container.data).subscribe(res=>{
+      console.log(res)
+    })
   }
 }

@@ -11,13 +11,14 @@ export class CardService {
   constructor(private http: HttpClient) {
   }
 
-  storeCard(dataCard:any):Observable<any>{
-    return this.http.post<any>(`${environment.apiUrl}/card/store` , dataCard , this.setHeader())
+  storeCard(dataCard: any): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/card/store`, dataCard, this.setHeader())
   }
-  getCardOfListByBoardId(board_id:number):Observable<any>{
-    return this.http.get<any>(`${environment.apiUrl}/card/${board_id}/get-card`, this.setHeader())
 
+  moveCard(dataCard: any): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/card/move`, dataCard, this.setHeader())
   }
+
   setHeader() {
     let token = localStorage.getItem('token')
     let headers_object = new HttpHeaders().set('Authorization', 'Bearer' + token);
