@@ -21,15 +21,10 @@ constructor(private authService: AuthService,
   ngOnInit(): void {
     // @ts-ignore
     this.userData = JSON.parse(localStorage.getItem('user'));
-    if (this.userData.image === null){
-      this.userData.image = "https://img.hoidap247.com/picture/answer/20210524/large_1621873431875.jpg"
-    }
-    this.checkLogin();
   }
   ngDoCheck() {
     // @ts-ignore
     this.userData = JSON.parse(localStorage.getItem('user'));
-    this.checkLogin();
   }
 
   logout() {
@@ -43,13 +38,6 @@ constructor(private authService: AuthService,
       })
   }
 
-  checkLogin() {
-    if (!this.authService.isLogin()){
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      this.router.navigate(['/login']);
-    }
-  }
 
 
   openDialogChangePassword(){

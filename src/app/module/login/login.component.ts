@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 import {AuthService} from "../../service/auth.service";
 import {NotificationService} from "../../service/notification.service";
 
@@ -15,7 +15,7 @@ import {NotificationService} from "../../service/notification.service";
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  logMessage!:string;
+  logMessage!: string;
   loginForm!: FormGroup;
   message: string | undefined;
 
@@ -24,16 +24,17 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private notifyService: NotificationService,
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.authService.currentMessage.subscribe(message => this.logMessage = message);
- console.log(this.logMessage)
+    console.log(this.logMessage)
     this.loginForm = this.fb.group({
       email: ['', [
-                    Validators.required,
-                    Validators.email
-                  ]],
+        Validators.required,
+        Validators.email
+      ]],
       password: [
         '',
         [
@@ -46,7 +47,6 @@ export class LoginComponent implements OnInit {
   }
 
 
-
   submitForm(): void {
     let data = this.loginForm.value;
     this.authService.checkLogin(data).subscribe(
@@ -56,8 +56,9 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/']);
       },
       (error) => {
-        console.log(error.error.error)
-       this.notifyService.showError(error.error.error,'Lỗi')
+        if (error.error.error) {
+          this.notifyService.showError(error.error.error, 'Lỗi')
+        }
       }
     );
   }

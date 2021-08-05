@@ -1,15 +1,22 @@
 .example-list {
-  height: 100%;
-  max-width: 100%;
-  min-height: 60px;
+  /* height: 100%; */
+  max-width: 32%;
+  /* min-height: 60px; */
   display: flex;
   flex-direction: row;
   border-radius: 4px;
-  overflow: auto;
+  /* overflow: auto; */
+}
+.example-container {
+  width: 289px;
+  max-width: 100%;
+  margin: 0 25px 25px 0;
+  display: inline-block;
+  vertical-align: top;
 }
 
 .example-box {
-  margin: 12px;
+  /* margin: 12px; */
   border-right: solid 1px #ccc;
   color: rgba(0, 0, 0, 0.87);
   display: flex;
@@ -48,22 +55,24 @@
 }
 
 .show-list {
-  margin-top: 4rem;
-  height: 50rem;
+  margin-top: 80px;
 }
 
 .add-button {
-  width: 150% !important;
+  width: 10%;
+  height: 6%;
   margin: 28px;
-  padding-bottom: 45px;
-  padding-top: 20px;
+  padding-bottom: 16px;
+  padding-top: 10px;
+  border: 3px solid blue
+
 }
 
 button.add-list {
   padding: 0.2rem;
   width: 40%;
   margin-top: 0.4rem;
-  margin-right: 0.5rem;
+  margin-right: .5rem;
 }
 
 .list {
@@ -79,6 +88,7 @@ div.card {
   display: flex;
   flex-direction: column;
 }
+
 .section-list {
   margin: 10px;
   flex-grow: 1;

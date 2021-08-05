@@ -11,6 +11,14 @@ export class CardService {
   constructor(private http: HttpClient) {
   }
 
+  storeCard(dataCard: any): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/card/store`, dataCard, this.setHeader())
+  }
+
+  moveCard(dataCard: any): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/card/move`, dataCard, this.setHeader())
+  }
+
   setHeader() {
     let token = localStorage.getItem('token')
     let headers_object = new HttpHeaders().set('Authorization', 'Bearer' + token);
@@ -23,8 +31,12 @@ export class CardService {
     return this.http.get<any>(`${environment.apiUrl}/card/${card_id}/get` , this.setHeader())
   }
 
-  storeCard(dataCard:any):Observable<any>{
-    return this.http.post<any>(`${environment.apiUrl}/list/changeTitle` , dataCard , this.setHeader())
+  addComment(data: any): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/card/addComment` , data , this.setHeader())
   }
-  
+
+  updateCard(newCard:any):Observable<any>{
+    return this.http.post<any>(`${environment.apiUrl}/card/update-card` , newCard , this.setHeader())
+  }
+
 }

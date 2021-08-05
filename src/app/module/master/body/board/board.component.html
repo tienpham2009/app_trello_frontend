@@ -1,167 +1,22 @@
-<div
-  class="show-list"
-  style="background-image: url('http://127.0.0.1:8000/uploadedimages/{{ board.name }}'); background-size: 100% 100%; "
->
+<div class="show-list">
   <app-board-bar></app-board-bar>
-  <button (click)="showCard(1)">
-     open dialog
-  </button>
-  <div
-    cdkDropList
-    cdkDropListOrientation="horizontal"
-    class="example-list"
-    (cdkDropListDropped)="drop($event)"
-  >
-    <div
-      class="container-list"
-      style="margin: 28px"
-      *ngFor="let timePeriod of lists; let i = index"
-      cdkDrag
-    >
-      <!-- start card -->
-      <div class="card shadow mb-4 section-list">
-        <!-- Card Header - Dropdown -->
-        <div
-          class="
-            card-header
-            py-3
-            d-flex
-            flex-row
-            align-items-center
-            justify-content-between
-          "
-        >
-          <input
-            style="width: 80%"
-            type="text"
-            #element
-            class="form-control"
-            *ngIf="hiddenInput === timePeriod.id"
-            (focusout)="isHiddenInput(element.value, timePeriod.id)"
-            value="{{ timePeriod.title }}"
-          />
-          <div
-            *ngIf="hiddenInput != timePeriod.id"
-            (click)="showInput(timePeriod.id)"
-          >
-            <h1 class="m-0 font-weight-bold text-primary">
-              {{ timePeriod.title }}
-            </h1>
-          </div>
-
-          <div class="dropdown no-arrow">
-            <a
-              class="dropdown-toggle"
-              href="#"
-              role="button"
-              id="dropdownMenuLink"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-            </a>
-            <div
-              class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-              aria-labelledby="dropdownMenuLink"
-            >
-              <div class="dropdown-header">Dropdown Header:</div>
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </div>
-        </div>
-        <!-- Card Body -->
-        <div class="card-body crollable-list">
-          <!-- card -->
-          <div
-            class="col-xl-3 col-md-6 mb-4"
-            style="padding-left: 0;"
-          >
-            <div
-              class="card border-left-success shadow h-100 py-2"
-              style="max-height: 6rem ;max-width: 15.5rem;"
-            >
-              <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                  <div class="col mr-2">
-                    <div
-                      class="
-                        text-xs
-                        font-weight-bold
-                        text-success text-uppercase
-                        mb-1
-                      "
-                    >
-                      Tao bang moi
-                    </div>
-                  </div>
-                  <div class="col-auto">
-                    <span style="font-size: 50px; color: green">+</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <mat-card-actions
-            (click)="hiddenFormAddCard(i)"
-            [hidden]="!isHiddenFormAddCard[i]"
-            ><i nz-icon nzType="plus"></i> Thêm thẻ</mat-card-actions
-          >
-          <div [hidden]="isHiddenFormAddCard[i]">
-            <form
-              *ngIf="formAddCard"
-              [formGroup]="formAddCard"
-              (ngSubmit)="addCard(i)"
-              style="margin: 5px"
-            >
-              <input
-                class="form-control border border-success"
-                type="text"
-                formControlName="title"
-              />
-              <button
-                type="submit"
-                class="btn btn-primary add-list"
-                [disabled]="formAddCard.invalid"
-              >
-                Thêm thẻ
-              </button>
-              <button
-                type="button"
-                class="btn btn-danger add-list"
-                (click)="hiddenFormAddCard(i)"
-              >
-                X
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-      <!-- end card -->
-    </div>
-    <ng-template #extraTemplate>
-      <a>---</a>
-    </ng-template>
+    <!--    nút thêm list-->
     <div>
       <button
         nz-button
         nzType="dashed"
         class="add-button"
-        style="margin: 28px"
+        style="margin: 28px;font-size: 1rem;font-weight: 500;"
         [hidden]="!isHiddenFormAddList"
         (click)="hidden()"
       >
-        <i nz-icon nzType="plus"></i>
-        Add List
+      <span style="margin-right: .5rem;">+</span>Add List
       </button>
     </div>
     <div
       [hidden]="isHiddenFormAddList"
       class="border border-primary"
-      style="margin: 20px; max-height: 11%"
+      style="margin: 20px; height: 20% ; width: 12%;" 
     >
       <form
         *ngIf="formAddList"
@@ -189,6 +44,78 @@
           X
         </button>
       </form>
+    </div>
+  <div cdkDropListGroup>
+    <div
+      cdkDropList
+      cdkDropListOrientation="horizontal"
+      class="example-list"
+      (cdkDropListDropped)="dropList($event)"
+    >
+      <div
+        class="example-box list-group example-container"
+        *ngFor="let list of lists"
+        cdkDrag
+      >
+        <ul class="list-group" style="width: 18rem">
+          <li class="list-group-item active">{{ list.title }}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="example-container" *ngFor="let list of lists; let i = index">
+      <ul class="list-group" style="width: 18rem">
+        <div
+          cdkDropList
+          [cdkDropListData]="list.cards"
+          class="example-container"
+          (cdkDropListDropped)="dropCard($event)"
+        >
+          <div
+            class="list-group-item example-box-card"
+            *ngFor="let item of list.cards"
+            cdkDrag
+          >
+            <div (click)="showCard(item.id)">
+              {{ item.title }}
+            </div>
+          </div>
+          
+        </div>
+      </ul>
+      <mat-card-actions
+        (click)="hiddenFormAddCard(i)"
+        [hidden]="!isHiddenFormAddCard[i]"
+        ><i nz-icon nzType="plus"></i>
+        Thêm thẻ
+      </mat-card-actions>
+      <div [hidden]="isHiddenFormAddCard[i]">
+        <form
+          *ngIf="formAddCard"
+          [formGroup]="formAddCard"
+          (ngSubmit)="addCard(i)"
+          style="margin: 5px"
+        >
+          <input
+            class="form-control border border-success"
+            type="text"
+            formControlName="title"
+          />
+          <button
+            type="submit"
+            class="btn btn-primary add-list"
+            [disabled]="formAddCard.invalid"
+          >
+            Thêm thẻ
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger add-list"
+            (click)="hiddenFormAddCard(i)"
+          >
+            X
+          </button>
+        </form>
+      </div>
     </div>
   </div>
 </div>
