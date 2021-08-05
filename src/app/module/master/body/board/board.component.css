@@ -1,21 +1,22 @@
 .example-list {
-  height: 100%;
-  max-width: 100%;
-  min-height: 60px;
+  /* height: 100%; */
+  max-width: 32%;
+  /* min-height: 60px; */
   display: flex;
   flex-direction: row;
   border-radius: 4px;
-  overflow: auto;
+  /* overflow: auto; */
 }
 .example-container {
-  width: 400px;
+  width: 289px;
   max-width: 100%;
   margin: 0 25px 25px 0;
   display: inline-block;
   vertical-align: top;
 }
+
 .example-box {
-  margin: 12px;
+  /* margin: 12px; */
   border-right: solid 1px #ccc;
   color: rgba(0, 0, 0, 0.87);
   display: flex;
@@ -58,11 +59,13 @@
 }
 
 .add-button {
-  width: 150%;
-  height: 20%;
+  width: 10%;
+  height: 6%;
   margin: 28px;
-  padding-bottom: 45px;
-  padding-top: 20px;
+  padding-bottom: 16px;
+  padding-top: 10px;
+  border: 3px solid blue
+
 }
 
 button.add-list {
