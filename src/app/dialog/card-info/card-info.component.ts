@@ -22,19 +22,21 @@ export class CardInfoComponent implements OnInit {
 
   ngOnInit(): void {
     let card_id = this.data.number;
-    this.getAll(card_id)
+    this.getAll(card_id);
 
     this.formComment = this.fb.group({
       comment: [''],
     });
   }
 
-  getAll(card_id: any)
-  {
+  getAll(card_id: any) {
     this.cardService.getCard(card_id).subscribe((res) => {
       this.card = res.card;
+
       this.comments = res.comments;
       console.log(res);
+
+      console.log(this.card);
     });
   }
 
@@ -49,7 +51,7 @@ export class CardInfoComponent implements OnInit {
     console.log(data);
     if (data.comment != '') {
       this.cardService.addComment(data).subscribe((res) => {
-          this.getAll(card_id)
+        this.getAll(card_id);
       });
     }
     this.formComment.reset();
