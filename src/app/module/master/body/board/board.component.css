@@ -7,7 +7,13 @@
   border-radius: 4px;
   overflow: auto;
 }
-
+.example-container {
+  width: 400px;
+  max-width: 100%;
+  margin: 0 25px 25px 0;
+  display: inline-block;
+  vertical-align: top;
+}
 .example-box {
   margin: 12px;
   border-right: solid 1px #ccc;
@@ -48,12 +54,12 @@
 }
 
 .show-list {
-  margin-top: 4rem;
-  height: 50rem;
+  margin-top: 80px;
 }
 
 .add-button {
-  width: 150% !important;
+  width: 150%;
+  height: 20%;
   margin: 28px;
   padding-bottom: 45px;
   padding-top: 20px;
@@ -63,7 +69,7 @@ button.add-list {
   padding: 0.2rem;
   width: 40%;
   margin-top: 0.4rem;
-  margin-right: 0.5rem;
+  margin-right: .5rem;
 }
 
 .list {
@@ -79,6 +85,7 @@ div.card {
   display: flex;
   flex-direction: column;
 }
+
 .section-list {
   margin: 10px;
   flex-grow: 1;

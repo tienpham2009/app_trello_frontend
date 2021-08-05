@@ -8,8 +8,9 @@ import { CardService } from 'src/app/service/card.service';
   styleUrls: ['./card-info.component.css'],
 })
 export class CardInfoComponent implements OnInit {
-  
+
   card: any;
+
 
   constructor(
     public dialogRef: MatDialogRef<CardInfoComponent>,
@@ -22,7 +23,7 @@ export class CardInfoComponent implements OnInit {
     this.cardService.getCard(card_id).subscribe((res) => {
       this.card = res.card;
       console.log(this.card);
-      
+
     });
   }
 
