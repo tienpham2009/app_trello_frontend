@@ -11,6 +11,7 @@ import { UserBoard } from 'src/app/user-board';
   styleUrls: ['./board-bar.component.css']
 })
 export class BoardBarComponent implements OnInit {
+  users:any;
   $board_id!:number;
   userBoards :UserBoard[] = [];
 
@@ -27,12 +28,13 @@ openDialog(){
 });
 }
 getAllUser(){
-  //  // @ts-ignore
-  //  let board_id = +this.route.snapshot.paramMap.get('id');
-  //  console.log(board_id);
-  // this.boardService.showAllUser(board_id).subscribe(res => {
-  //   console.log(res);
-  // })
+   // @ts-ignore
+   let board_id = +this.route.snapshot.paramMap.get('id');
+   console.log(board_id);
+  this.boardService.showAllUser(board_id).subscribe(res => {
+    this.users = res;
+    console.log(this.users);
+  })
 }
 
 

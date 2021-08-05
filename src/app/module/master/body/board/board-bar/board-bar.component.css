@@ -17,22 +17,27 @@ table {
 
 }
 
-td, th {
-  border: 1px solid #dddddd;
+th {
+  background-color:  #4d63ff;
   text-align: left;
   padding: 8px;
   text-align: center;
-  color: black;
+  color: white;
 }
 td {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
   text-align: center;
-  color: white;
+  color: black;
 }
-tr:nth-child(even) {
-  background-color: #4d63ff;
 
-  text-align: center;
+.button{
+  background-color: #8A2BE2; /* Green */
+  color: white;  text-align: center;
+
+  font-size:medium;
+  border-radius: 4px;
+
 }
+

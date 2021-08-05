@@ -7,8 +7,8 @@
 
     <button mat-raised-button color="primary" (click)="openDialog()" style="margin:5px;">Thêm thành viên</button>
 
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal96" (click) = getAllUser()>
-      Launch demo modal
+    <button type="button" class="button" data-toggle="modal" data-target="#exampleModal96" (click) = getAllUser()>
+    Danh sách thành viên
     </button>
 
 
@@ -27,12 +27,12 @@
       <div class="modal-body">
         <table>
           <tr>
-            <th>Thành viên</th>
-            <th>Vị trí</th>
+            <th>Tên</th>
+            <th>Email</th>
           </tr>
-          <tr  *ngFor = "let userBoard of userBoards ; index as i">
-            <td>Magazzini Alimentari Riuniti</td>
-            <td>Giovanni Rovelli</td>
+          <tr  *ngFor = "let user of users">
+            <td>{{user.name}}</td>
+            <td>{{user.email}}</td>
           </tr>
         </table>
       </div>
