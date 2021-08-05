@@ -1,35 +1,46 @@
 <div class="card">
-    <div class="card-body" style="height:40rem ; background-color:#00288000">
-      <h2 class="card-title font-weight-bold">{{ card.title }}  <button (click)="onNoClick()" class="btn btn-light rounded-circle" style="margin-left: 26rem;">X</button></h2>
-     
+  <div class="card-body" style="height:40rem ; background-color:#00288000">
+    <button (click)="onNoClick()" class="btn btn-light rounded-circle" style="float: right;">X</button>
+    <h2 class="card-title font-weight-bold" [hidden]="isHiddenInputTitle"
+        (click)="setHiddenInputTitle()">{{ card.title }} <i class="fa fa-pencil-square-o" aria-hidden="true"></i></h2>
+    <form>
+      <input type="text"
+             [hidden]="!isHiddenInputTitle"
+             value="{{ card.title }}"
+             (focusout)="setHiddenInputTitle();changeTitleCard()">
+    </form>
     <div class="row">
-        <div class="col-8">
-            <div class="mg">Thanh vien <button class="btn btn-sm btn-light rounded-circle">+</button></div>
-            <div class="mg">Nhan 
-                <small class="badge badge-primary mr-1">Primary</small>
-                <small class="badge badge-secondary mr-1">Secondary</small>
-                <small class="badge badge-success mr-1">Success</small>
-                <small class="badge badge-danger mr-1">Danger</small>
-            </div>
-            <h2 class="mg">Mo ta <button type="button" class="btn btn-sm btn-light">Chinh sua</button></h2>
-            <div class="mg">
-                <p>{{ card.content }}</p>
-            </div>
-            <div class="row">
-                <div class="col-12 mg">
-                    <form action="">
-                        <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Binh luan</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
-                        </div>
-                    </form>
-                </div>
-            </div>
+      <div class="col-8">
+        <div class="mg">Thanh vien
+          <button class="btn btn-sm btn-light rounded-circle">+</button>
         </div>
-        <div class="col-4">
-                <div class="bg-light mb-1 p-2"><i class="fas fa-user"></i> Thanh vien</div>
-                <div class="bg-light mb-1 p-2"><i class="fas fa-tag"></i> Nhan</div>
+        <div class="mg">Nhan
+          <small class="badge badge-primary mr-1">Primary</small>
+          <small class="badge badge-secondary mr-1">Secondary</small>
+          <small class="badge badge-success mr-1">Success</small>
+          <small class="badge badge-danger mr-1">Danger</small>
         </div>
+        <h2 class="mg">Mo ta
+          <button type="button" class="btn btn-sm btn-light">Chỉnh sửa</button>
+        </h2>
+        <div class="mg">
+          <p>{{ card.content }}</p>
+        </div>
+        <div class="row">
+          <div class="col-12 mg">
+            <form action="">
+              <div class="form-group">
+                <label for="exampleFormControlTextarea1">Bình luận</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="bg-light mb-1 p-2"><i class="fas fa-user"></i> Thành viên</div>
+        <div class="bg-light mb-1 p-2"><i class="fas fa-tag"></i> Nhãn</div>
+      </div>
     </div>
-    </div>
+  </div>
 </div>
