@@ -1,19 +1,25 @@
 <div class="card">
     <div class="card-body" style="height:40rem ; background-color:#00288000">
-      <h2 class="card-title font-weight-bold">{{ card.title }}  <button (click)="onNoClick()" class="btn btn-light rounded-circle" style="margin-left: 26rem;">X</button></h2>
-     
+      <h2 class="card-title font-weight-bold"> <button (click)="onNoClick()" class="btn btn-light rounded-circle" style="margin-left: 26rem;">X</button></h2>
     <div class="row">
         <div class="col-8">
             <div class="mg">Thanh vien <button class="btn btn-sm btn-light rounded-circle">+</button></div>
-            <div class="mg">Nhan 
+            <div class="mg">Nhan
                 <small class="badge badge-primary mr-1">Primary</small>
                 <small class="badge badge-secondary mr-1">Secondary</small>
                 <small class="badge badge-success mr-1">Success</small>
                 <small class="badge badge-danger mr-1">Danger</small>
             </div>
-            <h2 class="mg">Mo ta <button type="button" class="btn btn-sm btn-light">Chinh sua</button></h2>
+
+            <h2 class="mg">Mo ta <button type="button" class="btn btn-sm btn-light" (click)="setHidden()" >Chinh sua</button></h2>
+            <div [hidden]="hidden">
+              <form *ngIf="formEdit" [formGroup]="formEdit" (ngSubmit)="submit()">
+                <textarea  cols="30" rows="10" formControlName="content"></textarea>
+                <button type="submit">sub</button>
+              </form>
+            </div>
             <div class="mg">
-                <p>{{ card.content }}</p>
+<!--                <p>{{ card.content }}</p>-->
             </div>
             <div class="row">
                 <div class="col-12 mg">
