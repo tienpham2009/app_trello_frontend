@@ -14,7 +14,7 @@
         (click)="setHiddenInputTitle()"
       ></i>
     </h2>
-      <input type="text" [(ngModel)]="card.title" name="title" (focusout)="setHiddenInputTitle();updateCard()" [hidden]="!isHiddenInputTitle">
+      <input type="text" [(ngModel)]="card.title" name="title"  class="border border-primary" (focusout)="setHiddenInputTitle();updateCard()" [hidden]="!isHiddenInputTitle">
     <div class="row">
       <div class="col-8">
         <div class="mg">
