@@ -21,7 +21,7 @@
                   <h6 class="mb-0 text-sm">Tên tài khoản</h6>
                 </label>
                 <input class="mb-4" type="text" formControlName="name" [ngClass]="name && name.invalid && (name.dirty || name.touched) ? 'is-invalid' : ''">
-                <div *ngIf="name && name.invalid && (name.dirty || name.touched)"
+                <div style="margin-top: -1rem" *ngIf="name && name.invalid && (name.dirty || name.touched)"
                      class="text-danger">
                   <div *ngIf="name.errors?.required">
                     Tài khoản không đúng định dạng.
@@ -37,11 +37,12 @@
               <div class="row px-3">
                 <label class="mb-1">
                   <h6 class="mb-0 text-sm">Địa chỉ email</h6>
-                </label> <input type="text" formControlName="email"
+                </label>
+                 <input class="mb-4" type="text" formControlName="email"
                                 [ngClass]="email && email.invalid && (email.dirty || email.touched) ? 'is-invalid' : ''">
-                <div *ngIf="email && email.invalid && (email.dirty || email.touched)"
-                     class="text-danger">
-                  <div *ngIf="email.errors?.required">
+                <div style="margin-top: -1rem" *ngIf="email && email.invalid && (email.dirty || email.touched)"
+                     class="text-danger ">
+                  <div  *ngIf="email.errors?.required">
                     Email không được để trống.
                   </div>
                   <div *ngIf="email.errors?.email">
@@ -53,8 +54,8 @@
                   <label class="mb-1">
                     <h6 class="mb-0 text-sm">Số điện thoại</h6>
                   </label>
-                  <input type="text" formControlName="phone" [ngClass]="phone && phone.invalid && (phone.dirty || phone.touched) ? 'is-invalid' : ''">
-                  <div *ngIf="phone && phone.invalid && (phone.dirty || phone.touched)"
+                  <input class="error" class="mb-4" type="text" formControlName="phone" [ngClass]="phone && phone.invalid && (phone.dirty || phone.touched) ? 'is-invalid' : ''">
+                  <div style="margin-top: -1rem" *ngIf="phone && phone.invalid && (phone.dirty || phone.touched)"
                        class="text-danger">
                     <div *ngIf="phone.errors?.pattern">
                       Số điện thoại không đúng định dạng
@@ -67,9 +68,9 @@
                   <div class="row px-3">
                   <label class="mb-1">
                     <h6 class="mb-0 text-sm">Mật khẩu</h6>
-                  </label> <input type="password" formControlName="password"
+                  </label> <input class="mb-4" type="password" formControlName="password"
                                   [ngClass]="password && password.invalid && (password.dirty || password.touched) ? 'is-invalid' : ''">
-                  <div *ngIf="password && password.invalid && (password.dirty || password.touched)"
+                  <div style="margin-top: -1rem" *ngIf="password && password.invalid && (password.dirty || password.touched)"
                        class="text-danger">
                     <div *ngIf="password.errors?.required">
                       Mật khẩu không được để trống.

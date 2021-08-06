@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewChecked, Component, DoCheck, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ListServiceService} from '../../../../service/list-service.service';
 import {ActivatedRoute} from '@angular/router';
@@ -14,7 +14,7 @@ import { CardInfoComponent } from 'src/app/dialog/card-info/card-info.component'
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.css'],
 })
-export class BoardComponent implements OnInit {
+export class BoardComponent implements OnInit,OnChanges {
   formAddList!: FormGroup;
   formAddCard!: FormGroup;
   lists: any;
@@ -31,6 +31,10 @@ export class BoardComponent implements OnInit {
     private notifyService: NotificationService,
     private dialog : MatDialog
   ) {
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.lists
   }
 
   ngOnInit(): void {
@@ -152,13 +156,20 @@ export class BoardComponent implements OnInit {
   }
 
   showCard(number: number): void {
-    this.dialog.open(CardInfoComponent , {
+   const dialogRef = this.dialog.open(CardInfoComponent , {
       width: '40rem',
       height: '45rem',
       data:
       {
         number: number,
       }
-    })
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Hộp thoại đã bị đóng');
+      this.getListByBoardId()
+    });
   }
+
+
+
 }

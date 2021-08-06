@@ -34,4 +34,9 @@ export class CardService {
   addComment(data: any): Observable<any> {
     return this.http.post<any>(`${environment.apiUrl}/card/addComment` , data , this.setHeader())
   }
+
+  updateCard(newCard:any):Observable<any>{
+    return this.http.post<any>(`${environment.apiUrl}/card/update-card` , newCard , this.setHeader())
+  }
+
 }
