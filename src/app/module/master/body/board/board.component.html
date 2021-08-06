@@ -1,4 +1,8 @@
-<div class="show-list">
+
+<div class="show-list"
+style="background-image:url('http://127.0.0.1:8000/uploadedimages/{{board.name}}') ; background-size: 100% 100%; height: 50rem"
+[ngClass]="disable"
+>
   <app-board-bar></app-board-bar>
   <div class="example-list"
        cdkDropList
@@ -78,23 +82,35 @@
             nzType="dashed"
             [hidden]="!isHiddenFormAddList"
             (click)="hidden()"
+            class="btn-add-list"
           >
-            <span style="margin-right: .5rem;">+</span>Add List
+            <span style="margin-right: 0.5rem">+</span>Thêm vào danh sách
           </button>
         </div>
-        <div
-          [hidden]="isHiddenFormAddList"
-          class="form-add-list"
-        >
-          <form *ngIf="formAddList" [formGroup]="formAddList" (ngSubmit)="addList()">
-            <input type="text" formControlName="title" placeholder="Nhập tiêu đề danh sách"/><br>
+        <div [hidden]="isHiddenFormAddList" class="form-add-list" style="margin: 1rem">
+          <form
+            *ngIf="formAddList"
+            [formGroup]="formAddList"
+            (ngSubmit)="addList()"
+          >
+            <input
+              type="text"
+              formControlName="title"
+              placeholder="Nhập tiêu đề danh sách"
+            /><br />
             <button
               type="submit"
-              class="btn btn-primary" style="height: 2rem;margin: 3px" [disabled]="formAddList.invalid"
+              class="btn btn-primary"
+              style="height: 2rem; margin: 3px "
+              [disabled]="formAddList.invalid"
             >
-              Add list
+              Thêm vào danh sách
             </button>
-            <i class="fas fa-times" style="float: bottom" (click)="hidden()"></i>
+            <button
+              class="btn btn-danger"
+              style="float: bottom"
+              (click)="hidden()"
+            >x</button>
           </form>
         </div>
       </div>
