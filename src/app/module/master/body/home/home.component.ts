@@ -19,26 +19,26 @@ export class HomeComponent implements OnInit {
   modifiers: any[] = [
     {
       value: 1,
-      name: 'Rieng tu',
+      name: 'Riêng tư',
     },
     {
       value: 2,
-      name: 'Nhom',
+      name: 'Nhóm',
     },
     {
       value: 3,
-      name: 'Cong Khai',
+      name: 'Công Khai',
     },
   ];
 
   modifierGroups: any[] = [
     {
       value: 1,
-      name: 'Rieng tu',
+      name: 'Riêng tư',
     },
     {
       value: 2,
-      name: 'cong khai',
+      name: 'công khai',
     },
   ];
 
@@ -91,7 +91,7 @@ export class HomeComponent implements OnInit {
   submitFormAddBoard() {
     const data = this.formAddBoard?.value;
     this.boarService.addBoard(data).subscribe((res) => {
-      this.notifyService.showSuccess(res.message, 'congratulations');
+      this.notifyService.showSuccess(res.message, 'Thông báo');
       this.getGroupByUserId();
       this.formAddBoard?.reset();
     });

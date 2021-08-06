@@ -24,13 +24,13 @@
                 <div style="margin-top: -1rem" *ngIf="name && name.invalid && (name.dirty || name.touched)"
                      class="text-danger">
                   <div *ngIf="name.errors?.required">
-                    tài khoản không đúng định dạng.
+                    Tài khoản không đúng định dạng.
                   </div>
                   <div *ngIf="name.errors?.minlength">
-                    tài khoản phải có trên 2 kí tự.
+                    Tài khoản phải có trên 2 kí tự.
                   </div>
                   <div *ngIf="name.errors?.maxlength">
-                    tài khoản không quá 100 kí tự.
+                    Tài khoản không quá 100 kí tự.
                   </div>
                 </div>
               </div>

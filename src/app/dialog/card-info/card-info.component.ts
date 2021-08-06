@@ -11,6 +11,7 @@ import {NotificationService} from "../../service/notification.service";
   styleUrls: ['./card-info.component.css'],
 })
 export class CardInfoComponent implements OnInit {
+
   card: any;
   comments: any;
   formComment!: FormGroup;

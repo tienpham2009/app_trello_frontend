@@ -187,7 +187,7 @@ export class BoardComponent implements OnInit {
       },
     });
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
+      console.log('Hộp thoại đã bị đóng');
       this.getListByBoardId();
     });
   }
