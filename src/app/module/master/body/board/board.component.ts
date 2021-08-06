@@ -5,8 +5,8 @@ import {ActivatedRoute} from '@angular/router';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {CardService} from "../../../../service/card.service";
 import {NotificationService} from "../../../../service/notification.service";
-import { MatDialog } from '@angular/material/dialog';
-import { CardInfoComponent } from 'src/app/dialog/card-info/card-info.component';
+import {MatDialog} from '@angular/material/dialog';
+import {CardInfoComponent} from 'src/app/dialog/card-info/card-info.component';
 
 // import { NzButtonModule } from 'ng-zorro-antd/button';
 @Component({
@@ -14,7 +14,7 @@ import { CardInfoComponent } from 'src/app/dialog/card-info/card-info.component'
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.css'],
 })
-export class BoardComponent implements OnInit,OnChanges {
+export class BoardComponent implements OnInit {
   formAddList!: FormGroup;
   formAddCard!: FormGroup;
   lists: any;
@@ -23,18 +23,15 @@ export class BoardComponent implements OnInit,OnChanges {
   hiddenInput: number | undefined;
   board: any;
 
+
   constructor(
     private fb: FormBuilder,
     private listService: ListServiceService,
     private cardService: CardService,
     private route: ActivatedRoute,
     private notifyService: NotificationService,
-    private dialog : MatDialog
+    private dialog: MatDialog
   ) {
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    this.lists
   }
 
   ngOnInit(): void {
@@ -107,10 +104,10 @@ export class BoardComponent implements OnInit,OnChanges {
 
   dropList(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.lists, event.previousIndex, event.currentIndex);
-      this.listService.moveList(this.lists).subscribe((res) => {
-        console.log(res)
-      });
-    }
+    this.listService.moveList(this.lists).subscribe((res) => {
+      console.log(res)
+    });
+  }
 
   changeTitleList(element: any) {
     console.log(element);
@@ -143,33 +140,30 @@ export class BoardComponent implements OnInit,OnChanges {
         event.currentIndex);
     }
     for (let i = 0; i < this.lists.length; i++) {
-        this.lists[i].cards['list_id'] = this.lists[i]['id']
+      this.lists[i].cards['list_id'] = this.lists[i]['id']
     }
     // @ts-ignore
     event.container.data[event.currentIndex].list_id = event.container.data.list_id
-    this.cardService.moveCard(event.previousContainer.data).subscribe(res=>{
+    this.cardService.moveCard(event.previousContainer.data).subscribe(res => {
       console.log(res)
     })
-    this.cardService.moveCard(event.container.data).subscribe(res=>{
+    this.cardService.moveCard(event.container.data).subscribe(res => {
       console.log(res)
     })
   }
 
   showCard(number: number): void {
-   const dialogRef = this.dialog.open(CardInfoComponent , {
+    const dialogRef = this.dialog.open(CardInfoComponent, {
       width: '40rem',
       height: '45rem',
       data:
-      {
-        number: number,
-      }
+        {
+          number: number,
+        }
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log('Hộp thoại đã bị đóng');
+      console.log('The dialog was closed');
       this.getListByBoardId()
     });
   }
-
-
-
 }

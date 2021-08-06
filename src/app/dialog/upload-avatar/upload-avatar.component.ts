@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {NotificationService} from "../../service/notification.service";
 import {BoardService} from "../../service/board-service.service";
-import { MatDialogRef } from '@angular/material/dialog';
-import { CardInfoComponent } from '../card-info/card-info.component';
+import {MatDialogRef} from "@angular/material/dialog";
+import {CardInfoComponent} from "../card-info/card-info.component";
 
 @Component({
   selector: 'app-upload-avatar',
@@ -24,8 +24,6 @@ export class UploadAvatarComponent implements OnInit {
     this.image = $event.target.files[0];
   }
   uploadAvatar(){
-    console.log(1);
-    
     const data = new FormData();
     data.append('image',this.image);
     console.log(data)
