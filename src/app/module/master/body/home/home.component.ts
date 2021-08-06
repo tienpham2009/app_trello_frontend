@@ -50,6 +50,7 @@ export class HomeComponent implements OnInit {
   formAddUserGroup: FormGroup | undefined;
   data: any;
   id_group!: number;
+  members: any;
 
   constructor(
     private boarService: BoardService,
@@ -98,10 +99,11 @@ export class HomeComponent implements OnInit {
 
   submitFormAddGroup() {
     const data = this.formAddGroup?.value;
+    console.log(data);
     this.groupService.addGroup(data).subscribe((res) => {
-      this.formAddBoard?.reset();
       this.getGroupByUserId();
     });
+    this.formAddBoard?.reset();
   }
 
   resetForm() {
@@ -177,6 +179,12 @@ export class HomeComponent implements OnInit {
       next: (res: any) => {
         this.notifyService.showSuccess('Thành công', 'Thêm thành viên');
       },
+    });
+  }
+
+  showMember(group_id: any) {
+    this.groupService.getUserGroup(group_id).subscribe((res) => {
+      this.members = res.members;
     });
   }
 }
