@@ -1,25 +1,41 @@
 <div class="show-list">
-
+  <app-board-bar></app-board-bar>
   <div class="example-list"
        cdkDropList
        cdkDropListOrientation="horizontal"
        [cdkDropListData]="lists"
        (cdkDropListDropped)="dropList($event)">
-    <div class="row" cdkDropListGroup>
+    <div class="example-box" cdkDropListGroup>
       <div class="example-box" *ngFor="let list of lists;let i = index">
-        <div class="card" cdkDrag>
+        <div class="example-box-list" cdkDrag>
           <div class="example-container">
-            <h2>{{list.title}}</h2>
             <div
               cdkDropList
               [cdkDropListData]="list.cards"
               class="example-list-card"
-              (cdkDropListDropped)="dropCard($event)" >
-              <div class="example-box-card" *ngFor="let item of list.cards" (click)="showCard(item.id)" cdkDrag>{{item.title}}</div>
+              (cdkDropListDropped)="dropCard($event)">
+              <input
+                style="width: 99%;margin-top: 5px;"
+                type="text"
+                #element
+                class="form-control"
+                *ngIf="hiddenInput === list.id"
+                (focusout)="isHiddenInput(element.value, list.id)"
+                value="{{ list.title }}"
+              />
+              <div
+                *ngIf="hiddenInput != list.id"
+                (click)="showInput(list.id)"
+              >
+                <h1 class="m-0 font-weight-bold text-primary" style="text-align: center;margin-top: 5px">
+                  {{ list.title }}
+                </h1>
+              </div>
+              <div class="example-box-card" *ngFor="let item of list.cards" (click)="showCard(item.id)"
+                   cdkDrag>{{item.title}}</div>
               <mat-card-actions
                 (click)="hiddenFormAddCard(i)"
                 [hidden]="!isHiddenFormAddCard[i]"
-                cdkDrag
               ><i nz-icon nzType="plus"></i>
                 Thêm thẻ
               </mat-card-actions>
