@@ -65,7 +65,7 @@ export class BoardComponent implements OnInit {
       if (res.length < 1) {
         this.disable = 'my-disable';
       }
-      console.log(this.disable)
+      console.log(this.disable);
     });
   }
 
@@ -125,10 +125,14 @@ export class BoardComponent implements OnInit {
 
   dropList(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.lists, event.previousIndex, event.currentIndex);
-    this.listService.moveList(this.lists).subscribe((res) => {});
+    this.listService.moveList(this.lists).subscribe((res) => {
+      console.log(res);
+    });
   }
 
-  changeTitleList(element: any) {}
+  changeTitleList(element: any) {
+    console.log(element);
+  }
 
   isHiddenInput(title: any, listId: any) {
     this.hiddenInput = -1;
@@ -177,6 +181,7 @@ export class BoardComponent implements OnInit {
     const dialogRef = this.dialog.open(CardInfoComponent, {
       width: '40rem',
       height: '45rem',
+
       data: {
         number: number,
       },

@@ -1,41 +1,46 @@
-<div
-  class="show-list"
-  style="background-image:url('http://127.0.0.1:8000/uploadedimages/{{board.name}}') ; background-size: 100% 100%; height: 50rem"
-  [ngClass]="disable"
->
 
+<div class="show-list"
+style="background-image:url('http://127.0.0.1:8000/uploadedimages/{{board.name}}') ; background-size: 100% 100%; height: 50rem"
+[ngClass]="disable"
+>
   <app-board-bar></app-board-bar>
-  <div
-    class="example-list"
-    cdkDropList
-    cdkDropListOrientation="horizontal"
-    [cdkDropListData]="lists"
-    (cdkDropListDropped)="dropList($event)"
-  >
-    <div class="row" cdkDropListGroup>
-      <div class="example-box" *ngFor="let list of lists; let i = index">
-        <div class="card" cdkDrag>
+  <div class="example-list"
+       cdkDropList
+       cdkDropListOrientation="horizontal"
+       [cdkDropListData]="lists"
+       (cdkDropListDropped)="dropList($event)">
+    <div class="example-box" cdkDropListGroup>
+      <div class="example-box" *ngFor="let list of lists;let i = index">
+        <div class="example-box-list" cdkDrag>
           <div class="example-container">
-            <h2>{{ list.title }}</h2>
             <div
               cdkDropList
               [cdkDropListData]="list.cards"
               class="example-list-card"
-              (cdkDropListDropped)="dropCard($event)"
-            >
+              (cdkDropListDropped)="dropCard($event)">
+              <input
+                style="width: 99%;margin-top: 5px;"
+                type="text"
+                #element
+                class="form-control"
+                *ngIf="hiddenInput === list.id"
+                (focusout)="isHiddenInput(element.value, list.id)"
+                value="{{ list.title }}"
+              />
               <div
-                class="example-box-card"
-                *ngFor="let item of list.cards"
-                (click)="showCard(item.id)"
-                cdkDrag
+                *ngIf="hiddenInput != list.id"
+                (click)="showInput(list.id)"
               >
-                {{ item.title }}
+                <h1 class="m-0 font-weight-bold text-primary" style="text-align: center;margin-top: 5px">
+                  {{ list.title }}
+                </h1>
               </div>
+              <div class="example-box-card" *ngFor="let item of list.cards" (click)="showCard(item.id)"
+                   cdkDrag>{{item.title}}</div>
               <mat-card-actions
                 (click)="hiddenFormAddCard(i)"
                 [hidden]="!isHiddenFormAddCard[i]"
-                cdkDrag
-                ><i nz-icon nzType="plus"></i>
+              ><i nz-icon nzType="plus"></i>
                 Thêm thẻ
               </mat-card-actions>
               <div [hidden]="isHiddenFormAddCard[i]">
@@ -77,11 +82,12 @@
             nzType="dashed"
             [hidden]="!isHiddenFormAddList"
             (click)="hidden()"
+            class="btn-add-list"
           >
             <span style="margin-right: 0.5rem">+</span>Add List
           </button>
         </div>
-        <div [hidden]="isHiddenFormAddList" class="form-add-list">
+        <div [hidden]="isHiddenFormAddList" class="form-add-list" style="margin: 1rem">
           <form
             *ngIf="formAddList"
             [formGroup]="formAddList"
@@ -95,16 +101,16 @@
             <button
               type="submit"
               class="btn btn-primary"
-              style="height: 2rem; margin: 3px"
+              style="height: 2rem; margin: 3px "
               [disabled]="formAddList.invalid"
             >
               Add list
             </button>
-            <i
-              class="fas fa-times"
+            <button
+              class="btn btn-danger"
               style="float: bottom"
               (click)="hidden()"
-            ></i>
+            >x</button>
           </form>
         </div>
       </div>
