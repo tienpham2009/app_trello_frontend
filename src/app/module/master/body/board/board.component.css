@@ -2,34 +2,20 @@
   min-width: 400px;
   display: flex;
   flex-direction: row;
-  background: white;
-  border-radius: 4px;
 }
 
 .example-box {
   max-width: 400px;
   margin: 5px;
-  border-right: solid 1px #ccc;
-  color: rgba(0, 0, 0, 0.87);
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  box-sizing: border-box;
-  cursor: move;
-  background: white;
-  font-size: 14px;
-  flex-grow: 1;
-  flex-basis: 0;
 }
-
-.cdk-drag-preview {
-  box-sizing: border-box;
-  border-radius: 4px;
-  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-  0 8px 10px 1px rgba(0, 0, 0, 0.14),
-  0 3px 14px 2px rgba(0, 0, 0, 0.12);
+.example-box-list {
+  max-width: 400px;
+  margin: 5px;
+  display: flex;
+  flex-direction: row;
 }
-
 .cdk-drag-placeholder {
   opacity: 0;
 }
@@ -58,7 +44,6 @@
 
 .example-list-card {
   width: 400px;
-  border: solid 1px #ccc;
   min-height: 60px;
   background: #ccc;
   border-radius: 4px;
@@ -70,8 +55,7 @@
   padding: 20px 10px;
   max-width: 99%;
   margin: 5px;
-  border-bottom: solid 1px #ccc;
-  color: rgba(0, 0, 0, 0.87);
+  border-radius: 5px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -80,6 +64,7 @@
   cursor: move;
   background: white;
   font-size: 14px;
+  color: black;
 }
 
 .show-list{
