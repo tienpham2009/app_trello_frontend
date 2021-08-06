@@ -52,4 +52,16 @@ export class BoardService {
     let headers_object = new HttpHeaders().set('Authorization', 'Bearer' + token);
     return this.http.get(environment.apiUrl + `/${board_id}/show_user_board` ,{headers: headers_object});
   }
+
+  getRole(data:any): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/board/${data}/getRole` , this.setHeader())
+  }
+
+  setHeader() {
+    let token = localStorage.getItem('token')
+    let headers_object = new HttpHeaders().set('Authorization', 'Bearer' + token);
+    return {
+      headers: headers_object
+    };
+  }
 }

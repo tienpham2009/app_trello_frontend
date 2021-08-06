@@ -99,10 +99,11 @@ export class HomeComponent implements OnInit {
 
   submitFormAddGroup() {
     const data = this.formAddGroup?.value;
+    console.log(data);
     this.groupService.addGroup(data).subscribe((res) => {
-      this.formAddBoard?.reset();
       this.getGroupByUserId();
     });
+    this.formAddBoard?.reset();
   }
 
   resetForm() {
@@ -183,7 +184,7 @@ export class HomeComponent implements OnInit {
 
   showMember(group_id: any) {
     this.groupService.getUserGroup(group_id).subscribe((res) => {
-      console.log(res);
+      this.members = res.members;
     });
   }
 }

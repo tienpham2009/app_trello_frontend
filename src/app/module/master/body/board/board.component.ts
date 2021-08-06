@@ -7,6 +7,7 @@ import {CardService} from "../../../../service/card.service";
 import {NotificationService} from "../../../../service/notification.service";
 import { MatDialog } from '@angular/material/dialog';
 import { CardInfoComponent } from 'src/app/dialog/card-info/card-info.component';
+import { BoardService } from 'src/app/service/board-service.service';
 
 // import { NzButtonModule } from 'ng-zorro-antd/button';
 @Component({
@@ -22,6 +23,8 @@ export class BoardComponent implements OnInit,OnChanges {
   isHiddenFormAddCard: Array<any> = [];
   hiddenInput: number | undefined;
   board: any;
+  user:any;
+  disable: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -29,7 +32,8 @@ export class BoardComponent implements OnInit,OnChanges {
     private cardService: CardService,
     private route: ActivatedRoute,
     private notifyService: NotificationService,
-    private dialog : MatDialog
+    private dialog : MatDialog,
+    private boardService :BoardService
   ) {
   }
 
@@ -50,6 +54,15 @@ export class BoardComponent implements OnInit,OnChanges {
       contend: [],
       list_id: [''],
 
+    })
+    this.boardService.getRole(board_id).subscribe((res) =>{
+      let role = res.role;      
+      if(role !== 1)
+      {
+        this.disable = true;
+      }
+      console.log(res);
+      
     })
   }
 
@@ -87,7 +100,6 @@ export class BoardComponent implements OnInit,OnChanges {
     this.listService.getListByBoardId(board_id).subscribe((res) => {
       this.board = res.board;
       this.lists = res.lists;
-      console.log(res);
       this.setHiddenForCard(this.lists)
     });
   }
@@ -109,18 +121,16 @@ export class BoardComponent implements OnInit,OnChanges {
   dropList(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.lists, event.previousIndex, event.currentIndex);
       this.listService.moveList(this.lists).subscribe((res) => {
-        console.log(res)
+        
       });
     }
 
   changeTitleList(element: any) {
-    console.log(element);
+    
   }
 
   isHiddenInput(title: any, listId: any) {
     this.hiddenInput = -1;
-    console.log(listId);
-    console.log(title);
     let data = {
       listId: listId,
       newTitle: title
@@ -171,6 +181,7 @@ export class BoardComponent implements OnInit,OnChanges {
     });
   }
 
+  
   
 
 }
