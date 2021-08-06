@@ -14,7 +14,7 @@ import { CardInfoComponent } from 'src/app/dialog/card-info/card-info.component'
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.css'],
 })
-export class BoardComponent implements OnInit,OnChanges {
+export class BoardComponent implements OnInit {
   formAddList!: FormGroup;
   formAddCard!: FormGroup;
   lists: any;
@@ -31,10 +31,6 @@ export class BoardComponent implements OnInit,OnChanges {
     private notifyService: NotificationService,
     private dialog : MatDialog
   ) {
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    this.lists
   }
 
   ngOnInit(): void {

@@ -14,15 +14,7 @@
         (click)="setHiddenInputTitle()"
       ></i>
     </h2>
-    <form *ngIf="formUpdateCard" [formGroup]="formUpdateCard">
-      <input
-        type="text"
-        [hidden]="!isHiddenInputTitle"
-        formControlName="title"
-        value="{{ card.title }}"
-        (focusout)="setHiddenInputTitle(); changeTitleCard()"
-      />
-    </form>
+      <input type="text" [(ngModel)]="card.title" name="title"  class="border border-primary" (focusout)="setHiddenInputTitle();updateCard()" [hidden]="!isHiddenInputTitle">
     <div class="row">
       <div class="col-8">
         <div class="mg">
@@ -47,19 +39,9 @@
             {{ card.content ?? "Chưa có mô tả" }}
           </p>
         </div>
-        <form
-          *ngIf="formUpdateCard"
-          [formGroup]="formUpdateCard"
-          [hidden]="!isHiddenInputContent"
-        >
-          <textarea
-            cols="30"
-            rows="10"
-            formControlName="content"
-            (focusout)="setHiddenInputContent(); changeContentCard()"
-            >{{ card.content }}</textarea
-          >
-        </form>
+          <textarea cols="30" rows="10" [(ngModel)]="card.content" name="content" [hidden]="!isHiddenInputContent" (focusout)="setHiddenInputContent(); updateCard()">
+
+          </textarea>
         <div class="row">
           <div class="col-12 mg">
             <form *ngIf="formComment" [formGroup]="formComment">
