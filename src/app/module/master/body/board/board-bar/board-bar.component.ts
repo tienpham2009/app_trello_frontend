@@ -14,6 +14,7 @@ export class BoardBarComponent implements OnInit {
   users: any;
   $board_id!: number;
   userBoards: UserBoard[] = [];
+  board: any;
 
   constructor(
     public dialog: MatDialog,
@@ -21,7 +22,10 @@ export class BoardBarComponent implements OnInit {
     public boardService: BoardService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    let board_id = this.route.snapshot.paramMap.get('id');
+    this.getBoard(board_id);
+  }
   openDialog() {
     this.dialog.open(DialogMemberComponent, {
       data: {
@@ -36,6 +40,12 @@ export class BoardBarComponent implements OnInit {
     this.boardService.showAllUser(board_id).subscribe((res) => {
       this.users = res;
       console.log(this.users);
+    });
+  }
+
+  getBoard(board_id: any) {
+    this.boardService.getBoard(board_id).subscribe((res) => {
+      this.board = res;
     });
   }
 }

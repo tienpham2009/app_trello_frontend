@@ -1,120 +1,112 @@
-<div class="show-list" style="background-image:url('http://127.0.0.1:8000/uploadedimages/{{ board.name }}') ; background-size: 100% 100%; height: 50rem" [hidden]="disable">
+<div
+  class="show-list"
+  style="background-image:url('http://127.0.0.1:8000/uploadedimages/{{board.name}}') ; background-size: 100% 100%; height: 50rem"
+  [ngClass]="disable"
+>
+
   <app-board-bar></app-board-bar>
-    <!--    nút thêm list-->
-    <div>
-      <button
-        nz-button
-        nzType="dashed"
-        class="add-button"
-        style="margin: 28px;font-size: 1rem;font-weight: 500;"
-        [hidden]="!isHiddenFormAddList"
-        (click)="hidden()"
-      >
-      <span style="margin-right: .5rem;">+</span>Add List
-      </button>
-    </div>
-    <div
-      [hidden]="isHiddenFormAddList"
-      class="border border-primary"
-      style="margin: 20px; height: 20% ; width: 12%;" 
-    >
-      <form
-        *ngIf="formAddList"
-        [formGroup]="formAddList"
-        (ngSubmit)="addList()"
-        style="margin: 5px"
-      >
-        <input
-          class="form-control border border-success"
-          type="text"
-          formControlName="title"
-        />
-        <button
-          type="submit"
-          class="btn btn-primary add-list"
-          [disabled]="formAddList.invalid"
-        >
-          Add list
-        </button>
-        <button
-          type="button"
-          class="btn btn-danger add-list"
-          (click)="hidden()"
-        >
-          X
-        </button>
-      </form>
-    </div>
-  <div cdkDropListGroup>
-    <div
-      cdkDropList
-      cdkDropListOrientation="horizontal"
-      class="example-list"
-      (cdkDropListDropped)="dropList($event)"
-    >
-      <div
-        class="example-box list-group example-container"
-        *ngFor="let list of lists"
-        cdkDrag
-      >
-        <ul class="list-group" style="width: 18rem">
-          <li class="list-group-item active">{{ list.title }}</li>
-        </ul>
-      </div>
-    </div>
-    <div class="example-container" *ngFor="let list of lists; let i = index">
-      <ul class="list-group" style="width: 18rem">
-        <div
-          cdkDropList
-          [cdkDropListData]="list.cards"
-          class="example-container"
-          (cdkDropListDropped)="dropCard($event)"
-        >
-          <div
-            class="list-group-item example-box-card"
-            *ngFor="let item of list.cards"
-            cdkDrag
-          >
-            <div (click)="showCard(item.id)">
-              {{ item.title }}
+  <div
+    class="example-list"
+    cdkDropList
+    cdkDropListOrientation="horizontal"
+    [cdkDropListData]="lists"
+    (cdkDropListDropped)="dropList($event)"
+  >
+    <div class="row" cdkDropListGroup>
+      <div class="example-box" *ngFor="let list of lists; let i = index">
+        <div class="card" cdkDrag>
+          <div class="example-container">
+            <h2>{{ list.title }}</h2>
+            <div
+              cdkDropList
+              [cdkDropListData]="list.cards"
+              class="example-list-card"
+              (cdkDropListDropped)="dropCard($event)"
+            >
+              <div
+                class="example-box-card"
+                *ngFor="let item of list.cards"
+                (click)="showCard(item.id)"
+                cdkDrag
+              >
+                {{ item.title }}
+              </div>
+              <mat-card-actions
+                (click)="hiddenFormAddCard(i)"
+                [hidden]="!isHiddenFormAddCard[i]"
+                cdkDrag
+                ><i nz-icon nzType="plus"></i>
+                Thêm thẻ
+              </mat-card-actions>
+              <div [hidden]="isHiddenFormAddCard[i]">
+                <form
+                  *ngIf="formAddCard"
+                  [formGroup]="formAddCard"
+                  (ngSubmit)="addCard(i)"
+                  style="margin: 5px"
+                >
+                  <input
+                    class="form-control border border-success"
+                    type="text"
+                    formControlName="title"
+                  />
+                  <button
+                    type="submit"
+                    class="btn btn-primary add-list"
+                    [disabled]="formAddCard.invalid"
+                  >
+                    Thêm thẻ
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-danger add-list"
+                    (click)="hiddenFormAddCard(i)"
+                  >
+                    X
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
-          
         </div>
-      </ul>
-      <mat-card-actions
-        (click)="hiddenFormAddCard(i)"
-        [hidden]="!isHiddenFormAddCard[i]"
-        ><i nz-icon nzType="plus"></i>
-        Thêm thẻ
-      </mat-card-actions>
-      <div [hidden]="isHiddenFormAddCard[i]">
-        <form
-          *ngIf="formAddCard"
-          [formGroup]="formAddCard"
-          (ngSubmit)="addCard(i)"
-          style="margin: 5px"
-        >
-          <input
-            class="form-control border border-success"
-            type="text"
-            formControlName="title"
-          />
+      </div>
+      <div>
+        <div>
           <button
-            type="submit"
-            class="btn btn-primary add-list"
-            [disabled]="formAddCard.invalid"
+            nz-button
+            nzType="dashed"
+            [hidden]="!isHiddenFormAddList"
+            (click)="hidden()"
           >
-            Thêm thẻ
+            <span style="margin-right: 0.5rem">+</span>Add List
           </button>
-          <button
-            type="button"
-            class="btn btn-danger add-list"
-            (click)="hiddenFormAddCard(i)"
+        </div>
+        <div [hidden]="isHiddenFormAddList" class="form-add-list">
+          <form
+            *ngIf="formAddList"
+            [formGroup]="formAddList"
+            (ngSubmit)="addList()"
           >
-            X
-          </button>
-        </form>
+            <input
+              type="text"
+              formControlName="title"
+              placeholder="Nhập tiêu đề danh sách"
+            /><br />
+            <button
+              type="submit"
+              class="btn btn-primary"
+              style="height: 2rem; margin: 3px"
+              [disabled]="formAddList.invalid"
+            >
+              Add list
+            </button>
+            <i
+              class="fas fa-times"
+              style="float: bottom"
+              (click)="hidden()"
+            ></i>
+          </form>
+        </div>
       </div>
     </div>
   </div>

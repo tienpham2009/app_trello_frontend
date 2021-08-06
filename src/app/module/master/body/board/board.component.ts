@@ -1,10 +1,21 @@
-import {AfterViewChecked, Component, DoCheck, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ListServiceService} from '../../../../service/list-service.service';
-import {ActivatedRoute} from '@angular/router';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import {CardService} from "../../../../service/card.service";
-import {NotificationService} from "../../../../service/notification.service";
+import {
+  AfterViewChecked,
+  Component,
+  DoCheck,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ListServiceService } from '../../../../service/list-service.service';
+import { ActivatedRoute } from '@angular/router';
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
+import { CardService } from '../../../../service/card.service';
+import { NotificationService } from '../../../../service/notification.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CardInfoComponent } from 'src/app/dialog/card-info/card-info.component';
 import { BoardService } from 'src/app/service/board-service.service';
@@ -15,7 +26,7 @@ import { BoardService } from 'src/app/service/board-service.service';
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.css'],
 })
-export class BoardComponent implements OnInit,OnChanges {
+export class BoardComponent implements OnInit {
   formAddList!: FormGroup;
   formAddCard!: FormGroup;
   lists: any;
@@ -23,8 +34,8 @@ export class BoardComponent implements OnInit,OnChanges {
   isHiddenFormAddCard: Array<any> = [];
   hiddenInput: number | undefined;
   board: any;
-  user:any;
-  disable: boolean = false;
+  user: any;
+  disable: string = 'abc';
 
   constructor(
     private fb: FormBuilder,
@@ -32,14 +43,9 @@ export class BoardComponent implements OnInit,OnChanges {
     private cardService: CardService,
     private route: ActivatedRoute,
     private notifyService: NotificationService,
-    private dialog : MatDialog,
-    private boardService :BoardService
-  ) {
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    this.lists
-  }
+    private dialog: MatDialog,
+    private boardService: BoardService
+  ) {}
 
   ngOnInit(): void {
     // @ts-ignore
@@ -53,22 +59,19 @@ export class BoardComponent implements OnInit,OnChanges {
       title: [''],
       contend: [],
       list_id: [''],
-
-    })
-    this.boardService.getRole(board_id).subscribe((res) =>{
-      let role = res.role;      
-      if(role !== 1)
-      {
-        this.disable = true;
+    });
+    this.boardService.getRole(board_id).subscribe((res) => {
+      // let role = res.role;
+      if (res.length < 1) {
+        this.disable = 'my-disable';
       }
-      console.log(res);
-      
-    })
+      console.log(this.disable)
+    });
   }
 
   setHiddenForCard(lists: any) {
     for (let i = 0; i < lists.length; i++) {
-      this.isHiddenFormAddCard.push('true')
+      this.isHiddenFormAddCard.push('true');
     }
   }
 
@@ -86,12 +89,12 @@ export class BoardComponent implements OnInit,OnChanges {
   addCard(i: number) {
     let ListId = this.lists[i].id;
     let formAddData = this.formAddCard.value;
-    formAddData.list_id = ListId
-    this.cardService.storeCard(formAddData).subscribe(res => {
+    formAddData.list_id = ListId;
+    this.cardService.storeCard(formAddData).subscribe((res) => {
       this.notifyService.showSuccess(res.message, 'Thông báo');
       this.hiddenFormAddCard(i);
       this.getListByBoardId();
-    })
+    });
   }
 
   getListByBoardId() {
@@ -100,43 +103,41 @@ export class BoardComponent implements OnInit,OnChanges {
     this.listService.getListByBoardId(board_id).subscribe((res) => {
       this.board = res.board;
       this.lists = res.lists;
-      this.setHiddenForCard(this.lists)
+      this.setHiddenForCard(this.lists);
     });
   }
-
 
   hidden() {
     this.isHiddenFormAddList = !this.isHiddenFormAddList;
   }
 
   hiddenFormAddCard(index: any) {
-    this.isHiddenFormAddCard[index] = !this.isHiddenFormAddCard[index]
+    this.isHiddenFormAddCard[index] = !this.isHiddenFormAddCard[index];
     for (let i = 0; i < this.lists.length; i++) {
-      if (this.isHiddenFormAddCard[i] === this.isHiddenFormAddCard[index] && i !== index) {
-        this.isHiddenFormAddCard[i] = true
+      if (
+        this.isHiddenFormAddCard[i] === this.isHiddenFormAddCard[index] &&
+        i !== index
+      ) {
+        this.isHiddenFormAddCard[i] = true;
       }
     }
   }
 
   dropList(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.lists, event.previousIndex, event.currentIndex);
-      this.listService.moveList(this.lists).subscribe((res) => {
-        
-      });
-    }
-
-  changeTitleList(element: any) {
-    
+    this.listService.moveList(this.lists).subscribe((res) => {});
   }
+
+  changeTitleList(element: any) {}
 
   isHiddenInput(title: any, listId: any) {
     this.hiddenInput = -1;
     let data = {
       listId: listId,
-      newTitle: title
+      newTitle: title,
     };
     this.listService.changeTitle(data).subscribe(() => {
-      this.getListByBoardId()
+      this.getListByBoardId();
     });
   }
 
@@ -146,42 +147,43 @@ export class BoardComponent implements OnInit,OnChanges {
 
   dropCard(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(event.previousContainer.data,
+      moveItemInArray(
         event.container.data,
         event.previousIndex,
-        event.currentIndex);
+        event.currentIndex
+      );
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
     }
     for (let i = 0; i < this.lists.length; i++) {
-        this.lists[i].cards['list_id'] = this.lists[i]['id']
+      this.lists[i].cards['list_id'] = this.lists[i]['id'];
     }
     // @ts-ignore
-    event.container.data[event.currentIndex].list_id = event.container.data.list_id
-    this.cardService.moveCard(event.previousContainer.data).subscribe(res=>{
-      console.log(res)
-    })
-    this.cardService.moveCard(event.container.data).subscribe(res=>{
-      console.log(res)
-    })
+    event.container.data[event.currentIndex].list_id = event.container.data.list_id;
+    this.cardService.moveCard(event.previousContainer.data).subscribe((res) => {
+      console.log(res);
+    });
+    this.cardService.moveCard(event.container.data).subscribe((res) => {
+      console.log(res);
+    });
   }
 
   showCard(number: number): void {
-   const dialogRef = this.dialog.open(CardInfoComponent , {
+    const dialogRef = this.dialog.open(CardInfoComponent, {
       width: '40rem',
       height: '45rem',
-      data:
-      {
+      data: {
         number: number,
-      }
+      },
     });
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
-      this.getListByBoardId()
+      this.getListByBoardId();
     });
   }
-
-  
-  
-
 }
